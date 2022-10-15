@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "products")
 @ToString
+@RequiredArgsConstructor
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
