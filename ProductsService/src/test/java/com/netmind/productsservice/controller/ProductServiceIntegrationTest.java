@@ -14,12 +14,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
-public class ProductServiceImplIntegrationTest {
+public class ProductServiceIntegrationTest {
 
     @TestConfiguration
     static class ProductServiceImplTestContextConfiguration {
@@ -32,11 +33,9 @@ public class ProductServiceImplIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        Product aProd = new Product();
-        aProd.setId(1L);
-        aProd.setName("Fake product");
-        List<Product> products=new ArrayList();
-        products.add(aProd);
+        List<Product> products = Arrays.asList(
+                new Product(1L,"Fake product")
+        );
         Mockito.when(productsRepository.findByNameContaining("Fake"))
                 .thenReturn(products);
     }

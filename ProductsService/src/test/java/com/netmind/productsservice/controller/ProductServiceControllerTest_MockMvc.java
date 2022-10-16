@@ -21,7 +21,7 @@ import static org.hamcrest.Matchers.is;
         classes = ProductsServiceApplication.class)
 @AutoConfigureMockMvc
 //@TestPropertySource( locations = "classpath:application-integrationtest.properties")
-class ProductServiceControllerTest_Mock {
+class ProductServiceControllerTest_MockMvc {
     @Autowired
     private MockMvc mvc;
 

@@ -17,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/products")
+//@CrossOrigin(origins = "*")
 public class ProductServiceController {
     private static final Logger logger = LoggerFactory.getLogger(ProductServiceController.class);
 
@@ -33,7 +34,8 @@ public class ProductServiceController {
     public ResponseEntity getProduct(@PathVariable @Min(1) Long id) {
         Product product = productsRepo.findById(id).get();
         if (product != null) return new ResponseEntity<>(product, HttpStatus.OK);
-        else return new ResponseEntity<>(new StatusMessage(HttpStatus.NOT_FOUND.value(), "No encontrado"), HttpStatus.NOT_FOUND);
+        else
+            return new ResponseEntity<>(new StatusMessage(HttpStatus.NOT_FOUND.value(), "No encontrado"), HttpStatus.NOT_FOUND);
     }
 
     @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -41,7 +43,8 @@ public class ProductServiceController {
         newProduct.setId(null);
         productsRepo.save(newProduct);
         if (newProduct != null && newProduct.getId() > 0) return new ResponseEntity<>(newProduct, HttpStatus.CREATED);
-        else return new ResponseEntity<>(new StatusMessage(HttpStatus.BAD_REQUEST.value(), "No encontrado"), HttpStatus.BAD_REQUEST);
+        else
+            return new ResponseEntity<>(new StatusMessage(HttpStatus.BAD_REQUEST.value(), "No encontrado"), HttpStatus.BAD_REQUEST);
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -49,7 +52,8 @@ public class ProductServiceController {
         aProduct.setId(id);
         productsRepo.save(aProduct);
         if (aProduct != null) return new ResponseEntity(aProduct, HttpStatus.ACCEPTED);
-        else return new ResponseEntity<>(new StatusMessage(HttpStatus.NOT_MODIFIED.value(), "No modificado"), HttpStatus.NOT_MODIFIED);
+        else
+            return new ResponseEntity<>(new StatusMessage(HttpStatus.NOT_MODIFIED.value(), "No modificado"), HttpStatus.NOT_MODIFIED);
     }
 
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
