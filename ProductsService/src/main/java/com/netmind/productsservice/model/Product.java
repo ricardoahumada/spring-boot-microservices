@@ -13,17 +13,16 @@ import javax.validation.constraints.Size;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
+
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
-    @Setter
     @Min(0)
     private Long id;
 
     @Column
-    @Getter
-    @Setter
     @NotBlank
     @NotNull
     @Size(min = 3, max = 50)
