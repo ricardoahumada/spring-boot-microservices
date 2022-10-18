@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
-@RestController
+//@RestController
 public class DemoApplication {
    private static final Logger logger = LoggerFactory.getLogger(DemoApplication.class);
 
@@ -22,8 +22,8 @@ public class DemoApplication {
 
       SpringApplication.run(DemoApplication.class, args);
    }
-   @RequestMapping(value = "/")
+   /*@RequestMapping(value = "/")
    public String name() {
       return name;
-   }
+   }*/
 }

@@ -1,4 +1,4 @@
-package com.netmind.demo.controllers;
+package com.netmind.demo.controller;
 
 import com.netmind.demo.model.Product;
 import org.springframework.http.HttpStatus;

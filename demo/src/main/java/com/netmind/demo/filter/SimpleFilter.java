@@ -1,4 +1,4 @@
-package com.netmind.demo.filters;
+package com.netmind.demo.filter;
 
 import java.io.IOException;
 

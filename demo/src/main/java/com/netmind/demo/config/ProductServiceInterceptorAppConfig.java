@@ -1,6 +1,6 @@
 package com.netmind.demo.config;
 
-import com.netmind.demo.interceptors.ProductServiceInterceptor;
+import com.netmind.demo.interceptor.ProductServiceInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

@@ -1,4 +1,4 @@
-package com.netmind.demo.interceptors;
+package com.netmind.demo.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

@@ -19,7 +19,6 @@ logging:
 #   level:
 #      root: WARN
 
-
 ---
 spring:
    profiles: prod
