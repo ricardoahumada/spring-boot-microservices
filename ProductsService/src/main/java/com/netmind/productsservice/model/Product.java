@@ -15,7 +15,6 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @Getter
 @Setter
-
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

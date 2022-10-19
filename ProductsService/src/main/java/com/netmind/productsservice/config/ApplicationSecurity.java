@@ -59,7 +59,8 @@ public class ApplicationSecurity {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.authorizeRequests()
-                .antMatchers("/auth/login", "/docs/**", "/users", "/h2-ui")
+//                .antMatchers("/auth/login", "/docs/**", "/users", "/h2-ui","/swagger-ui.html/**","/webjars/**") // HABILITAR LIMITACIONES
+                .antMatchers("/**") // QUItAR LIMITACIONES
                 .permitAll()
                 .anyRequest()
                 .authenticated();
