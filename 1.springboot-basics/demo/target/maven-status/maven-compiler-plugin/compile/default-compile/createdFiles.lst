@@ -1,5 +1,0 @@
-com\netmind\demo\config\ProductServiceInterceptorAppConfig.class
-com\netmind\demo\controllers\ProductServiceController.class
-com\netmind\demo\interceptors\ProductServiceInterceptor.class
-com\netmind\demo\DemoApplication.class
-com\netmind\demo\model\Product.class
