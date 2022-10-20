@@ -38,7 +38,7 @@ public class ProductServiceControllerTest_WebMvcTest {
     @Test
     public void givenProducts_whenGetProducts_thenReturnJsonArray() throws Exception {
 
-        Product aProduct = new Product(1L, "Fake product");
+        Product aProduct = new Product(1L, "Fake product","123-123-1234");
 
         List<Product> allProducts = Arrays.asList(aProduct);
 

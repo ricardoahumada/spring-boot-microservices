@@ -1,5 +1,6 @@
 package com.netmind.productsservice.model;
 
+import com.netmind.productsservice.constraints.SerialNumber;
 import lombok.*;
 
 import javax.persistence.*;
@@ -26,4 +27,10 @@ public class Product {
     @NotNull
     @Size(min = 3, max = 50)
     private String name;
+
+    @Column
+    @NotBlank(message = "{serial.not.blank}")
+    @NotNull
+    @SerialNumber(message = "{serial.format}")
+    private String serial;
 }

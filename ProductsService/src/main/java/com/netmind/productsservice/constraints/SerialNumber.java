@@ -10,11 +10,10 @@ import javax.validation.ConstraintValidatorContext;
 import javax.validation.Payload;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = { SerialNumber.Validator.class })
+@Constraint(validatedBy = {SerialNumber.Validator.class})
 public @interface SerialNumber {
 
-    String message()
-    default "Serial number is not valid";
+    String message() default "Serial number is not valid";
 
     Class<?>[] groups() default {};
 
@@ -28,7 +27,8 @@ public @interface SerialNumber {
         @Override
         public boolean isValid(final String serial, final ConstraintValidatorContext constraintValidatorContext) {
             final String serialNumRegex = "^\\d{3}-\\d{3}-\\d{4}$";
-            return Pattern.matches(serialNumRegex, serial);
+            if (serial != null) return Pattern.matches(serialNumRegex, serial);
+            else return false;
         }
     }
 }

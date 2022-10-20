@@ -23,7 +23,7 @@ public class ProductRepositoryIntegrationTest {
     @Test
     public void whenFindByName_thenReturnProduct() {
         // given
-        Product aProduct = new Product(null, "Fake Product");
+        Product aProduct = new Product(null, "Fake Product","123-123-1234");
         entityManager.persist(aProduct);
         entityManager.flush();
 
