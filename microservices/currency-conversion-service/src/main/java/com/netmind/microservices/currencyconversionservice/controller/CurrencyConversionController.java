@@ -18,7 +18,6 @@ import org.springframework.web.client.RestTemplate;
 public class CurrencyConversionController {
     @Autowired
     private CurrencyExchangeServiceClient exchangeClient;
-
     @Value("${microservices.currency-exchange-service.complete-url}")
     String complete_path;
 
