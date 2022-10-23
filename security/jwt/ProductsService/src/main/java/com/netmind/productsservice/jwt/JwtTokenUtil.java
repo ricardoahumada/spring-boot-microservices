@@ -1,5 +1,6 @@
 package com.netmind.productsservice.jwt;
 
+import com.netmind.productsservice.model.ERole;
 import com.netmind.productsservice.model.User;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
@@ -17,9 +18,13 @@ public class JwtTokenUtil {
     private String SECRET_KEY;
 
     public String generateAccessToken(User user) {
+        Claims claims = Jwts.claims().setSubject(String.format("%s,%s", user.getId(), user.getEmail()));
+        claims.put("role", user.getRole());
+
         return Jwts.builder()
-                .setSubject(String.format("%s,%s", user.getId(), user.getEmail()))
-                .setIssuer("CodeJava")
+//                .setSubject(String.format("%s,%s", user.getId(), user.getEmail()))
+                .setClaims(claims)
+                .setIssuer("com.netmind")
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRE_DURATION))
                 .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
@@ -48,8 +53,18 @@ public class JwtTokenUtil {
         return false;
     }
 
+    public Claims getClaims(String token) {
+        Claims claims = parseClaims(token);
+        return claims;
+    }
+
     public String getSubject(String token) {
-        return parseClaims(token).getSubject();
+        return getClaims(token).getSubject();
+    }
+
+    public ERole getRole(String token){
+        String role= getClaims(token).get("role",String.class);
+        return ERole.valueOf(role);
     }
 
     private Claims parseClaims(String token) {

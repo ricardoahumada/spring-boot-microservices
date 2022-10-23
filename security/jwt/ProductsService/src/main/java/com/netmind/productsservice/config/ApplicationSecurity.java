@@ -3,6 +3,7 @@ package com.netmind.productsservice.config;
 import javax.servlet.http.HttpServletResponse;
 
 import com.netmind.productsservice.jwt.JwtTokenFilter;
+import com.netmind.productsservice.model.ERole;
 import com.netmind.productsservice.persistence.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
@@ -30,11 +31,11 @@ public class ApplicationSecurity {
         return new UserDetailsService() {
 
             @Override
-            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-                return userRepo.findByEmail(username)
+            public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+                return userRepo.findByEmail(email)
                         .orElseThrow(
                                 () -> new UsernameNotFoundException(
-                                        "User " + username + " not found"
+                                        "User " + email + " not found"
                                 )
                         );
             }
@@ -68,11 +69,11 @@ public class ApplicationSecurity {
                         "/configuration/security",
                         "/swagger-ui.html",
                         "/webjars/**"
-                ) // HABILITAR LIMITACIONES
-//                .antMatchers("/**") // QUItAR LIMITACIONES
-                .permitAll()
-                .anyRequest()
-                .authenticated();
+                ).permitAll() // HABILITAR ESPACIOS LIBRES
+//                .antMatchers("/**").permitAll() // BARRA LIBRE
+//                .antMatchers("/products/**").hasAuthority(ERole.USER.name())
+                .antMatchers("/products/**").hasAnyAuthority(ERole.USER.name(),ERole.ADMIN.name()) //Para acceder a productos debe ser USER
+                .anyRequest().authenticated();
 
         http.exceptionHandling()
                 .authenticationEntryPoint(
