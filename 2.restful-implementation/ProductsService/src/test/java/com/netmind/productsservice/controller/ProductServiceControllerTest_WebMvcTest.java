@@ -13,6 +13,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,7 +37,7 @@ public class ProductServiceControllerTest_WebMvcTest {
     @BeforeEach
     public void setUp() {
         List<Product> products = Arrays.asList(
-                new Product(1L,"Fake product","")
+                new Product(1L, "Fake product", "")
         );
 
         Mockito.when(repository.findByNameContaining("Fake"))
@@ -44,6 +45,13 @@ public class ProductServiceControllerTest_WebMvcTest {
 
         Mockito.when(repository.findAll())
                 .thenReturn(products);
+
+        Mockito.when(repository.save(Mockito.any(Product.class)))
+                .thenAnswer(elem -> {
+                    Product ap = (Product) elem.getArguments()[0];
+                    ap.setId(100L);
+                    return ap;
+                });
     }
 
     @Autowired
@@ -55,7 +63,7 @@ public class ProductServiceControllerTest_WebMvcTest {
     @Test
     public void givenProducts_whenGetProducts_thenReturnJsonArray() throws Exception {
 
-        Product aProduct = new Product(1L, "Fake product","123-123-1234");
+        Product aProduct = new Product(1L, "Fake product", "123-123-1234");
 
         List<Product> allProducts = Arrays.asList(aProduct);
 
@@ -77,8 +85,9 @@ public class ProductServiceControllerTest_WebMvcTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                 )
+                .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.id").exists());
+                .andExpect(jsonPath("$.id", is(100)));
     }
 
     public static String asJsonString(final Object obj) {
