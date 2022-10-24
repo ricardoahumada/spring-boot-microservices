@@ -32,6 +32,7 @@ public class DefaultSecurityConfig {
                 .password(encoder.encode("password"))
                 .roles("USER")
                 .build();
+
         return new InMemoryUserDetailsManager(user);
     }
 }
