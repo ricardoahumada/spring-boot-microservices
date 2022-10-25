@@ -40,7 +40,7 @@ services:
       - eureka.client.service-url.defaultZone=http://naming-server:8761/eureka   
     expose:
       - 9090
-    scale: 1
+    scale: 2
     networks:
       - spring-cloud-network    
   orders-service:
