@@ -41,6 +41,7 @@ services:
     expose:
       - 9090
     scale: 2
+    restart: always
     networks:
       - spring-cloud-network    
   orders-service:
