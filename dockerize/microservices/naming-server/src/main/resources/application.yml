@@ -10,7 +10,7 @@ cloud:
 
 spring.config:
   config: false
-  import: optional:configserver:http://config-server:8888 # config server
+  import: optional:configserver:
 
 eureka.client.register-with-eureka: false
 eureka.client.fetch-registry: false
