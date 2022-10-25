@@ -13,7 +13,9 @@ services:
     image: ricardoahumada/products-service:0.0.1-SNAPSHOT
     container_name: products-service
     depends_on:
-      - naming-server    
+      - naming-server
+    environment:
+      - eureka.client.service-url.defaultZone=http://naming-server:8761/eureka   
     ports:
       - 9090:9090
     networks:
@@ -25,6 +27,8 @@ services:
     depends_on:
       - naming-server
       - products-service
+    environment:
+      - eureka.client.service-url.defaultZone=http://naming-server:8761/eureka   
     ports:
       - 9100:9100
     networks:
