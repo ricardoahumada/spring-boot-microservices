@@ -4,6 +4,8 @@ services:
     image: ricardoahumada/naming-server:0.0.1-SNAPSHOT
     build: config-server/
     container_name: config-server
+    environment:
+      - eureka.client.service-url.defaultZone=http://naming-server:8761/eureka   
     ports:
       - 8888:8888
     networks:

@@ -1,9 +1,5 @@
 version: '3.8'
 services:
-  config-server:
-    image: ricardoahumada/naming-server:0.0.1-SNAPSHOT
-    build: config-server/
-    container_name: config-server
   naming-server:
     image: ricardoahumada/naming-server:0.0.1-SNAPSHOT
     build: naming-server/
