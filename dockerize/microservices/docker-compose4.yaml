@@ -29,6 +29,7 @@ services:
       - eureka.client.service-url.defaultZone=http://naming-server:8761/eureka   
     ports:
       - "9090-9099:9090"
+    scale: 3
     networks:
       - spring-cloud-network    
   orders-service:
