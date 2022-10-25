@@ -19,7 +19,7 @@ services:
     build: orders-service/
     depends_on:
       - naming-server
-      - products-server
+      - products-service
     environment:
       SPRING_APPLICATION_JSON: '{"eureka":{"client":{"serviceUrl":{"defaultZone":"http://eureka-server:8761/eureka"}}}}'
     ports:
