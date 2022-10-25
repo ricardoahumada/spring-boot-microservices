@@ -13,11 +13,7 @@ spring:
         - id: OrdersService
           uri: "lb://orders-service/"
           predicates:
-            - Path=/orders/**
-        - id: Eureka
-          uri: "lb://naming-server/"
-          predicates:
-            - Path=//registry/**
+            - Path=/orders/**        
 
 eureka.client:  
   service-url.default-zone: http://naming-server:8761/eureka

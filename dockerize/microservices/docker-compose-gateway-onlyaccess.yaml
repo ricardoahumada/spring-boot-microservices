@@ -16,8 +16,8 @@ services:
       - config-server
     environment:
       - spring.config.import=optional:configserver:http://config-server:8888  
-    expose:
-      - 8761
+    ports:
+      - 8761:8761
     networks:
       - spring-cloud-network
   gateway-server:
