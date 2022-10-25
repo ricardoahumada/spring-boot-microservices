@@ -16,8 +16,6 @@ services:
     container_name: naming-server
     depends_on:
       - config-server
-    environment:
-      - spring.config.import=optional:configserver:http://config-server:8888  
     ports:
       - 8761:8761
     networks:
