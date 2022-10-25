@@ -32,7 +32,7 @@ spring.cloud:
     discovery.enabled: true
     service-registry.auto-registration.fail-fast: true
 
-eureka.client.service-url.default-zone: ${EUREKA_SERVER:http://naming-server:8761/eureka}
+eureka.client.service-url.default-zone: http://naming-server:8761/eureka
 
 #### with config server in eureka
 spring.config.import: "optional:configserver:"

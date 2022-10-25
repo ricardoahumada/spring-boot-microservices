@@ -5,22 +5,28 @@ services:
     build: naming-server/
     ports:
       - 8761:8761
+    networks:
+      - spring-cloud-network
   products-service:
     build: products-service/
     image: ricardoahumada/products-service:0.0.1-SNAPSHOT
     depends_on:
-      - naming-server
-    environment:
-      SPRING_APPLICATION_JSON: '{"eureka":{"client":{"serviceUrl":{"defaultZone":"http://eureka-server:8761/eureka"}}}}'
+      - naming-server    
     ports:
-      - 9090:9090      
+      - 9090:9090
+    networks:
+      - spring-cloud-network    
   orders-service:
     image: ricardoahumada/orders-service:0.0.1-SNAPSHOT
     build: orders-service/
     depends_on:
       - naming-server
       - products-service
-    environment:
-      SPRING_APPLICATION_JSON: '{"eureka":{"client":{"serviceUrl":{"defaultZone":"http://eureka-server:8761/eureka"}}}}'
     ports:
       - 9100:9100
+    networks:
+      - spring-cloud-network
+
+networks:
+    spring-cloud-network:
+        driver: bridge      
