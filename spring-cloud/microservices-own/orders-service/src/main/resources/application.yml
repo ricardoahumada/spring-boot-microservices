@@ -28,14 +28,25 @@ server:
 
 spring.mvc.pathmatch.matching-strategy: ANT_PATH_MATCHER
 
-spring.config.import: configserver:http://localhost:8888 # config server
+eureka.client.service-url.default-zone: http://localhost:8761/eureka
+
+#spring.config.import: "optional:configserver:http://localhost:8888" # config server
+
+#### with config server in eureka
+spring.config.import: "optional:configserver:"
+cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config-server
+      enabled: true
+
 management.endpoints.web.exposure.include: "*"
 
 orders-service:
-  min: 0
+  min: 99
   max: 100
 
-eureka.client.service-url.default-zone: http://localhost:8761/eureka
 
 products-service:
   base-url: localhost:9090
