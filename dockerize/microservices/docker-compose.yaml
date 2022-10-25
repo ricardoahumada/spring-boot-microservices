@@ -3,6 +3,7 @@ services:
   naming-server:
     image: ricardoahumada/naming-server:0.0.1-SNAPSHOT
     build: naming-server/
+    container_name: naming-server
     ports:
       - 8761:8761
     networks:
@@ -10,6 +11,7 @@ services:
   products-service:
     build: products-service/
     image: ricardoahumada/products-service:0.0.1-SNAPSHOT
+    container_name: products-service
     depends_on:
       - naming-server    
     ports:
@@ -19,6 +21,7 @@ services:
   orders-service:
     image: ricardoahumada/orders-service:0.0.1-SNAPSHOT
     build: orders-service/
+    container_name: orders-service    
     depends_on:
       - naming-server
       - products-service
