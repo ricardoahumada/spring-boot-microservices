@@ -12,6 +12,8 @@ services:
     image: ricardoahumada/naming-server:0.0.1-SNAPSHOT
     build: naming-server/
     container_name: naming-server
+    depends_on:
+      - config-server
     ports:
       - 8761:8761
     networks:
