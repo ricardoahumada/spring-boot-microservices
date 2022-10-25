@@ -12,5 +12,6 @@ spring.config:
   config: false
   import: "optional:configserver:"
 
-eureka.client.register-with-eureka: false
-eureka.client.fetch-registry: false
+eureka.client:
+  register-with-eureka: true
+  fetch-registry: false
