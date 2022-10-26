@@ -32,7 +32,7 @@ spring.mvc.pathmatch.matching-strategy: ANT_PATH_MATCHER
 management.endpoints.web.exposure.include: "*"
 
 orders-service:
-  min: 0
+  min: 80
   max: 100
 
 #eureka.client.service-url.default-zone: http://localhost:8761/eureka
