@@ -13,8 +13,11 @@ public class SpringCloudConfig {
         return builder.routes()
                 .route(r -> r.path("/orders/**")
                         .uri("lb://orders-service/"))
-
                 .route(r -> r.path("/products/**")
+                        .filters(f ->
+                                f.addRequestHeader("added-request-header", "added-request-header-value")
+                                .addResponseHeader("added-response-header", "added-response-header-value")
+                        )
                         .uri("lb://products-service/"))
 
                 .build();

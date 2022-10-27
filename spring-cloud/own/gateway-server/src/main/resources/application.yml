@@ -6,15 +6,17 @@ spring:
     gateway:
       discovery.locator.enabled: true
 #      routes:
-#        - id: CurrencyConversionService
-##          uri: "http://localhost:8100/currency-converter-feign/"
-#          uri: "lb://currency-conversion-service/currency-converter-feign/"
+#        - id: ProductsService
+#          uri: "lb://products-service/"
 #          predicates:
-#            - Path=/currency-converter/**
-#        - id: CurrencyExchangeService
-#          uri: "lb://currency-exchange-service/currency-exchange/"
+#            - Path=/products/**
+#          filters:
+#            - AddRequestHeader=added-request-header, added-request-header-value
+#            - AddResponseHeader=added-response-header, added-response-header-value
+#        - id: OrdersService
+#          uri: "lb://orders-service/"
 #          predicates:
-#            - Path=/currency-exchange/**
+#            - Path=/orders/**
 
 eureka.client:
   service-url.default-zone: http://localhost:8761/eureka
