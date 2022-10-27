@@ -13,7 +13,7 @@ public class ResourceServerConfig {
                 .mvcMatchers("/products/**").authenticated()
                 .mvcMatchers("/products/**").hasAuthority("SCOPE_products.read")
                 .and()
-                .oauth2ResourceServer()
+                .oauth2ResourceServer() 
                 .jwt();
         return http.build();
     }
