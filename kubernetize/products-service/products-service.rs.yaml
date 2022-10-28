@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: products-service-dep
-        image: ricardoahumada/products-service:0.0.1-SNAPSHOT
+        image: ricardoahumada/products-service:0.0.2-SNAPSHOT
         ports:
         - name: http-prods
           containerPort: 9090
