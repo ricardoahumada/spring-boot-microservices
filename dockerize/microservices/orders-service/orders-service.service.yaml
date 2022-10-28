@@ -10,7 +10,7 @@ spec:
   type: NodePort
   ports:
   - port: 9100
-    targetPort: http
-    nodePort: 30163 #30000-32767
+    targetPort: http-orders
+    nodePort: 30164 #30000-32767
     protocol: TCP
-    name: http
+    name: http-orders
