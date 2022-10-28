@@ -17,6 +17,11 @@ spec:
       containers:
       - name: orders-service-deployment
         image: ricardoahumada/orders-service:0.0.3-SNAPSHOT
+        env:
+        - name: spring.config.import
+          value: "optional:configserver:http://config-server:8888"
+        - name: products-service.base-url
+          value: "products-service:9090"
         ports:
         - name: http-orders
           containerPort: 9100
