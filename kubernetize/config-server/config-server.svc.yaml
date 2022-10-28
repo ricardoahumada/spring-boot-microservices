@@ -11,6 +11,6 @@ spec:
   ports:
   - port: 8888
     targetPort: http-cfg
-    nodePort: 30164 #30000-32767
+    nodePort: 30165 #30000-32767
     protocol: TCP
     name: http-cfg
