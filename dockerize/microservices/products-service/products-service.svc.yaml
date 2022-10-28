@@ -3,14 +3,14 @@ kind: Service
 metadata:
   name: products-service
   labels:
-    app: products
+    app: products-service
 spec:
   selector:
-    app: products
+    app: products-service
   type: NodePort
   ports:
   - port: 9090
-    targetPort: http
+    targetPort: http-prods
     nodePort: 30163 #30000-32767
     protocol: TCP
-    name: http
+    name: http-prods

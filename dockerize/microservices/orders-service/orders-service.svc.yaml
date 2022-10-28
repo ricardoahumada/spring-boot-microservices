@@ -3,10 +3,10 @@ kind: Service
 metadata:
   name: orders-service
   labels:
-    app: orders
+    app: orders-service
 spec:
   selector:
-    app: orders
+    app: orders-service
   type: NodePort
   ports:
   - port: 9100
