@@ -9,7 +9,7 @@ spec:
     app: orders
   type: NodePort
   ports:
-  - port: 9090
+  - port: 9100
     targetPort: http
     nodePort: 30163 #30000-32767
     protocol: TCP
