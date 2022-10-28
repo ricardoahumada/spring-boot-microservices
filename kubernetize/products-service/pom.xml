@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.netmind</groupId>
     <artifactId>ProductsService</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>v1</version>
     <name>ProductsService</name>
     <description>ProductsService project for Spring Boot</description>
     <properties>

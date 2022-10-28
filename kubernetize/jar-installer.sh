@@ -5,11 +5,6 @@ cd ./config-server
 mvn clean install
 cd ..
 
-echo "Installing naming-server..."
-cd ./naming-server
-mvn clean install
-cd ..
-
 echo "Installing gateway-server..."
 cd ./gateway-server
 mvn clean install
