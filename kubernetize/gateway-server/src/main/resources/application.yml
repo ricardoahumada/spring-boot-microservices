@@ -7,11 +7,11 @@ spring:
       discovery.locator.enabled: true
       routes:
         - id: ProductsService
-          uri: "lb://products-service:9090/"
+          uri: "products-service:9090/"
           predicates:
             - Path=/products/**
         - id: OrdersService
-          uri: "lb://orders-service:9100/"
+          uri: "orders-service:9100/"
           predicates:
             - Path=/orders/**        
 

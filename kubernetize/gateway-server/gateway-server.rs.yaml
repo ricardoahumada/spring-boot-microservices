@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: gateway-server-deployment
-        image: ricardoahumada/gateway-server:0.0.2-SNAPSHOT
+        image: ricardoahumada/gateway-server:0.0.3-SNAPSHOT
         ports:
         - name: http-gtw
           containerPort: 8765
