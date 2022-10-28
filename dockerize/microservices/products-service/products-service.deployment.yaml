@@ -19,4 +19,4 @@ spec:
         image: ricardoahumada/products-service:0.0.1-SNAPSHOT
         ports:
         - name: http
-          containerPort: 5000
+          containerPort: 9090
