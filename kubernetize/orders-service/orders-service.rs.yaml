@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: orders-service-deployment
-        image: ricardoahumada/orders-service:0.0.2-SNAPSHOT
+        image: ricardoahumada/orders-service:0.0.3-SNAPSHOT
         ports:
         - name: http-orders
           containerPort: 9100
