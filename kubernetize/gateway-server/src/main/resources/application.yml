@@ -7,17 +7,13 @@ spring:
       discovery.locator.enabled: true
       routes:
         - id: ProductsService
-          uri: "lb://products-service/"
+          uri: "lb://products-service:9090/"
           predicates:
             - Path=/products/**
         - id: OrdersService
-          uri: "lb://orders-service/"
+          uri: "lb://orders-service:9100/"
           predicates:
             - Path=/orders/**        
-
-eureka.client:  
-  service-url.default-zone: http://naming-server:8761/eureka
-  health-check.enabled: true
 
 management:
   endpoint:
