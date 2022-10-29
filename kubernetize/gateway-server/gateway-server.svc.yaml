@@ -7,7 +7,7 @@ metadata:
 spec:
   selector:
     app: gateway-server
-  type: NodePort
+  type: LoadBalancer
   ports:
   - port: 8765
     targetPort: http-gtw
