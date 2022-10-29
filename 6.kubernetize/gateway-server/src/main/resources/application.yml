@@ -1,0 +1,25 @@
+server.port: 8765
+
+spring:
+  application.name: gateway-server
+  cloud:
+    gateway:
+      discovery.locator.enabled: true
+      routes:
+        - id: ProductsService
+          uri: "http://products-service:9090/"
+          predicates:
+            - Path=/products/**
+        - id: OrdersService
+          uri: "http://orders-service:9100/"
+          predicates:
+            - Path=/orders/**        
+
+management:
+  endpoint:
+    gateway:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: gateway
