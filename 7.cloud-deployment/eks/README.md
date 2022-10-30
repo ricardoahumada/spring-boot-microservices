@@ -26,7 +26,8 @@
 ## 2. Provision EKS cluster
 
 ## Create cluster with eksctl
-### ⚠️Fist Create a role and associate to EC2 with EKS permissions!
+>⚠️Fist Create a role and associate to EC2 with EKS permissions!\
+>⚠️Add role to instance: Actions > Security > Modify IAM role
 
 `eksctl create cluster --name <your-cluster-name> --version <version-number> --nodes=1 --node-type=t2.small`
 
