@@ -6,4 +6,5 @@
 ## [3. Security](./3.security)
 ## [4. Spring Cloud](./4.spring-cloud)
 ## [5. Contenerization](./5.dockerize)
-## [6. Kubernetes-cloud](./6.kubernetize)
+## [6. Kubernetization](./6.kubernetize)
+## [7. Cloud deployment](./6.cloud-deployment)
