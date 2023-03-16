@@ -40,7 +40,7 @@ public class ProductServiceIntegrationTest {
     @BeforeEach
     public void setUp() {
         List<Product> products = Arrays.asList(
-                new Product(1L,"Fake product","")
+                new Product(1L, "Fake product", "")
         );
 
         Mockito.when(productsRepository.findByNameContaining("Fake"))
