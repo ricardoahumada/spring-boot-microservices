@@ -40,7 +40,7 @@ class ProductServiceControllerTest_MockMvc {
         mvc.perform(get("/products").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$[0].name", is("Nuevo Prod")));
+                .andExpect(jsonPath("$[0].name", is("Nuevo producto")));
 
     }
 

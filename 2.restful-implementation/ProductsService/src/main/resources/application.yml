@@ -1,7 +1,9 @@
 spring:
   application:
     name: ProductsService
+
 server:
+  servlet.contextPath: /api
   port: 8080
   error:
      include-message: always
@@ -14,7 +16,8 @@ spring.mvc.pathmatch.matching-strategy: ANT_PATH_MATCHER
 ---
 spring:
   sql.init.mode: always
-  profiles: dev
+  config.activate.on-profile: dev
+  devtools.restart.enabled: true
   application:
     name: ProductsService
   datasource:
@@ -34,6 +37,7 @@ spring:
     console.path: /h2-ui
 
 server:
+  servlet.contextPath: /api
   port: 9090
 
 #debug: true
@@ -46,10 +50,12 @@ logging:
 
 ---
 spring:
-  profiles: prod
+  config.activate.on-profile: prod
   application:
     name: ProductsService
+
 server:
+  servlet.contextPath: /api/v1
   port: 8443
   ssl:
       key-store: keystore.p12

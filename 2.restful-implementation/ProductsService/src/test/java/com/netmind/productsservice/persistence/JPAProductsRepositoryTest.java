@@ -3,6 +3,8 @@ package com.netmind.productsservice.persistence;
 import com.netmind.productsservice.model.Product;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEntityManager;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -23,6 +25,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @AutoConfigureTestEntityManager
 class JPAProductsRepositoryTest {
 
+    private static final Logger logger = LoggerFactory.getLogger(JPAProductsRepositoryTest.class);
+
     @Autowired
     private TestEntityManager entityManager;
 
@@ -32,37 +36,37 @@ class JPAProductsRepositoryTest {
     @Test
     void findAll() {
         // given
-        Product aProduct = new Product(null, "Fake Product","123-123-1234");
+        Product aProduct = new Product(null, "Fake Product", "123-123-1234");
         entityManager.persist(aProduct);
         entityManager.flush();
 
         // when
         List<Product> prods = jpaRepo.findAll();
+        logger.info("Prods:" + prods);
 
         // then
         assertThat(prods.size())
                 .isGreaterThan(0);
 
         assertNotNull(prods);
-        System.out.println(prods);
     }
 
-//    @Test
+    //    @Test
     void findById() {
     }
 
-//    @Test
+    //    @Test
     void findByNameContaining() {
     }
 
-//    @Test
+    //    @Test
     void findByName() {
     }
 
     @Test
     void save() {
         // given
-        Product aProduct = new Product(null, "Another Fake Product","123-123-1234");
+        Product aProduct = new Product(null, "Another Fake Product", "123-123-1234");
 
         // when
         jpaRepo.save(aProduct);
