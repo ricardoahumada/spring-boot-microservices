@@ -5,11 +5,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
-//@RestController
+@RestController
+@ServletComponentScan // for reading @webfilter
 public class DemoApplication {
    private static final Logger logger = LoggerFactory.getLogger(DemoApplication.class);
 
@@ -22,8 +24,8 @@ public class DemoApplication {
 
       SpringApplication.run(DemoApplication.class, args);
    }
-   /*@RequestMapping(value = "/")
+   @RequestMapping(value = "/name")
    public String name() {
       return name;
-   }*/
+   }
 }
