@@ -7,12 +7,14 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name = "products")
 @NoArgsConstructor @AllArgsConstructor
 @Getter @Setter @ToString
 @ApiModel(description = "Modelo producto")
+@XmlRootElement
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +30,7 @@ public class Product {
     private String name;
 
     @Column
-    @NotNull @NotBlank(message = "Debe tener valor con formato ddd-ddd-dddd")
+//    @NotNull @NotBlank(message = "Debe tener valor con formato ddd-ddd-dddd")
     @SerialNumber
     @ApiModelProperty(notes = "Product serial number", example = "111-222-3333", required = true)
     private String serial;

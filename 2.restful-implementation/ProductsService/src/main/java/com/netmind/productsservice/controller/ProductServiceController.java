@@ -52,7 +52,7 @@ public class ProductServiceController {
         return new ResponseEntity<>("not valid due to validation error: " + e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
-    @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<List<Product>> getAllProducts() {
         List<Product> products = productsRepo.findAll();
         return new ResponseEntity<>(products, HttpStatus.OK);
@@ -63,7 +63,7 @@ public class ProductServiceController {
             @ApiResponse(code = 200, message = "Successfully retrieved"),
             @ApiResponse(code = 404, message = "Not found - The product was not found")
     })
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity getProduct(
             @ApiParam(name = "id", value = "Product id", example = "1") @PathVariable @Min(1) Long id
     ) {
@@ -74,7 +74,7 @@ public class ProductServiceController {
             return new ResponseEntity<>(new StatusMessage(HttpStatus.NOT_FOUND.value(), "No encontrado"), HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity createProduct(@RequestBody @Valid Product newProduct) {
         newProduct.setId(null);
         productsRepo.save(newProduct);
