@@ -31,7 +31,7 @@ public class Product {
 
     @Column
 //    @NotNull @NotBlank(message = "Debe tener valor con formato ddd-ddd-dddd")
-    @SerialNumber
+    @SerialNumber(message="{serial.format}")
     @ApiModelProperty(notes = "Product serial number", example = "111-222-3333", required = true)
     private String serial;
 }
