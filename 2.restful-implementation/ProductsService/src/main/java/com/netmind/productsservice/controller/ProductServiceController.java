@@ -27,7 +27,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/products")
-//@CrossOrigin(origins = "*")
+// @CrossOrigin(origins = {"*"}, allowedHeaders = "*")
 public class ProductServiceController {
     private static final Logger logger = LoggerFactory.getLogger(ProductServiceController.class);
 
