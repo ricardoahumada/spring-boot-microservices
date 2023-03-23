@@ -1,24 +1,32 @@
 # Testing
 
 - Open any REST Client.
-- Authenticate against the authentication endpoint localhost:8080/auth/login with this data (POST request):
+
+- Get users: localhost:8080/users
+- Add your users: 
+	+ POST localhost:8080/users {"email":"admin@mail.com", "password":"my_pass", "role":"ADMIN"}
+	+ POST localhost:8080/users {"email":"user@mail.com", "password":"my_pass", "role":"USER"}
+
+
+- Authenticate against the authentication endpoint localhost:8080/auth/login with this your user data (POST request):
 - 
 ```
-	{"email":"my@mail.com", "password":"my_pass"}"
+	{"email":"admin@mail.com", "password":"my_pass"}
+	{"email":"user@mail.com", "password":"my_pass"}
 ```
 
 - Header: Content-Type application/json
 	+ Example with curl:
 
 ```
-curl -v -H "Content-Type: application/json" -d "{\"email\":\"my@mail.com\", \"password\":\"my_pass\"}" localhost:8080/auth/login
+curl -v -H "Content-Type: application/json" -d "{\"email\":\"admin@mail.com\", \"password\":\"my_pass\"}" localhost:8080/auth/login
 ```
 
 - Response:
 
 ```
 {
-  "email": "my@mail.com",
+  "email": "admin@mail.com",
   "accessToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxLG5hbUBjb2RlamF2YS5..."
 }
 ```

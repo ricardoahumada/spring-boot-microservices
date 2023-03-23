@@ -64,7 +64,7 @@ public class ApplicationSecurity {
                 .antMatchers("/auth/login",
                         "/docs/**",
                         "/users",
-                        "/h2-ui",
+                        "/h2-ui/**",
                         "/configuration/ui",
                         "/swagger-resources/**",
                         "/configuration/security",
@@ -74,8 +74,10 @@ public class ApplicationSecurity {
 //                .antMatchers("/**").permitAll() // BARRA LIBRE
 //                .antMatchers("/products/**").hasAuthority(ERole.USER.name())
                 .antMatchers(HttpMethod.GET,"/products/**").hasAnyAuthority(ERole.USER.name()) //Para acceder a productos debe ser USER
-                .antMatchers("/products/**").hasAnyAuthority(ERole.ADMIN.name()) //Para acceder a productos debe ser USER
+                .antMatchers("/products/**").hasAnyAuthority(ERole.ADMIN.name()) //admin puede hacer de todo
                 .anyRequest().authenticated();
+
+        http.headers().frameOptions().sameOrigin();
 
         http.exceptionHandling()
                 .authenticationEntryPoint(
