@@ -52,7 +52,7 @@ public class ApplicationSecurity {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
+    @Bean
     public DaoAuthenticationProvider authProvider() {
         logger.info("Entra authProvider!!!!");
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -73,6 +73,8 @@ public class ApplicationSecurity {
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+//        http.authenticationProvider(authProvider());
 
         http.authorizeRequests()
                 .antMatchers("/auth/login",

@@ -12,10 +12,12 @@ http://127.0.0.1:9000/oauth2/authorize?response_type=code&client_id=[client_id]&
 ```
 - Get the previous data from the configuration of auth server.
 
-	+ For example: 
+- Example url: 
 ```
 http://127.0.0.1:9000/oauth2/authorize?response_type=code&client_id=client1&redirect_uri=http://127.0.0.1:8080/authorized&scope=openid SCOPE_products.read
 ```
+- Example user-password:
+    + admin/password
 
 - You get a response like this: 
 ```
@@ -32,6 +34,10 @@ http://127.0.0.1:8080/authorized?code=[CODE]
         - grant_type: authorization_code
         - code: [CODE]
         - redirect_uri: [redirect_uri]
+- Example data:
+    + client_id: client1
+    + client_secret: myClientSecretVaue
+    + redirect_uri: http://127.0.0.1:8080/
 
 - Using curl:
 
@@ -43,6 +49,8 @@ curl -X POST -H "Content-Type: application/x-www-form-urlencoded" –d "grant_ty
 
 
 ## Consuming resources
+0. Add to host:
+- 127.0.0.1    auth-server
 1. Obtain a token against the authorization server.
 - Follow former steps
 - Copy the access_token value in the response.
