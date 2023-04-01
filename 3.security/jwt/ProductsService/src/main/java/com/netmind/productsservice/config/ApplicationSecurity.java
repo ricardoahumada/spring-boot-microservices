@@ -54,7 +54,6 @@ public class ApplicationSecurity {
 
     @Bean
     public DaoAuthenticationProvider authProvider() {
-        logger.info("Entra authProvider!!!!");
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService());
         authProvider.setPasswordEncoder(passwordEncoder());

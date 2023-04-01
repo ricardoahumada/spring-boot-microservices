@@ -15,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.test.annotation.Commit;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
@@ -49,6 +50,17 @@ class AuthServiceTest {
 
     @Autowired
     private UserRepository userRepository;
+
+    @BeforeAll
+    @Commit // force REAL saving in DB
+    public void clean() {
+        try {
+            logger.info("**** cleaning users...");
+            userRepository.deleteUsersByEmail("t@t.com");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @BeforeEach
     public void setUp() {
@@ -118,7 +130,7 @@ class AuthServiceTest {
             // when
             mvc.perform(get("/products")
                             .contentType(MediaType.APPLICATION_JSON)
-                            .header("Authorization","Bearer " + accessToken)
+                            .header("Authorization", "Bearer " + accessToken)
                     )
                     // then
                     .andDo(MockMvcResultHandlers.print())
