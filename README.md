@@ -1,10 +1,10 @@
 # SPRING BOOT AND MICROSERVICES
 
-## [0. Docs](./0.docs)
-## [1. SpringBoot Basics](./1.springboot-basics)
-## [2. RESTful implementation](./2.restful-implementation)
-## [3. Security](./3.security)
-## [4. Spring Cloud](./4.spring-cloud)
-## [5. Contenerization](./5.dockerize)
-## [6. Kubernetization](./6.kubernetize)
-## [7. Cloud deployment](./6.cloud-deployment)
+## [00. Docs](./00.docs)
+## [01. SpringBoot Basics](./01.springboot-basics)
+## [02. RESTful implementation](./02.restful-implementation)
+## [03. Security](./03.security)
+## [04. Spring Cloud](./04.spring-cloud)
+## [05. Contenerization](./05.dockerize)
+## [06. Kubernetization](./06.kubernetize)
+## [07. Cloud deployment](./07.cloud-deployment)
