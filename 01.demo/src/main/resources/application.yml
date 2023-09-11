@@ -1,4 +1,5 @@
 spring:
+   # profiles.active: dev # active dev profile
    application:
       name: demoservice
 server:
@@ -6,7 +7,7 @@ server:
 
 ---
 spring:
-   profiles: dev
+   config.activate.on-profile: dev
    application:
       name: demoservice
 server:
@@ -21,7 +22,7 @@ logging:
 
 ---
 spring:
-   profiles: prod
+   config.activate.on-profile: prod
    application:
       name: demoservice
 server:
