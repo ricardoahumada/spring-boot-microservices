@@ -1,9 +1,8 @@
 package com.netmind.productsservice.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.*;
 
-import javax.xml.bind.annotation.XmlRootElement;
 
 @NoArgsConstructor
 @AllArgsConstructor

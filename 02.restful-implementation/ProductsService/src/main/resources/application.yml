@@ -1,6 +1,7 @@
 spring:
   application:
     name: ProductsService
+  profiles.active: dev
 
 server:
   servlet.contextPath: /api
@@ -12,6 +13,22 @@ server:
      include-exception: false
 
 spring.mvc.pathmatch.matching-strategy: ANT_PATH_MATCHER
+
+springdoc:
+  #api-docs.enabled: false
+  #swagger-ui.enabled: false
+  swagger-ui.path: /products-documentation
+  api-docs.path: /products-api-docs
+  packages-to-scan: com.netmind.productsservice.controller
+  swagger-ui:
+    tryItOutEnabled: true
+    operationsSorter: method
+    tagsSorter: alpha
+    filter: true
+
+products.openapi:
+  dev-url: http://localhost:8080
+  prod-url: https://products-api.com
 
 ---
 spring:

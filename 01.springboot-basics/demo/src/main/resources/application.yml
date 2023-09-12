@@ -1,16 +1,18 @@
 spring:
    application:
       name: demoservice
+   profiles.active: dev # active dev profile
 server:
    port: 8080
 
 ---
 spring:
-   profiles: dev
+   config.activate.on-profile: dev
    application:
       name: demoservice
 server:
    port: 9090
+   servlet.context-path: /api/v1
 
 #debug: true
 logging:
@@ -21,7 +23,7 @@ logging:
 
 ---
 spring:
-   profiles: prod
+   config.activate.on-profile: prod
    application:
       name: demoservice
 server:
