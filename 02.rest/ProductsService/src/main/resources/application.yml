@@ -14,7 +14,7 @@ spring.mvc.pathmatch.matching-strategy: ANT_PATH_MATCHER
 ---
 spring:
   sql.init.mode: always
-  profiles: dev
+  config.activate.on-profile: dev
   application:
     name: ProductsService
   datasource:
@@ -46,7 +46,7 @@ logging:
 
 ---
 spring:
-  profiles: prod
+  config.activate.on-profile: prod
   application:
     name: ProductsService
 server:
