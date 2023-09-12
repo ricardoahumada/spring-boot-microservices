@@ -1,6 +1,6 @@
 package com.netmind.productsservice.config;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 
 import com.netmind.productsservice.jwt.JwtTokenFilter;
 import com.netmind.productsservice.model.ERole;

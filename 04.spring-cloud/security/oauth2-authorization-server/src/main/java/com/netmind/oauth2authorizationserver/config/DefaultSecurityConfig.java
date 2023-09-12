@@ -19,8 +19,8 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.sql.DataSource;
 import java.util.Optional;
 
 @EnableWebSecurity
