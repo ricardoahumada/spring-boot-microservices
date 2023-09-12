@@ -54,7 +54,7 @@ spring:
     console.path: /h2-ui
 
 server:
-  servlet.contextPath: /api
+#  servlet.contextPath: /api
   port: 9090
 
 #debug: true
