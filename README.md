@@ -1,6 +1,5 @@
 # SPRING BOOT AND MICROSERVICES
 
-## [00. Docs](./00.docs)
 ## [01. SpringBoot Basics](./01.springboot-basics)
 ## [02. RESTful implementation](./02.restful-implementation)
 ## [03. Security](./03.security)
