@@ -13,7 +13,7 @@ public class LoadBalancerConfiguration {
         System.out.println("Configuring Load balancer to prefer same instance");
         return ServiceInstanceListSupplier.builder()
                 .withBlockingDiscoveryClient()
-                .withSameInstancePreference()
+//                .withSameInstancePreference()
                 .build(context);
     }
 
