@@ -7,34 +7,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
-//import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.Customizer;
 
-//@Configuration
-//@EnableWebSecurity
-/*
-public class WebSecurityConfig */
-/*extends WebSecurityConfigurerAdapter*//*
- {
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf()
-                .disable()
-                .cors()
-                .and()
-                .authorizeRequests().antMatchers("/**").permitAll();
-    }
-
-    @Override
-    @Bean
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
-
-
-}
-*/
 
 @Configuration
 public class SecurityConfig {
@@ -45,7 +19,7 @@ public class SecurityConfig {
                 .build();
     }
 
-    @Bean
+    @Bean   
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring()
                 .requestMatchers("/**")
@@ -55,7 +29,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests((authz) -> authz
+                .authorizeHttpRequests((request) -> request
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults());
