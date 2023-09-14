@@ -33,7 +33,6 @@ public class AuthService {
             );
 
             User user = (User) authentication.getPrincipal();
-            System.out.println("User:" + user.getId()+" "+ user.getEmail()+" "+ user.getPassword());
             String accessToken = jwtUtil.generateAccessToken(user);
             AuthResponse response = new AuthResponse(user.getEmail(), accessToken);
 
