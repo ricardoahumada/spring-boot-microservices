@@ -1,6 +1,5 @@
 package com.netmind.productsservice.model;
 
-import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.*;
 
 
