@@ -1,6 +1,5 @@
 package com.netmind.productsservice.controller;
 
-import com.netmind.productsservice.model.StatusMessage;
 import com.netmind.productsservice.model.User;
 import com.netmind.productsservice.persistence.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

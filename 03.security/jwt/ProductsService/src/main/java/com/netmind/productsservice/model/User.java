@@ -41,7 +41,7 @@ public class User implements UserDetails {
     @Override
     @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> authorities = new ArrayList();
+        List<GrantedAuthority> authorities = new ArrayList<>();
 
         if (this.role != null) authorities.add(new SimpleGrantedAuthority(this.role.name()));
 
