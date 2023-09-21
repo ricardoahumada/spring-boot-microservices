@@ -19,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,13 +31,14 @@ import java.util.Map;
 @RequestMapping(value = "/products")
 // @CrossOrigin(origins = {"*"}, allowedHeaders = "*")
 @Tag(name = "Products API", description = "Products management APIs")
+@Validated
 public class ProductServiceController {
     private static final Logger logger = LoggerFactory.getLogger(ProductServiceController.class);
 
     @Autowired
     ProductsRepository productsRepo;
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    /* @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
@@ -46,13 +48,13 @@ public class ProductServiceController {
             errors.put(fieldName, errorMessage);
         });
         return errors;
-    }
+    } */
 
-    @ExceptionHandler(ConstraintViolationException.class)
+    /*@ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     ResponseEntity<String> handleConstraintViolationException(ConstraintViolationException e) {
-        return new ResponseEntity<>("not valid due to validation error: " + e.getMessage(), HttpStatus.BAD_REQUEST);
-    }
+        return new ResponseEntity<>("Not valid due to validation error: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+    }*/
 
     @GetMapping(value = "", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<List<Product>> getAllProducts() {
@@ -78,7 +80,7 @@ public class ProductServiceController {
 
     @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity createProduct(@RequestBody @Valid Product newProduct) {
-        newProduct.setId(null);
+//        newProduct.setId(null);
         productsRepo.save(newProduct);
         if (newProduct != null && newProduct.getId() > 0) return new ResponseEntity<>(newProduct, HttpStatus.CREATED);
         else

@@ -33,9 +33,9 @@ public class Product {
     @Schema(name = "Product name", example = "Product 1", required = true)
     private String name;
 
-    @Column
+    /*@Column
 //    @NotNull @NotBlank(message = "Debe tener valor con formato ddd-ddd-dddd")
     @SerialNumber(message = "{serial.format}")
     @Schema(name = "Product serial number", example = "111-222-3333", required = true)
-    private String serial;
+    private String serial;*/
 }
