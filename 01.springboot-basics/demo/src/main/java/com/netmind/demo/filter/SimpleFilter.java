@@ -11,11 +11,16 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebFilter;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 //@Component // with @ServletComponentScan not necessary
 @WebFilter(urlPatterns = {"/products"})
 public class SimpleFilter implements Filter {
+
+    private static Logger log = LoggerFactory.getLogger(TransactionFilter.class);
+
     @Override
     public void destroy() {
     }
@@ -24,8 +29,8 @@ public class SimpleFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterchain)
             throws IOException, ServletException {
 
-        System.out.println("Remote Host:" + request.getRemoteHost());
-        System.out.println("Remote Address:" + request.getRemoteAddr());
+        log.info("Remote Host:" + request.getRemoteHost());
+        log.info("Remote Address:" + request.getRemoteAddr());
         filterchain.doFilter(request, response);
     }
 

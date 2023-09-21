@@ -18,22 +18,22 @@ import org.springframework.stereotype.Component;
 @Order(1)
 public class TransactionFilter implements Filter {
 
-       private static Logger log = LoggerFactory.getLogger(TransactionFilter.class);
+    private static Logger log = LoggerFactory.getLogger(TransactionFilter.class);
 
     @Override
     public void doFilter(
-      ServletRequest request,
-      ServletResponse response,
-      FilterChain chain) throws IOException, ServletException {
+            ServletRequest request,
+            ServletResponse response,
+            FilterChain chain) throws IOException, ServletException {
 
         HttpServletRequest req = (HttpServletRequest) request;
         log.info(
-          "Starting a transaction for req : {}",
-          req.getRequestURI());
+                "Starting a transaction for req : {}",
+                req.getRequestURI());
 
         chain.doFilter(request, response);
         log.info(
-          "Committing a transaction for req : {}",
-          req.getRequestURI());
+                "Committing a transaction for req : {}",
+                req.getRequestURI());
     }
 }

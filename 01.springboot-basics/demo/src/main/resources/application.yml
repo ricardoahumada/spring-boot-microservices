@@ -12,7 +12,7 @@ spring:
       name: demoservice
 server:
    port: 9090
-   servlet.context-path: /api/v1
+   servlet.context-path: /api/dev
 
 #debug: true
 logging:
