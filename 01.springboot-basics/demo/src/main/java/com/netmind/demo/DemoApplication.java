@@ -17,6 +17,7 @@ public class DemoApplication {
 
    @Value("${spring.application.name}")
    private String name;
+   
    public static void main(String[] args) {
       logger.info("this is a info message");
       logger.warn("this is a warn message");
@@ -24,6 +25,7 @@ public class DemoApplication {
 
       SpringApplication.run(DemoApplication.class, args);
    }
+
    @RequestMapping(value = "/name")
    public String name() {
       return name;
