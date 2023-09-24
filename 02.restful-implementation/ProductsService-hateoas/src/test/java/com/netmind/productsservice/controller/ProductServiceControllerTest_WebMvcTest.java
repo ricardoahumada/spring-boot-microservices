@@ -1,0 +1,100 @@
+package com.netmind.productsservice.controller;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.netmind.productsservice.entity.ProductEntity;
+import com.netmind.productsservice.persistence.ProductsRepository;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+
+import java.util.Arrays;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
+
+import static org.mockito.BDDMockito.given;
+
+@ExtendWith(SpringExtension.class)
+@WebMvcTest(ProductServiceController.class)
+public class ProductServiceControllerTest_WebMvcTest {
+
+    @BeforeEach
+    public void setUp() {
+        List<ProductEntity> productEntities = Arrays.asList(
+                new ProductEntity(1L, "Fake product", "")
+        );
+
+        Mockito.when(repository.findByNameContaining("Fake"))
+                .thenReturn(productEntities);
+
+        Mockito.when(repository.findAll())
+                .thenReturn(productEntities);
+
+        Mockito.when(repository.save(Mockito.any(ProductEntity.class)))
+                .thenAnswer(elem -> {
+                    ProductEntity ap = (ProductEntity) elem.getArguments()[0];
+                    ap.setId(100L);
+                    return ap;
+                });
+    }
+
+    @Autowired
+    private MockMvc mvc;
+
+    @MockBean
+    private ProductsRepository repository;
+
+    @Test
+    public void givenProducts_whenGetProducts_thenReturnJsonArray() throws Exception {
+
+        ProductEntity aProductEntity = new ProductEntity(1L, "Fake product", "123-123-1234");
+
+        List<ProductEntity> allProductEntities = Arrays.asList(aProductEntity);
+
+        given(repository.findAll()).willReturn(allProductEntities);
+
+        mvc.perform(get("/products")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].name", is(aProductEntity.getName())));
+    }
+
+    @Test
+    void givenProducts_whenVaildCreateProduct_thenIsCreatedAndHaveId() throws Exception {
+        ProductEntity newProductEntity = new ProductEntity(null, "Nuevo producto", "123-123-1234");
+
+        mvc.perform(post("/products")
+                        .content(asJsonString(newProductEntity))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                )
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id", is(100)));
+    }
+
+    public static String asJsonString(final Object obj) {
+        try {
+            return new ObjectMapper().writeValueAsString(obj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
