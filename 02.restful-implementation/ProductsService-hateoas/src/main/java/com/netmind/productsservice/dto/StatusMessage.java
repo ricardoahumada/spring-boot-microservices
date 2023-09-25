@@ -1,4 +1,4 @@
-package com.netmind.productsservice.model;
+package com.netmind.productsservice.dto;
 
 import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.*;

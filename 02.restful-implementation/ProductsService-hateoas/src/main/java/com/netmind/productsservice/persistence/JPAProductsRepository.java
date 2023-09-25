@@ -1,6 +1,6 @@
 package com.netmind.productsservice.persistence;
 
-import com.netmind.productsservice.entity.ProductEntity;
+import com.netmind.productsservice.model.Product;
 import org.springframework.stereotype.Repository;
 
 import jakarta.persistence.EntityManager;
@@ -17,31 +17,31 @@ public class JPAProductsRepository implements IProductsRepository{
     EntityManager em;
 
     @Override
-    public List<ProductEntity> findAll() {
+    public List<Product> findAll() {
         Query query = em.createQuery("SELECT p FROM Product p");
-        return (List<ProductEntity>) query.getResultList();
+        return (List<Product>) query.getResultList();
     }
 
     @Override
-    public Optional<ProductEntity> findById(Long id) {
+    public Optional<Product> findById(Long id) {
         return Optional.empty();
     }
 
     @Override
-    public List<ProductEntity> findByNameContaining(String name) {
+    public List<Product> findByNameContaining(String name) {
         return null;
     }
 
     @Override
-    public ProductEntity findByName(String name) {
+    public Product findByName(String name) {
         return null;
     }
 
     @Override
     @Transactional
-    public ProductEntity save(ProductEntity aProductEntity) {
-        em.persist(aProductEntity);
-        return aProductEntity;
+    public Product save(Product aProduct) {
+        em.persist(aProduct);
+        return aProduct;
     }
 
     @Override

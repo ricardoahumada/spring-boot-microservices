@@ -5,9 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.netmind.productsservice.controller.ProductServiceController;
-import com.netmind.productsservice.entity.ProductEntity;
-import com.netmind.productsservice.model.ProductModel;
-import org.springframework.hateoas.CollectionModel;
+import com.netmind.productsservice.model.Product;
+import com.netmind.productsservice.dto.ProductDTO;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -16,14 +15,14 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ProductModelAssembler extends RepresentationModelAssemblerSupport<ProductEntity, ProductModel> {
+public class ProductModelAssembler extends RepresentationModelAssemblerSupport<Product, ProductDTO> {
     public ProductModelAssembler() {
-        super(ProductServiceController.class, ProductModel.class);
+        super(ProductServiceController.class, ProductDTO.class);
     }
 
     @Override
-    public ProductModel toModel(ProductEntity entity) {
-        ProductModel productModel = instantiateModel(entity);
+    public ProductDTO toModel(Product entity) {
+        ProductDTO productModel = instantiateModel(entity);
 
         productModel.add(linkTo(
                 methodOn(ProductServiceController.class)
@@ -32,24 +31,16 @@ public class ProductModelAssembler extends RepresentationModelAssemblerSupport<P
 
         productModel.setId(entity.getId());
         productModel.setName(entity.getName());
+        productModel.setSerial(entity.getSerial());
         return productModel;
     }
 
-    @Override
-    public CollectionModel<ProductModel> toCollectionModel(Iterable<? extends ProductEntity> entities) {
-        CollectionModel<ProductModel> productModels = super.toCollectionModel(entities);
-
-        productModels.add(linkTo(methodOn(ProductServiceController.class).getAllProducts()).withSelfRel());
-
-        return productModels;
-    }
-
-    public List<ProductModel> toProductModel(List<ProductEntity> products) {
+    public List<ProductDTO> toProductModel(List<Product> products) {
         if (products.isEmpty())
             return Collections.emptyList();
 
         return products.stream()
-                .map(product -> ProductModel.builder()
+                .map(product -> ProductDTO.builder()
                         .id(product.getId())
                         .name(product.getName())
                         .build()

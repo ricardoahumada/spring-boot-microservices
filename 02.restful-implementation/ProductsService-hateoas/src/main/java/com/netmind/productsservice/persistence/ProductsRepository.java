@@ -1,13 +1,13 @@
 package com.netmind.productsservice.persistence;
 
-import com.netmind.productsservice.entity.ProductEntity;
+import com.netmind.productsservice.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface ProductsRepository extends JpaRepository<ProductEntity, Long> {
-    List<ProductEntity> findByNameContaining(String name);
-    @Query("select p from ProductEntity p where p.name = ?1")
-    ProductEntity findByName(String name);
+public interface ProductsRepository extends JpaRepository<Product, Long> {
+    List<Product> findByNameContaining(String name);
+    @Query("select p from Product p where p.name = ?1")
+    Product findByName(String name);
 }

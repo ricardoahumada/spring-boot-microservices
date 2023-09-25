@@ -1,20 +1,20 @@
 package com.netmind.productsservice.persistence;
 
-import com.netmind.productsservice.entity.ProductEntity;
+import com.netmind.productsservice.model.Product;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface IProductsRepository {
-    List<ProductEntity> findAll();
+    List<Product> findAll();
 
-    Optional<ProductEntity> findById(Long id);
+    Optional<Product> findById(Long id);
 
-    List<ProductEntity> findByNameContaining(String name);
+    List<Product> findByNameContaining(String name);
 
-    ProductEntity findByName(String name);
+    Product findByName(String name);
 
-    ProductEntity save(ProductEntity aProductEntity);
+    Product save(Product aProduct);
 
     void deleteById(Long id);
 }
