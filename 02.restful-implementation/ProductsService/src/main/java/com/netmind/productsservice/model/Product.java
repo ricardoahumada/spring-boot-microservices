@@ -18,6 +18,6 @@ public class Product {
     @Column
     private String name;
 
-    @Column
-    private String serial;
+    /*@Column
+    private String serial;*/
 }
