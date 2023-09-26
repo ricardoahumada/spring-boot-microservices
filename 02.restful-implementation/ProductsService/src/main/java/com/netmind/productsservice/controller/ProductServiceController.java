@@ -54,5 +54,17 @@ public class ProductServiceController {
         return new ResponseEntity(newP, HttpStatus.CREATED);
     }
 
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product aProduct) {
+        aProduct.setId(id);
+        repo.save(aProduct);
+        return new ResponseEntity(aProduct, HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity deleteProduct(@PathVariable Long id) {
+        repo.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }
