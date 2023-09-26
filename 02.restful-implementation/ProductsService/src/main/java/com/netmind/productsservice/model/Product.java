@@ -1,5 +1,6 @@
 package com.netmind.productsservice.model;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,6 +11,7 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
+@JacksonXmlRootElement
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
