@@ -1,5 +1,7 @@
-package com.netmind.productsservice.exception;
+package com.netmind.productsservice.config;
 
+import com.netmind.productsservice.exception.GlobalException;
+import com.netmind.productsservice.exception.ProductNotfoundException;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
@@ -18,7 +20,19 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler /*extends ResponseEntityExceptionHandler*/ {
 
-    @ExceptionHandler(ProductNotfoundException.class)
+    /*When not specific exception is defined it handles the parent exceptio*/
+    @ExceptionHandler(GlobalException.class)
+    ProblemDetail handleGlobalException(GlobalException e) {
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, e.getMessage());
+        problemDetail.setTitle("Global exception");
+        problemDetail.setType(URI.create("https://api.products.com/errors/global"));
+        // custom properties
+        problemDetail.setProperty("errorCategory", "Generic");
+        problemDetail.setProperty("timestamp", Instant.now());
+        return problemDetail;
+    }
+    /*When specific exception is defined...*/
+    /*@ExceptionHandler(ProductNotfoundException.class)
     ProblemDetail handleProductNotFoundException(ProductNotfoundException e) {
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());
         problemDetail.setTitle("Product Not Found");
@@ -27,7 +41,7 @@ public class GlobalExceptionHandler /*extends ResponseEntityExceptionHandler*/ {
         problemDetail.setProperty("errorCategory", "Generic");
         problemDetail.setProperty("timestamp", Instant.now());
         return problemDetail;
-    }
+    }*/
 
     /*@ExceptionHandler(ProductNotfoundException.class)
     ErrorResponse handleBookmarkNotFoundException(ProductNotfoundException e) {

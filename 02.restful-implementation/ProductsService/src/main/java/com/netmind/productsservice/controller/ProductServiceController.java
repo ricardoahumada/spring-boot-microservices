@@ -68,14 +68,11 @@ public class ProductServiceController {
             @ApiResponse(responseCode = "404", description = "Not found - The product was not found")
     })
     @GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity getProduct(
+    public ResponseEntity<Product> getProduct(
             @Parameter(name = "id", description = "Product id", example = "1") @PathVariable @Min(1) Long id
     ) {
-        if (!productsRepo.existsById(id)) throw new ProductNotfoundException();
-        Product product = productsRepo.findById(id).get();
-        if (product != null) return new ResponseEntity<>(product, HttpStatus.OK);
-        else
-            return new ResponseEntity<>(new StatusMessage(HttpStatus.NOT_FOUND.value(), "No encontrado"), HttpStatus.NOT_FOUND);
+
+        return productsRepo.findById(id).map(ResponseEntity::ok).orElseThrow(() -> new ProductNotfoundException(id));
     }
 
     @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
