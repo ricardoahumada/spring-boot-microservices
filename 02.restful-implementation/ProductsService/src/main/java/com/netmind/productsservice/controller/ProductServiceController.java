@@ -1,14 +1,19 @@
 package com.netmind.productsservice.controller;
 
+import com.netmind.productsservice.exception.ProductNotfoundException;
+import com.netmind.productsservice.exception.ProductNotfoundExceptionHijo;
 import com.netmind.productsservice.model.Product;
 import com.netmind.productsservice.model.StatusMessage;
 import com.netmind.productsservice.persistence.ProductsRepository;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +21,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/products")
+@Validated
 public class ProductServiceController {
 
     @Autowired
@@ -37,10 +43,11 @@ public class ProductServiceController {
 
     //    @RequestMapping(path = "/{pid}", method = RequestMethod.GET)
     @GetMapping("/{pid}")
-    public ResponseEntity getAProduct(@PathVariable(name = "pid") Long id) {
+    public ResponseEntity<Product> getAProduct(@PathVariable(name = "pid") @Min(1) Long id) {
         Optional<Product> prod = repo.findById(id);
         if (!prod.isEmpty()) return new ResponseEntity<>(prod.get(), HttpStatus.OK);
-        else return new ResponseEntity<>(new StatusMessage(1289, "No existe"), HttpStatus.NOT_FOUND);
+        else throw new ProductNotfoundExceptionHijo(id);
+//        else return new ResponseEntity<>(new StatusMessage(1289, "No existe"), HttpStatus.NOT_FOUND);
     }
 
     //    @RequestMapping(path = "", method = RequestMethod.POST)
@@ -48,7 +55,7 @@ public class ProductServiceController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
-    public ResponseEntity<Product> addProduct(@RequestBody Product newP) {
+    public ResponseEntity<Product> addProduct(@RequestBody @Valid Product newP) {
         newP.setId(null);
         repo.save(newP);
         return new ResponseEntity(newP, HttpStatus.CREATED);
@@ -65,6 +72,7 @@ public class ProductServiceController {
     public ResponseEntity deleteProduct(@PathVariable Long id) {
         repo.deleteById(id);
         return ResponseEntity.noContent().build();
+//        return new ResponseEntity<>(new StatusMessage(202, "El contenido se eliminó correctametne"), HttpStatus.ACCEPTED);
     }
 
 }
