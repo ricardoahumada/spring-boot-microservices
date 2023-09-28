@@ -14,8 +14,8 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import java.util.Locale;
 
 @Configuration
-public class Internationalization implements WebMvcConfigurer {
-    @Bean
+public class InternationalizationConfig implements WebMvcConfigurer {
+    /*@Bean
     public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setBasename("classpath:messages");
@@ -28,11 +28,12 @@ public class Internationalization implements WebMvcConfigurer {
         LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
         bean.setValidationMessageSource(messageSource());
         return bean;
-    }
+    }*/
 
     @Bean
     public LocaleResolver localeResolver() {
-        SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();
+         SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();
+//        AcceptHeaderLocaleResolver sessionLocaleResolver = new AcceptHeaderLocaleResolver();
 //      sessionLocaleResolver.setDefaultLocale(Locale.US);
         sessionLocaleResolver.setDefaultLocale(Locale.getDefault());
         return sessionLocaleResolver;
