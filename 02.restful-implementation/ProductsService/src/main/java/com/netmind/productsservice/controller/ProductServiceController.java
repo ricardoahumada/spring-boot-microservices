@@ -5,6 +5,11 @@ import com.netmind.productsservice.exception.ProductNotfoundExceptionHijo;
 import com.netmind.productsservice.model.Product;
 import com.netmind.productsservice.model.StatusMessage;
 import com.netmind.productsservice.persistence.ProductsRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import org.slf4j.Logger;
@@ -22,6 +27,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/products")
 @Validated
+//@CrossOrigin(origins = {"*"}, allowedHeaders = {"*"})
+@Tag(name = "Products API", description = "API de los productos")
 public class ProductServiceController {
 
     @Autowired
@@ -43,7 +50,16 @@ public class ProductServiceController {
 
     //    @RequestMapping(path = "/{pid}", method = RequestMethod.GET)
     @GetMapping("/{pid}")
-    public ResponseEntity<Product> getAProduct(@PathVariable(name = "pid") @Min(1) Long id) {
+    @Valid
+    @Operation(summary = "Get a product by id", description = "Returns a product as per the id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved"),
+            @ApiResponse(responseCode = "404", description = "Not found - The product was not found")
+    })
+    public ResponseEntity<Product> getAProduct(
+            @Parameter(name = "pid", description = "Product id", example = "1")
+            @PathVariable(name = "pid") @Min(1) Long id
+    ) {
         Optional<Product> prod = repo.findById(id);
         if (!prod.isEmpty()) return new ResponseEntity<>(prod.get(), HttpStatus.OK);
         else throw new ProductNotfoundExceptionHijo(id);
@@ -55,7 +71,15 @@ public class ProductServiceController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
-    public ResponseEntity<Product> addProduct(@RequestBody @Valid Product newP) {
+    @Operation(summary = "Add a new product", description = "Returns a presisted product")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "202", description = "Successfully created"),
+            @ApiResponse(responseCode = "4XX", description = "Bad request")
+    })
+    public ResponseEntity<Product> addProduct(
+            @io.swagger.v3.oas.annotations.parameters.RequestBody( required = true, description = "Product data")
+            @RequestBody @Valid Product newP
+    ) {
         newP.setId(null);
         repo.save(newP);
         return new ResponseEntity(newP, HttpStatus.CREATED);
