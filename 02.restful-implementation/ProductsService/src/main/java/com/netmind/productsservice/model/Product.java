@@ -33,7 +33,7 @@ public class Product {
     private String name;
 
     @Column
-    @SerialNumber(message = "El número de serie debe tener la secuencia ddd-ddd-dddd")
+    @SerialNumber(message = "{serial.format}")
     @Schema(name = "Product serial number", example = "111-222-3333", required = true)
     private String serial;
 }
