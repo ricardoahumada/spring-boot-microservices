@@ -1,20 +1,34 @@
 spring:
   application:
     name: ProductsService
-  profiles.active: dev
+  profiles.active: prod
 
 server:
   servlet.contextPath: /api
   port: 8080
-#  error:
-#    include-message: always
-#    include-binding-errors: always
-#    include-stacktrace: on_param
-#    include-exception: false
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: on_param
+    include-exception: false
 
 spring.mvc.pathmatch.matching-strategy: ANT_PATH_MATCHER
 
 # TODO: OPENAPI CONFIG
+#springdoc.api-docs.enabled: false
+#springdoc.swagger-ui.enabled: false
+springdoc.swagger-ui.path: /products-documentation
+springdoc.api-docs.path: /products-api-docs
+#springdoc.packages-to-scan: com.netmind.productsservice.controller
+#springdoc.swagger-ui.tryItOutEnabled: true
+#springdoc.swagger-ui.operationsSorter: method
+#springdoc.swagger-ui.tagsSorter: alpha
+#springdoc.swagger-ui.filter: true
+
+products.openapi:
+  dev-url: http://localhost:8080
+  prod-url: https://products-api.com
+
 
 ---
 spring:
@@ -59,8 +73,12 @@ spring:
 
 server:
   servlet.contextPath: /api/v1
+  port: 443
+  ssl:
+    key-store: "keystore2.p12"
+    key-store-password: xxxxxx
+    keyStoreType: PKCS12
+    keyAlias: prod
 
-# TODO: SSL CONFIG
-
-
+security.require-ssl: true
 
