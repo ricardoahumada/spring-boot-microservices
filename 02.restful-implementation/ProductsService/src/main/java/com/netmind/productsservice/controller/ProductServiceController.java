@@ -76,7 +76,15 @@ public class ProductServiceController {
     }
 
     @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity createProduct(@RequestBody @Valid Product newProduct) {
+    @Operation(summary = "Add a new product", description = "Returns a persisted product")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "202", description = "Successfully created"),
+            @ApiResponse(responseCode = "4XX", description = "Bad request")
+    })
+    public ResponseEntity createProduct(
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "Product data")
+            @RequestBody @Valid Product newProduct
+    ) {
 //        newProduct.setId(null);
         productsRepo.save(newProduct);
         if (newProduct != null && newProduct.getId() > 0) return new ResponseEntity<>(newProduct, HttpStatus.CREATED);
