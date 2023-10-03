@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @ExtendWith(SpringExtension.class)
 @DataJpaTest()
 @ComponentScan(basePackages = {"com.netmind.productsservice.persistence"})
-@AutoConfigureTestEntityManager
+//@AutoConfigureTestEntityManager
 class JPAProductsRepositoryTest {
 
     private static final Logger logger = LoggerFactory.getLogger(JPAProductsRepositoryTest.class);

@@ -1,8 +1,8 @@
 package com.netmind.productsservice.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netmind.productsservice.model.Product;
 import com.netmind.productsservice.persistence.ProductsRepository;
+import com.netmind.productsservice.util.JsonUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,17 +18,13 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-
 import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(ProductServiceController.class)
@@ -81,7 +77,7 @@ public class ProductServiceControllerTest_WebMvcTest {
         Product newProduct = new Product(null, "Nuevo producto", "123-123-1234");
 
         mvc.perform(post("/products")
-                        .content(asJsonString(newProduct))
+                        .content(JsonUtil.asJsonString(newProduct))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                 )
@@ -90,11 +86,4 @@ public class ProductServiceControllerTest_WebMvcTest {
                 .andExpect(jsonPath("$.id", is(100)));
     }
 
-    public static String asJsonString(final Object obj) {
-        try {
-            return new ObjectMapper().writeValueAsString(obj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
