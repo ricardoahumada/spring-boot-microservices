@@ -11,6 +11,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+// TODO: uncomment and implement methods
 //@ExtendWith(SpringExtension.class)
 //@DataJpaTest
 public class ProductRepositoryIntegrationTest {

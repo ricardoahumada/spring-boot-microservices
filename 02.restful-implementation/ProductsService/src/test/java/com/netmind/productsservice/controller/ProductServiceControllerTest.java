@@ -11,6 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
+// TODO: uncomment and implement methods
 //@SpringBootTest
 class ProductServiceControllerTest {
 
