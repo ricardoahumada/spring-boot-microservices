@@ -21,12 +21,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import static org.hamcrest.Matchers.is;
 
-/*
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK,
-        classes = ProductsServiceApplication.class)
-*/
-//@AutoConfigureMockMvc
-//@TestPropertySource( locations = "classpath:application-integrationtest.properties")
+
+// TODO: uncomment and implement methods
+// @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+// @AutoConfigureMockMvc
+// @TestPropertySource( locations = "classpath:application-integrationtest.properties")
 class ProductServiceControllerTest_MockMvc {
     @Autowired
     private ProductsRepository repository;
@@ -34,19 +33,11 @@ class ProductServiceControllerTest_MockMvc {
     @Test
     public void givenProducts_whenGetProducts_thenStatus200() throws Exception {
 
-    }
-
+    
+}
     @Test
-    void givenProducts_whenVaildCreateProduct_thenIsCreatedAndHaveId() throws Exception {
+    void givenProducts_whenValidCreateProduct_thenIsCreatedAndHaveId() throws Exception {
 
     }
-
-
-    public static String asJsonString(final Object obj) {
-        try {
-            return new ObjectMapper().writeValueAsString(obj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
+    
 }

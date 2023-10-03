@@ -30,8 +30,9 @@ import static org.hamcrest.Matchers.is;
 
 import static org.mockito.BDDMockito.given;
 
-@ExtendWith(SpringExtension.class)
-//@WebMvcTest(ProductServiceController.class)
+// TODO: uncomment and implement methods
+// @ExtendWith(SpringExtension.class)
+// @WebMvcTest(ProductServiceController.class)
 public class ProductServiceControllerTest_WebMvcTest {
 
 
@@ -44,11 +45,4 @@ public class ProductServiceControllerTest_WebMvcTest {
 
     }
 
-    public static String asJsonString(final Object obj) {
-        try {
-            return new ObjectMapper().writeValueAsString(obj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
