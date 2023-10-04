@@ -23,7 +23,7 @@ class ProductServiceControllerTest {
     @Test
     void givenProducts_whengetAllProducts_thenIsNotNull() {
         ResponseEntity<List<Product>> productos = controller.getAll("");
-        System.out.println("productos:"+productos.getBody());
+        System.out.println("productos:" + productos.getBody());
 
         assertThat(productos.getStatusCode().value()).isEqualTo(HttpStatus.OK.value());
         assertThat(productos.getBody()).isNotNull();
@@ -32,7 +32,14 @@ class ProductServiceControllerTest {
 
     @Test
     void givenProducts_whenVaildCreateProduct_thenIsCreatedAndHaveId() {
+        Product newP = new Product(null, "new Product", "123-122-1234");
+        ResponseEntity<Product> producto = controller.addProduct(newP);
+        System.out.println("producto:" + producto.getBody());
 
-
+        assertThat(producto.getStatusCode().value()).isEqualTo(HttpStatus.CREATED.value());
+        Product rP = producto.getBody();
+        assertThat(rP).isNotNull();
+        assertThat(rP.getId()).isGreaterThan(0);
+        assertThat(rP.getName()).isEqualTo(newP.getName());
     }
 }
