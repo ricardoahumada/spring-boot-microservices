@@ -15,10 +15,11 @@ import java.util.List;
 
 // TODO: uncomment and implement methods
 @SpringBootTest
-@Sql("classpath:test.sql")
+@Sql(value = "classpath:test.sql")
+@Sql(value = "classpath:clean.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 //@TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+//@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 class ProductServiceControllerTest {
 
     @Autowired
