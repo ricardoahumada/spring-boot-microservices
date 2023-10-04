@@ -32,7 +32,7 @@ import java.util.Optional;
 public class ProductServiceController {
 
     @Autowired
-    private ProductsRepository repo;
+    public ProductsRepository repo;
 
     private static final Logger logger = LoggerFactory.getLogger(ProductServiceController.class);
 

@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Arrays;
@@ -29,6 +31,11 @@ public class ProductServiceIntegrationTest {
         public ProductsService productsService() {
             return new ProductsService();
         }
+
+        @Bean
+        public ProductServiceController ProductServiceController() {
+            return new ProductServiceController();
+        }
     }
 
     // TODO: implement setup for mock repo bean
@@ -44,9 +51,9 @@ public class ProductServiceIntegrationTest {
     @Autowired
     private ProductsService productsService;
 
-    /*@Autowired
+    @Autowired
     private ProductServiceController controller;
-*/
+
     @MockBean
     private ProductsRepository productsRepository;
 
@@ -60,7 +67,13 @@ public class ProductServiceIntegrationTest {
 
     @Test
     void givenProducts_whengetAllProducts_thenIsNotNull() {
+        ResponseEntity<List<Product>> productos = controller.getAll("");
 
+//        System.out.println(productos.getBody());
+
+        assertThat(productos.getStatusCode().value()).isEqualTo(HttpStatus.OK.value());
+        assertThat(productos.getBody()).isNotNull();
+        assertThat(productos.getBody().size()).isGreaterThanOrEqualTo(1);
     }
 
 }
