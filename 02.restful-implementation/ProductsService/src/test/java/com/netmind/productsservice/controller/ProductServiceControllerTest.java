@@ -39,7 +39,7 @@ class ProductServiceControllerTest {
     @Test
     @Order(1)
     void givenProducts_whenVaildCreateProduct_thenIsCreatedAndHaveId() {
-        Product newP = new Product(null, "new Product", "123-122-1234");
+        Product newP = new Product(null, "new Product", "123-122-123");
         ResponseEntity<Product> producto = controller.addProduct(newP);
         System.out.println("producto:" + producto.getBody());
 
