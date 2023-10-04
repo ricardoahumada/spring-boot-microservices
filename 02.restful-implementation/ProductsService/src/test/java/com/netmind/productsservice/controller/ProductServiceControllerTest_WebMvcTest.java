@@ -28,6 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(ProductServiceController.class)
+//@ActiveProfiles("tes_sin_db")
 public class ProductServiceControllerTest_WebMvcTest {
 
     @BeforeEach

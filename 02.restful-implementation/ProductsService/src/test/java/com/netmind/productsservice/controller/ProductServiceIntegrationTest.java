@@ -74,8 +74,9 @@ public class ProductServiceIntegrationTest {
         assertThat(products.getStatusCode().value())
                 .isEqualTo(HttpStatus.OK.value());
 
-        assertThat(products.getBody())
-                .isNotNull();
+        assertThat(products.getBody()).isNotNull();
+        assertThat(products.getBody().size()).isGreaterThanOrEqualTo(1);
+
     }
 
 }
