@@ -51,7 +51,7 @@ class AuthServiceTest {
     @Autowired
     private UserRepository userRepository;
 
-    @BeforeAll
+    /*@BeforeAll
     @Commit // force REAL saving in DB
     public void clean() {
         try {
@@ -60,7 +60,7 @@ class AuthServiceTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     @BeforeEach
     public void setUp() {
