@@ -14,37 +14,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.test.annotation.Commit;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
+import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK,
-        classes = ProductsServiceApplication.class)
-@AutoConfigureMockMvc
+
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class AuthServiceTest {
+class AuthServiceTestRestTemplate {
 
-    Logger logger = LoggerFactory.getLogger(AuthServiceTest.class);
+    Logger logger = LoggerFactory.getLogger(AuthServiceTestRestTemplate.class);
 
     String accessToken = null;
-
-    @Autowired
-    private MockMvc mvc;
 
     @MockBean
     private ProductsRepository productsRepository;
@@ -52,16 +52,11 @@ class AuthServiceTest {
     @Autowired
     private UserRepository userRepository;
 
-    /*@BeforeAll
-    @Commit // force REAL saving in DB
-    public void clean() {
-        try {
-            logger.info("**** cleaning users...");
-            userRepository.deleteUsersByEmail("t@t.com");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }*/
+    @LocalServerPort
+    private int port;
+
+    @Autowired
+    private TestRestTemplate restTemplate;
 
     @BeforeEach
     public void setUp() {
@@ -95,54 +90,64 @@ class AuthServiceTest {
 
         User aUser = new User(null, email, enc_password, ERole.USER);
         userRepository.save(aUser);
-
         logger.info("Saved user:" + aUser);
 
         // when
         AuthRequest authRequest = new AuthRequest(email, password);
 
         //then
-        MvcResult result = mvc.perform(post("/auth/login")
-                        .content(JsonUtil.asJsonString(authRequest))
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON)
-                )
-                .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.accessToken").exists())
-                .andReturn();
+        final String baseUrl = "http://localhost:" + port + "/auth/login";
+        logger.info("baseUrl:" + baseUrl);
+        URI uri = new URI(baseUrl);
 
-        String contentAsString = result.getResponse().getContentAsString();
-        AuthResponse response = new ObjectMapper().readValue(contentAsString, AuthResponse.class);
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("CONTENT-TYPE", "application/json");
+        headers.set("ACCEPT", "application/json");
+        HttpEntity<AuthRequest> request = new HttpEntity<>(authRequest, headers);
 
-        logger.info(response.toString());
+        ResponseEntity<AuthResponse> response = this.restTemplate.postForEntity(uri, request, AuthResponse.class);
 
-        accessToken = response.getAccessToken();
+        System.out.println(response);
+        logger.info("Response: " + response);
+
+        assertThat(response.getStatusCodeValue()).isEqualTo(HttpStatus.OK.value());
+
+        AuthResponse authResponse = response.getBody();
+        assertThat(authResponse.getAccessToken()).isNotBlank().isNotEmpty().isNotNull();
+
+        accessToken = authResponse.getAccessToken();
     }
 
     @Test
     @Order(2)
-    void given_accesstoken_when_getproducts_then_success() {
+    void given_accesstoken_when_getproducts_then_success() throws Exception {
+        // given: existing token
+        // given_existing_user_when_login_success(); // must  have executed previously in test sequence
 
-        try {
-            // given: existing token
-            // given_existing_user_when_login_success(); // must  have executed previously in test sequence
+        // when
+        final String baseUrl = "http://localhost:" + port + "/products";
+        logger.info("baseUrl:" + baseUrl);
+        URI uri = new URI(baseUrl);
 
-            // when
-            mvc.perform(get("/products")
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .header("Authorization", "Bearer " + accessToken)
-                    )
-                    // then
-                    .andDo(MockMvcResultHandlers.print())
-                    .andExpect(status().isOk())
-                    .andExpect(jsonPath("$", hasSize(1)))
-                    .andExpect(jsonPath("$[0].name", is("Fake product")));
 
-        } catch (Exception e) {
-            fail(e.getMessage());
-        }
+        HttpHeaders authzHeaders = new HttpHeaders();
+        authzHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        authzHeaders.add("Authorization", "Bearer " + accessToken);
+        authzHeaders.add("Content-Type", "application/json");
 
+
+        ResponseEntity<Product[]> response = restTemplate.exchange(uri,
+                HttpMethod.GET,
+                new HttpEntity<>(null, authzHeaders),
+                Product[].class);
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getHeaders().getContentType()).isEqualTo(MediaType.APPLICATION_JSON);
+
+        Product[] responseBody = response.getBody();
+        assertThat(responseBody)
+                .extracting(Product::getName)
+                .contains("Fake product");
     }
 
 }
