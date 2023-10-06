@@ -74,44 +74,44 @@ public class ApplicationSecurity {
     }
 
 //    TODO: UNCOMMENT
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        http.csrf(csrf -> csrf.disable())
-//                .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-//
-//        http.authenticationProvider(authProvider());
-//
-//        http
-//                .authorizeHttpRequests((requests) -> requests
-//                        .requestMatchers(antMatcher("/h2-ui/**"),
-//                                antMatcher("/configuration/ui"),
-//                                antMatcher("/configuration/security"),
-//                                antMatcher("/auth/login"),
-//                                antMatcher("/docs/**"),
-//                                antMatcher("/users"),
-//                                antMatcher("/webjars/**")
-//                        ).permitAll()// HABILITAR ESPACIOS LIBRES*/
-//                        // .requestMatchers(antMatcher("/**")).permitAll() // BARRA LIBRE
-//                        .requestMatchers(antMatcher(HttpMethod.POST, "/products/**")).hasAnyAuthority(ERole.ADMIN.name()) //admin puede hacer de todo
-//                        .requestMatchers(antMatcher(HttpMethod.GET, "/products/**")).hasAnyAuthority(ERole.ADMIN.name(), ERole.USER.name()) //Para acceder a productos debe ser USER
-//                        .anyRequest().authenticated()
-//                );
-//
-//        http.headers(headers ->
-//                headers.frameOptions(frameOptionsConfig -> frameOptionsConfig.sameOrigin())
-//        );
-//
-//        http.exceptionHandling((exception) -> exception.authenticationEntryPoint(
-//                (request, response, ex) -> {
-//                    response.sendError(
-//                            HttpServletResponse.SC_UNAUTHORIZED,
-//                            ex.getMessage()
-//                    );
-//                }
-//        ));
-//
-//        http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
-//
-//        return http.build();
-//    }
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.csrf(csrf -> csrf.disable())
+                .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
+        http.authenticationProvider(authProvider());
+
+        http
+                .authorizeHttpRequests((requests) -> requests
+                        .requestMatchers(antMatcher("/h2-ui/**"),
+                                antMatcher("/configuration/ui"),
+                                antMatcher("/configuration/security"),
+                                antMatcher("/auth/login"),
+                                antMatcher("/docs/**"),
+                                antMatcher("/users"),
+                                antMatcher("/webjars/**")
+                        ).permitAll()// HABILITAR ESPACIOS LIBRES*/
+                        // .requestMatchers(antMatcher("/**")).permitAll() // BARRA LIBRE
+                        .requestMatchers(antMatcher(HttpMethod.POST, "/products/**")).hasAnyAuthority(ERole.ADMIN.name()) //admin puede hacer de todo
+                        .requestMatchers(antMatcher(HttpMethod.GET, "/products/**")).hasAnyAuthority(ERole.ADMIN.name(), ERole.USER.name()) //Para acceder a productos debe ser USER
+                        .anyRequest().authenticated()
+                );
+
+        http.headers(headers ->
+                headers.frameOptions(frameOptionsConfig -> frameOptionsConfig.sameOrigin())
+        );
+
+        http.exceptionHandling((exception) -> exception.authenticationEntryPoint(
+                (request, response, ex) -> {
+                    response.sendError(
+                            HttpServletResponse.SC_UNAUTHORIZED,
+                            ex.getMessage()
+                    );
+                }
+        ));
+
+        http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
+
+        return http.build();
+    }
 }

@@ -22,12 +22,12 @@ public class SecurityConfig {
     }
 
     // TODO: UNCOMMENT 
-    /*@Bean   
+    @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring()
                 .requestMatchers("/**")
                 .anyRequest();
-    }*/
+    }
 
     // TODO: UNCOMMENT 
     @Bean
