@@ -31,6 +31,9 @@ public class SecurityConfig {
     // TODO: UNCOMMENT 
     /*@Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.csrf(csrf -> csrf.disable())
+                .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
         http
                 .authorizeHttpRequests((request) -> request
                         .anyRequest().authenticated()
