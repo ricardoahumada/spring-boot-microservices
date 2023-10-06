@@ -67,7 +67,7 @@ public class ProductServiceIntegrationTest {
 
     @Test
     void givenProducts_whengetAllProducts_thenIsNotNull() {
-        ResponseEntity<List<Product>> productos = controller.getAll("");
+        ResponseEntity<List<Product>> productos = controller.getAll("Fake");
 
 //        System.out.println(productos.getBody());
 
