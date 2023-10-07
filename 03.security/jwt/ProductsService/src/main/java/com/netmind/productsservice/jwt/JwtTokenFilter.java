@@ -84,6 +84,8 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         userDetails.setEmail(jwtSubject[1]);
         userDetails.setRole(role);
 
+        System.out.println("getAuthorities:"+userDetails.getAuthorities());
+
         return userDetails;
     }
 }

@@ -1,6 +1,7 @@
 package com.netmind.productsservice.controller;
 
 import com.netmind.productsservice.exception.ProductNotfoundException;
+import com.netmind.productsservice.model.ERole;
 import com.netmind.productsservice.model.Product;
 import com.netmind.productsservice.model.StatusMessage;
 import com.netmind.productsservice.persistence.ProductsRepository;
@@ -18,6 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -55,6 +58,9 @@ public class ProductServiceController {
     }
 
     @GetMapping(value = "", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+//    @PreAuthorize("authentication.principal.username == 'r@r.com'")
+//    @PreAuthorize("hasAuthority('ADMIN')")
+//    @Secured("ADMIN")
     public ResponseEntity<List<Product>> getAllProducts() {
         List<Product> products = productsRepo.findAll();
         return new ResponseEntity<>(products, HttpStatus.OK);

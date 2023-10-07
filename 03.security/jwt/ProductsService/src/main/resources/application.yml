@@ -48,6 +48,8 @@ logging:
   file: /var/tmp/mylog.log
   level:
     root: INFO
+    org.springframework.security: DEBUG # debug security
+
 
 
 ---
