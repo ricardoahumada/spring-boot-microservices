@@ -36,6 +36,7 @@ import java.security.KeyPairGenerator;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.time.Duration;
+import java.util.List;
 import java.util.UUID;
 
 @Configuration
@@ -47,8 +48,10 @@ public class AuthorizationServerSecurityConfig {
     public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http)
             throws Exception {
         OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
+
         http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
                 .oidc(Customizer.withDefaults());
+
         http.exceptionHandling(exceptions -> exceptions.defaultAuthenticationEntryPointFor(
                 new LoginUrlAuthenticationEntryPoint("/login"),
                 new MediaTypeRequestMatcher(MediaType.TEXT_HTML))
@@ -75,12 +78,18 @@ public class AuthorizationServerSecurityConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         UserDetails userDetails = User.withDefaultPasswordEncoder()
+                .username("user")
+                .password("password")
+                .roles("USER")
+                .build();
+
+        UserDetails adminDetails = User.withDefaultPasswordEncoder()
                 .username("admin")
                 .password("password")
                 .roles("ADMIN")
                 .build();
 
-        return new InMemoryUserDetailsManager(userDetails);
+        return new InMemoryUserDetailsManager(userDetails, adminDetails);
     }
 
     @Bean
@@ -98,8 +107,23 @@ public class AuthorizationServerSecurityConfig {
                 .scope("SCOPE_products.read")
                 .tokenSettings(tokenSettings())
                 .build();
+//        return new InMemoryRegisteredClientRepository(oidcClient);
 
-        return new InMemoryRegisteredClientRepository(oidcClient);
+        RegisteredClient oidcClient2 = RegisteredClient.withId(UUID.randomUUID().toString())
+                .clientId("client2")
+                .clientSecret("{noop}myClientSecretValue2")
+                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+                .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+                .redirectUri("https://oauthdebugger.com/debug")
+                .redirectUri("http://127.0.0.1:8080/authorized")
+                .redirectUri("http://127.0.0.1:8080/login/oauth2/code/products-client-oidc")
+                .scope(OidcScopes.OPENID)
+                .scope("SCOPE_products.write")
+                .tokenSettings(tokenSettings())
+                .build();
+
+        return new InMemoryRegisteredClientRepository(oidcClient, oidcClient2);
     }
 
     @Bean

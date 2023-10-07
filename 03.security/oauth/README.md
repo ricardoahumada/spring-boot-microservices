@@ -15,12 +15,14 @@ http://127.0.0.1:9000/oauth2/authorize?response_type=code&client_id=[client_id]&
 - Example url: 
 ```
 http://127.0.0.1:9000/oauth2/authorize?response_type=code&client_id=client1&redirect_uri=http://127.0.0.1:8080/authorized&scope=SCOPE_products.read
+    - With different client update client param
 ```
 - Alternatively can use https://oauthdebugger.com/
     + Complete the fields and send
 
 - Example user-password:
     + admin/password
+    + user/password
 
 - You get a response like this: 
 ```
