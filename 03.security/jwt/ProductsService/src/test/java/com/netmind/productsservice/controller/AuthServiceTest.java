@@ -1,7 +1,6 @@
 package com.netmind.productsservice.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.netmind.productsservice.ProductsServiceApplication;
 import com.netmind.productsservice.model.*;
 import com.netmind.productsservice.persistence.ProductsRepository;
 import com.netmind.productsservice.persistence.UserRepository;
@@ -16,7 +15,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.test.annotation.Commit;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
@@ -24,7 +22,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -144,4 +143,4 @@ class AuthServiceTest {
 
     }
 
-}v
+}
