@@ -11,8 +11,8 @@
 - Authenticate against the authentication endpoint localhost:8080/auth/login with this your user data (POST request):
 - 
 ```
-	{"email":"admin@mail.com", "password":"my_pass"}
-	{"email":"user@mail.com", "password":"my_pass"}
+	{"email":"admin@mail.com", "password":"my_pass", "role":"USER"}
+	{"email":"user@mail.com", "password":"my_pass", "role":"ADMIN"}
 ```
 
 - Header: Content-Type application/json
