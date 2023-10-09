@@ -1,5 +1,6 @@
 package com.netmind.accountsservice.controller;
 
+import com.netmind.accountsservice.config.SecurityTestsConfiguration;
 import com.netmind.accountsservice.model.Account;
 import com.netmind.accountsservice.persistence.AccountRepository;
 import com.netmind.accountsservice.services.AccountService;
@@ -10,7 +11,6 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -26,9 +26,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(AccountController.class)
+//@AutoConfigureMockMvc(addFilters = false)
 //@ComponentScan("package com.netmind.accountsservice.services")
-@Import(AccountService.class)
+@Import({AccountService.class, SecurityTestsConfiguration.class})
 class AccountControllerTest {
+
     @BeforeEach
     public void setUp() {
         Account cuenta = new Account(1L, "Personal", null, 1000, 1L, null);
@@ -67,7 +69,7 @@ class AccountControllerTest {
     }
 
     @Test
-    void givenAnOwner_WhenDeleteAccountByUserId_thenOK() throws Exception{
+    void givenAnOwner_WhenDeleteAccountByUserId_thenOK() throws Exception {
         mvc.perform(delete("/accounts/user/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isAccepted());
