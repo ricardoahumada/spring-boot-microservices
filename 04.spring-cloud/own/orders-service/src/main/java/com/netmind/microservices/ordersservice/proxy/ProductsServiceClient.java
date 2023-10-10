@@ -8,10 +8,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+// TODO: uncomment for feign
 //@FeignClient(name = "products-service", url = "${products-service.base-url}")
-@FeignClient(name = "products-service") //for eureka and load balancer
-@LoadBalancerClient(name = "products-service", configuration= LoadBalancerConfiguration.class)
+// TODO: uncomment for eureka and load balancer
+// @FeignClient(name = "products-service") //for eureka and load balancer
+// TODO: uncomment for load balancer
+//@LoadBalancerClient(name = "products-service", configuration= LoadBalancerConfiguration.class)
 public interface ProductsServiceClient {
+
     @RequestMapping(method = RequestMethod.GET, value = "${products-service.path}")
     public ProductBean getProduct(@PathVariable Long id);
 

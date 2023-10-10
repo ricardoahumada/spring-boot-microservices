@@ -27,11 +27,13 @@ public class OrderServiceController {
     @Autowired
     OrdersRepository orderRepo;
 
-    @Autowired
-    private ConfigurationValues limits;
+    // TODO: uncomment for config properties
+    // @Autowired
+    // private ConfigurationValues limits;
 
-    @Autowired
-    private ProductsServiceClient productsServiceClient;
+    // TODO: uncomment for consuming products-service
+    // @Autowired
+    // ProductsServiceClient productsServiceClient;
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -62,10 +64,9 @@ public class OrderServiceController {
         Integer quantity = newOrder.getQuantity();
 
         if (quantity >= limits.getMin() && quantity <= limits.getMax()) {
-            ProductBean productBean = productsServiceClient.getProduct(newOrder.getProduct());
-
+            ProductBean product = productsServiceClient.getProduct(newOrder.getProduct());
+            newOrder.setFinalprice(product.getPrice() * newOrder.getQuantity());
             newOrder.setId(null);
-            newOrder.setFinalprice(newOrder.getQuantity()*productBean.getPrice());
             orderRepo.save(newOrder);
             if (newOrder != null && newOrder.getId() > 0) return new ResponseEntity<>(newOrder, HttpStatus.CREATED);
             else
