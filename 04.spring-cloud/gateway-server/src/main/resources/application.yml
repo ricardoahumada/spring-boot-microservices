@@ -5,7 +5,8 @@ spring:
   security.oauth2.resourceserver.jwt.issuer-uri: http://auth-server:9000
   cloud:
     gateway:
-      discovery.locator.enabled: true
+      discovery.locator.enabled: true      
+# TODO: uncomment for routes in properties
 #      routes:
 #        - id: ProductsService
 #          uri: "lb://products-service/"
@@ -20,35 +21,38 @@ spring:
 #            - Path=/orders/**
 
 
-springdoc:
-  enable-native-support: true
-  api-docs:
-    enabled: true
-  swagger-ui:
-    enabled: true
-    path: /swagger-ui.html
-    config-url: /v3/api-docs/swagger-config
-    urls:
-      - url: /v3/api-docs
-        name: API Gateway Service
-        primaryName: API Gateway Service
-      - url: /products-service/v3/api-docs
-        name: Product Service
-        primaryName: Product Service
-      - url: /orders-service/v3/api-docs
-        name: Order Service
-        primaryName: Order Service
+# TODO: uncomment for api docs
+# springdoc:
+#   enable-native-support: true
+#   api-docs:
+#     enabled: true
+#   swagger-ui:
+#     enabled: true
+#     path: /swagger-ui.html
+#     config-url: /v3/api-docs/swagger-config
+#     urls:
+#       - url: /v3/api-docs
+#         name: API Gateway Service
+#         primaryName: API Gateway Service
+#       - url: /products-service/v3/api-docs
+#         name: Product Service
+#         primaryName: Product Service
+#       - url: /orders-service/v3/api-docs
+#         name: Order Service
+#         primaryName: Order Service
 
-eureka.client:
-  service-url.default-zone: http://localhost:8761/eureka
-  health-check.enabled: true
+# TODO: uncomment for eureka
+# eureka.client:
+#   service-url.default-zone: http://localhost:8761/eureka
+#   health-check.enabled: true
 
-management:
-  endpoint:
-    gateway:
-      enabled: true
-  endpoints:
-    web:
-      exposure:
-        include: gateway
+# TODO: uncomment for actuator
+# management:
+#   endpoint:
+#     gateway:
+#       enabled: true
+#   endpoints:
+#     web:
+#       exposure:
+#         include: gateway
 

@@ -8,8 +8,9 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
-@Configuration
-@EnableWebFluxSecurity
+// TODO: uncomment for security
+// @Configuration
+// @EnableWebFluxSecurity
 public class SecurityConfiguration {
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(final ServerHttpSecurity http) {
