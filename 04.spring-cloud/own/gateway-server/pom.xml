@@ -23,15 +23,17 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
-        <dependency>
+        <!-- TODO: uncomment -->
+        <!-- <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>
-        </dependency>
+        </dependency> -->
 
-        <dependency>
+        <!-- TODO: uncomment -->
+        <!-- <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
+        </dependency> -->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -50,16 +52,18 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
+        <!-- TODO: uncomment for security -->
+        <!-- <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
+        </dependency> -->
 
-        <dependency>
+        <!-- TODO: uncomment for swagger-->
+        <!-- <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webflux-api</artifactId>
             <version>2.0.2</version>
@@ -68,7 +72,7 @@
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
             <version>2.0.2</version>
-        </dependency>
+        </dependency> -->
 
     </dependencies>
 
@@ -81,11 +85,6 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!--<dependency>
-                <groupId>io.github.classgraph</groupId>
-                <artifactId>classgraph</artifactId>
-                <version>4.8.139</version>
-            </dependency>-->
         </dependencies>
     </dependencyManagement>
 
