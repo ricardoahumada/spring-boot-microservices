@@ -26,6 +26,7 @@ server:
     include-stacktrace: on_param
     include-exception: false
 
+
 products.openapi:
   dev-url: http://localhost:8080
   prod-url: https://products-api.com

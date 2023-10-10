@@ -13,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -52,7 +53,9 @@ class AccountControllerTest {
 
     @Test
     void givenAnAccount_WhenAddMoney_thenAccepted() throws Exception {
-        mvc.perform(put("/accounts/addmoney/1?amount=10&ownerId=1")
+        mvc.perform(put("/accounts/addmoney/{id}",1L)
+                        .queryParam("amount","10")
+                        .queryParam("ownerId","1")
                         .content("")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isAccepted())
