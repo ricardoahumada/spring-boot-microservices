@@ -21,6 +21,7 @@ public class CustomerService implements ICustomerService {
 
     @Override
     public Customer create(Customer customer) {
+        logger.info("customer:" + customer);
         return customerRepository.save(customer);
     }
 
@@ -30,7 +31,7 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
-    public Customer get(String id) {
+    public Customer get(Long id) {
 
         Customer customer = customerRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Customer with given id not found"));
 
@@ -38,7 +39,7 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
-    public Customer update(String id, Customer customer) {
+    public Customer update(Long id, Customer customer) {
         Customer customer1 = this.customerRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Customer with given id not found"));
         customer1.setName(customer.getName());
         customer1.setEmail(customer.getEmail());
@@ -48,7 +49,7 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Long id) {
         Customer customer = this.customerRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Customer with given id not found"));
         // Deleting Accounts from ACCOUNT-SERVICE
 

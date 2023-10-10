@@ -18,16 +18,16 @@ public interface ICustomerService {
 
     //get single
 
-    Customer get(String id);
+    Customer get(Long id);
 
 
     //update
 
-    Customer update(String id, Customer customer);
+    Customer update(Long id, Customer customer);
 
     //delete
 
-    void delete(String id);
+    void delete(Long id);
 
 
 
