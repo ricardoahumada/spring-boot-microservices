@@ -10,6 +10,8 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
 
+import org.springframework.http.HttpMethod;
+
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
 @Configuration
@@ -24,7 +26,9 @@ public class ResourceServerConfig {
         http
                 .authorizeHttpRequests(
                         authorize -> authorize
-                                .requestMatchers(antMatcher("/docs/**")).permitAll()
+                                // .requestMatchers(antMatcher("/docs/**")).permitAll()
+                                .requestMatchers(antMatcher(HttpMethod.GET, "/products/**")).hasAnyAuthority("SCOPE_products.read") //admin puede hacer de todo
+                                // .requestMatchers(antMatcher(HttpMethod.GET, "/products/**")).hasAnyAuthority(ERole.ADMIN.name(), ERole.USER.name()) //Para acceder a productos debe ser USER
                                 .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oAuth2 -> oAuth2
@@ -35,8 +39,9 @@ public class ResourceServerConfig {
     @Bean
     public JwtAuthenticationConverter jwtAuthenticationConverter() {
         JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
-        jwtGrantedAuthoritiesConverter.setAuthoritiesClaimName("role");
-//        jwtGrantedAuthoritiesConverter.setAuthoritiesClaimName("sub"); //role comes in sub examine jwt token
+        jwtGrantedAuthoritiesConverter.setAuthoritiesClaimName("scope");
+        // jwtGrantedAuthoritiesConverter.setAuthoritiesClaimName("role");
+       // jwtGrantedAuthoritiesConverter.setAuthoritiesClaimName("sub"); //role comes in sub examine jwt token
         jwtGrantedAuthoritiesConverter.setAuthorityPrefix("");
 
         JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
