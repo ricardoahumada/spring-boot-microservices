@@ -7,18 +7,18 @@ spring:
     gateway:
       discovery.locator.enabled: true      
 # TODO: uncomment for routes in properties
-#      routes:
-#        - id: ProductsService
-#          uri: "lb://products-service/"
-#          predicates:
-#            - Path=/products/**
-#          filters:
-#            - AddRequestHeader=added-request-header, added-request-header-value
-#            - AddResponseHeader=added-response-header, added-response-header-value
-#        - id: OrdersService
-#          uri: "lb://orders-service/"
-#          predicates:
-#            - Path=/orders/**
+      routes:
+        - id: ProductsService
+          uri: "lb://products-service/"
+          predicates:
+            - Path=/products/**
+          filters:
+            - AddRequestHeader=added-request-header, added-request-header-value
+            - AddResponseHeader=added-response-header, added-response-header-value
+        - id: OrdersService
+          uri: "lb://orders-service/"
+          predicates:
+            - Path=/orders/**
 
 
 # TODO: uncomment for api docs

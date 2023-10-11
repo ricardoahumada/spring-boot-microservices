@@ -9,7 +9,7 @@ import org.springframework.http.HttpMethod;
 import reactor.core.publisher.Mono;
 
 // TODO: uncomment for routes
-@Configuration
+//@Configuration
 public class SpringCloudConfig {
     // TODO: uncomment for global filter
      @Bean
