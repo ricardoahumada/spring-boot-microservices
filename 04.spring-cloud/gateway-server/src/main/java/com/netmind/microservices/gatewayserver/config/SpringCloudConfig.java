@@ -9,10 +9,10 @@ import org.springframework.http.HttpMethod;
 import reactor.core.publisher.Mono;
 
 // TODO: uncomment for routes
-// @Configuration
+@Configuration
 public class SpringCloudConfig {
     // TODO: uncomment for global filter
-    // @Bean
+     @Bean
     public GlobalFilter globalFilter() {
         return (exchange, chain) -> {
             System.out.println("Global filter 1");
@@ -35,13 +35,13 @@ public class SpringCloudConfig {
                         .uri("lb://orders-service"))*/
                 // Endpoints
                 // TODO: uncomment for routes
-                /*.route(r -> r.path("/orders/**")
+                .route(r -> r.path("/orders/**")
                         .uri("lb://orders-service/"))
                 .route(r -> r.path("/products/**")
                         .filters(f ->
                                 f.addRequestHeader("added-request-header", "added-request-header-value")
                                         .addResponseHeader("added-response-header", "added-response-header-value")
-                        ).uri("lb://products-service/"))*/
+                        ).uri("lb://products-service/"))
                 .build();
     }
 
