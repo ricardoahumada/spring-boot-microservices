@@ -5,6 +5,7 @@ import com.netmind.microservices.ordersservice.model.Order;
 import com.netmind.microservices.ordersservice.model.ProductBean;
 import com.netmind.microservices.ordersservice.persistence.OrdersRepository;
 //import com.netmind.microservices.ordersservice.proxy.ProductsServiceClient;
+import com.netmind.microservices.ordersservice.proxy.ProductsServiceClient;
 import com.netmind.microservices.productsservice.model.StatusMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,8 +33,8 @@ public class OrderServiceController {
      private ConfigurationValues limits;
 
     // TODO: uncomment for consuming products-service
-    // @Autowired
-    // ProductsServiceClient productsServiceClient;
+     @Autowired
+    ProductsServiceClient productsServiceClient;
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -64,9 +65,9 @@ public class OrderServiceController {
         Integer quantity = newOrder.getQuantity();
 
         if (quantity >= limits.getMin() && quantity <= limits.getMax()) {
-            /*ProductBean product = productsServiceClient.getProduct(newOrder.getProduct());
+            ProductBean product = productsServiceClient.getProduct(newOrder.getProduct());
             newOrder.setFinalprice(product.getPrice() * newOrder.getQuantity());
-            newOrder.setId(null);*/
+            newOrder.setId(null);
             orderRepo.save(newOrder);
             if (newOrder != null && newOrder.getId() > 0) return new ResponseEntity<>(newOrder, HttpStatus.CREATED);
             else

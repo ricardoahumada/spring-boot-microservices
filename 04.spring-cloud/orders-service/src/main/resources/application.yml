@@ -29,8 +29,8 @@ server:
 spring.mvc.pathmatch.matching-strategy: ANT_PATH_MATCHER
 
 # TODO: uncomment for config
-# spring.config.import: "optional:configserver:http://localhost:8888" # config server
-# spring.profiles.active: dev #for activate profile
+spring.config.import: "configserver:http://localhost:8888" # config server
+spring.profiles.active: dev #for activate profile
 
 # TODO: uncomment for actuator
 management.endpoints.web.exposure.include: "*"
@@ -40,9 +40,9 @@ orders-service:
   max: 100
 
 # TODO: uncomment for eureka
-# eureka.client.service-url.default-zone: http://localhost:8761/eureka
+eureka.client.service-url.default-zone: http://localhost:8761/eureka
 
 # TODO: uncomment for consume products service
-# products-service:
-#   base-url: localhost:9090
-#   path: /products/{id}
+products-service:
+   base-url: localhost:9090
+   path: /products/{id}

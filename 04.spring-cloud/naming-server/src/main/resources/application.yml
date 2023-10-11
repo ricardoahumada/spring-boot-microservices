@@ -14,6 +14,6 @@ server.port: 8761
 #   import: "optional:configserver:http://localhost:8888" # config server
 
 # TODO: unccomment for not auto register
-# eureka.client.register-with-eureka: false
-# eureka.client.fetch-registry: false
+eureka.client.register-with-eureka: false
+eureka.client.fetch-registry: false
 
