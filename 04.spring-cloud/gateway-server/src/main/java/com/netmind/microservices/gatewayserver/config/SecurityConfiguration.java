@@ -1,6 +1,5 @@
 package com.netmind.microservices.gatewayserver.config;
 
-/*
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
@@ -8,13 +7,12 @@ import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
-*/
 
 // TODO: uncomment for security
-// @Configuration
+ @Configuration
 // @EnableWebFluxSecurity
 public class SecurityConfiguration {
-   /* @Bean
+    @Bean
     public SecurityWebFilterChain springSecurityFilterChain(final ServerHttpSecurity http) {
         http.authorizeExchange()
                 .pathMatchers(
@@ -28,7 +26,7 @@ public class SecurityConfiguration {
                         "/*-service/**",
                         "/swagger-ui.html"
                 ).permitAll()
-                .pathMatchers("/products/**").permitAll() // with oauth must be commented
+//                .pathMatchers("/products/**").permitAll() // with oauth must be commented
                 .pathMatchers("/orders/**").permitAll()
                 .anyExchange().authenticated()
                 .and()
@@ -37,5 +35,4 @@ public class SecurityConfiguration {
 
         return http.build();
     }
-*/
 }
