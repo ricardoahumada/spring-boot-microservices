@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 // TODO: uncomment for eureka and load balancer
  @FeignClient(name = "products-service") //for eureka and load balancer
 // TODO: uncomment for load balancer
-//@LoadBalancerClient(name = "products-service", configuration= LoadBalancerConfiguration.class)
 public interface ProductsServiceClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "${products-service.path}")
