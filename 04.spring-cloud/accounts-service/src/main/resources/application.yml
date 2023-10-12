@@ -29,7 +29,7 @@ springdoc:
   #api-docs.enabled: false
   #swagger-ui.enabled: false
   swagger-ui.path: /accounts-documentation
-  api-docs.path: /accounts-api-docs
+#  api-docs.path: /accounts-api-docs
   packages-to-scan: com.netmind.accountsservice.controller
   swagger-ui:
     tryItOutEnabled: true

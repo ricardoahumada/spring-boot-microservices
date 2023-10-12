@@ -30,9 +30,14 @@ public class SpringCloudConfig {
                 .route(r -> r.path("/orders-service/v3/api-docs")
                         .filters(f->f.rewritePath("/orders-service/v3/api-docs","/v3/api-docs"))
                         .uri("lb://orders-service"))
+                .route(r -> r.path("/accounts-service/v3/api-docs")
+                        .filters(f->f.rewritePath("/accounts-service/v3/api-docs","/v3/api-docs"))
+                        .uri("lb://accounts-service"))
                 // Endpoints
                 .route(r -> r.path("/orders/**")
                         .uri("lb://orders-service/"))
+                .route(r -> r.path("/accounts/**")
+                        .uri("lb://accounts-service/"))
                 .route(r -> r.path("/products/**")
                         .filters(f ->
                                 f.addRequestHeader("added-request-header", "added-request-header-value")

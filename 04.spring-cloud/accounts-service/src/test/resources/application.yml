@@ -1,41 +1,22 @@
 spring:
   application:
-    name: AccountsService
+    name: accounts-service
   profiles.active: testing
-
-server:
-  servlet.contextPath: /api
-  port: 8080
-
-spring.security.oauth2.resourceserver.jwt.issuer-uri: http://auth-server:9000
-
----
-spring:
   sql.init.mode: always
-  config.activate.on-profile: testing
   devtools.restart.enabled: true
-  application:
-    name: AccountsService
-#  datasource:
-#    url: "jdbc:h2:mem:accountsdb"
-#    driverClassName: org.h2.Driver
-#    username: sa
-#    password: password
-#  jpa:
-#    show-sql: true
-#    database-platform: org.hibernate.dialect.H2Dialect
-#    hibernate:
-#      ddl-auto: create-drop
-#      generate-ddl: true
-#      hbm2ddl.auto: create
-#    defer-datasource-initialization: true
-#  h2:
-#    console.enabled: true
-#    console.path: /h2-ui
+  cloud.config.enabled: false
 
 server:
-  #  servlet.contextPath: /api
   port: 9900
+
+
+# property
+accounts-service.maxtoshow: 10
+
+# customers service path
+customers-service.path: /customers/{id}
+
+management.endpoints.web.exposure.include: "*"
 
 #debug: true
 logging:

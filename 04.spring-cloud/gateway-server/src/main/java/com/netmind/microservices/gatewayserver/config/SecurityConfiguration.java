@@ -27,6 +27,7 @@ public class SecurityConfiguration {
                 ).permitAll()
                 .pathMatchers("/products/**").permitAll() // with oauth must be commented
                 .pathMatchers("/orders/**").permitAll()
+                .pathMatchers("/accounts/**").permitAll()
                 .anyExchange().authenticated()
                 .and()
                 .oauth2ResourceServer()

@@ -1,7 +1,9 @@
 package com.netmind.accountsservice.controller;
 
 import com.netmind.accountsservice.model.Account;
+import com.netmind.accountsservice.model.Customer;
 import com.netmind.accountsservice.persistence.AccountRepository;
+import com.netmind.accountsservice.proxy.CustomersServiceClient;
 import com.netmind.accountsservice.services.AccountService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,6 +20,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.Optional;
 
 import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -39,6 +42,9 @@ class AccountControllerTest {
                 .thenReturn(cuenta);
 
         Mockito.doNothing().when(repository).delete(Mockito.any());
+
+        Mockito.when(customersServiceClient.getCustomer(anyLong()))
+                .thenReturn(new Customer(1L,"fake name","fake email"));
     }
 
     @Autowired
@@ -46,6 +52,9 @@ class AccountControllerTest {
 
     @MockBean
     private AccountRepository repository;
+
+    @MockBean
+    private CustomersServiceClient customersServiceClient;
 
     @Test
     void givenAnAccount_WhenAddMoney_thenAccepted() throws Exception {
