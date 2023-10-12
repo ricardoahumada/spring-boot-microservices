@@ -1,21 +1,23 @@
 package com.netmind.microservices.ordersservice.config;
 
+// TODO: uncomment all for load balancer configuration
+/*
 import org.springframework.cloud.loadbalancer.core.ServiceInstanceListSupplier;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+*/
 
-// TODO: uncomment for load balancer
-// @Configuration
+//@LoadBalancerClient(name = "products-service", configuration= LoadBalancerConfiguration.class)
 public class LoadBalancerConfiguration {
 
-//    @Bean
+    /*@Bean
     public ServiceInstanceListSupplier discoveryClientServiceInstanceListSupplier(ConfigurableApplicationContext context) {
         System.out.println("Configuring Load balancer to prefer same instance");
         return ServiceInstanceListSupplier.builder()
                 .withBlockingDiscoveryClient()
-//                .withSameInstancePreference()
+             // .withSameInstancePreference()
                 .build(context);
-    }
+    }*/
 
 }

@@ -27,13 +27,13 @@ public class OrderServiceController {
     @Autowired
     OrdersRepository orderRepo;
 
-    // TODO: uncomment for config properties
+    // TODO: uncomment for injecting config properties
     // @Autowired
-    // private ConfigurationValues limits;
+     private ConfigurationValues limits;
 
-    // TODO: uncomment for consuming products-service
+    // TODO: uncomment for injecting products-service client
     // @Autowired
-    // ProductsServiceClient productsServiceClient;
+     ProductsServiceClient productsServiceClient;
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
