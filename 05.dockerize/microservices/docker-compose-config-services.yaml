@@ -50,7 +50,7 @@ services:
     networks:
       - spring-cloud-network
   customers-service:
-    build: customers-service/
+    build: users-management-service/
     image: ricardoahumada/users-management-service:sb3
     container_name: customers-service
     depends_on:
