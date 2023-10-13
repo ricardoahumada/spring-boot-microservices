@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   config-server:
-    image: ricardoahumada/config-server:0.0.1-SNAPSHOT
+    image: ricardoahumada/config-server:sb3
     build: config-server/
     container_name: config-server
     environment:
@@ -11,7 +11,7 @@ services:
     networks:
       - spring-cloud-network
   naming-server:
-    image: ricardoahumada/naming-server:0.0.1-SNAPSHOT
+    image: ricardoahumada/naming-server:sb3
     build: naming-server/
     container_name: naming-server
     depends_on:
@@ -24,7 +24,7 @@ services:
       - spring-cloud-network
   products-service:
     build: products-service/
-    image: ricardoahumada/products-service:0.0.1-SNAPSHOT
+    image: ricardoahumada/products-service:sb3
     container_name: products-service
     depends_on:
       - naming-server
@@ -35,7 +35,7 @@ services:
     networks:
       - spring-cloud-network    
   orders-service:
-    image: ricardoahumada/orders-service:0.0.1-SNAPSHOT
+    image: ricardoahumada/orders-service:sb3
     build: orders-service/
     container_name: orders-service    
     depends_on:

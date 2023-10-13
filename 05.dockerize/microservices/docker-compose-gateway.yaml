@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   config-server:
-    image: ricardoahumada/config-server:0.0.1-SNAPSHOT
+    image: ricardoahumada/config-server:sb3
     build: config-server/
     environment:
       - eureka.client.service-url.defaultZone=http://naming-server:8761/eureka    
@@ -10,7 +10,7 @@ services:
     networks:
       - spring-cloud-network
   naming-server:
-    image: ricardoahumada/naming-server:0.0.1-SNAPSHOT
+    image: ricardoahumada/naming-server:sb3
     build: naming-server/
     depends_on:
       - config-server
@@ -21,7 +21,7 @@ services:
     networks:
       - spring-cloud-network
   gateway-server:
-    image: ricardoahumada/gateway-server:0.0.1-SNAPSHOT
+    image: ricardoahumada/gateway-server:sb3
     build: gateway-server/
     depends_on:
       - naming-server
@@ -33,7 +33,7 @@ services:
       - spring-cloud-network
   products-service:
     build: products-service/
-    image: ricardoahumada/products-service:0.0.1-SNAPSHOT
+    image: ricardoahumada/products-service:sb3
     depends_on:
       - naming-server
     environment:
@@ -44,7 +44,7 @@ services:
     networks:
       - spring-cloud-network    
   orders-service:
-    image: ricardoahumada/orders-service:0.0.1-SNAPSHOT
+    image: ricardoahumada/orders-service:sb3
     build: orders-service/
     depends_on:
       - naming-server
