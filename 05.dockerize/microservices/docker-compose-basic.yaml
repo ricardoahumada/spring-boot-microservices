@@ -34,6 +34,18 @@ services:
       - 9100:9100
     networks:
       - spring-cloud-network
+  customers-service:
+    build: customers-service/
+    image: ricardoahumada/users-management-service:sb3
+    container_name: customers-service
+    depends_on:
+      - naming-server
+    environment:
+      - eureka.client.service-url.defaultZone=http://naming-server:8761/eureka   
+    ports:
+      - 9200:9200
+    networks:
+      - spring-cloud-network    
 
 networks:
     spring-cloud-network:
