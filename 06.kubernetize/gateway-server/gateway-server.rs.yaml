@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: gateway-server-deployment
-        image: ricardoahumada/gateway-server:sb3
+        image: ricardoahumada/gateway-server:sb3.1
         ports:
         - name: http-gtw
           containerPort: 8765

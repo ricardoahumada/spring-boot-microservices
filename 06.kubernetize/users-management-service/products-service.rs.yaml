@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: customers-service-dep
-        image: ricardoahumada/users-management-service:sb3
+        image: ricardoahumada/users-management-service:sb3.1
         ports:
         - name: http-prods
           containerPort: 9090
