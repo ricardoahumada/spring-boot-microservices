@@ -13,24 +13,24 @@
 
 
 ### build images
-`docker build -t ricardoahumada/config-server:v1 config-server`
+`docker build -t ricardoahumada/config-server:sb3 config-server`
 
-`docker build -t ricardoahumada/products-service:v1 products-service`
+`docker build -t ricardoahumada/products-service:sb3 products-service`
 
-`docker build -t ricardoahumada/orders-service:v1 orders-service`
+`docker build -t ricardoahumada/orders-service:sb3 orders-service`
 
-`docker build -t ricardoahumada/gateway-server:v1 gateway-server`
+`docker build -t ricardoahumada/gateway-server:sb3 gateway-server`
 
 `docker images`
 
 ### push images
-`docker push ricardoahumada/config-server:v1`
+`docker push ricardoahumada/config-server:sb3`
 
-`docker push ricardoahumada/products-service:v1`
+`docker push ricardoahumada/products-service:sb3`
 
-`docker push ricardoahumada/orders-service:v1`
+`docker push ricardoahumada/orders-service:sb3`
 
-`docker push ricardoahumada/gateway-server:v1`
+`docker push ricardoahumada/gateway-server:sb3`
 
 
 ### apply manifests

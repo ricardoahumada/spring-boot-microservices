@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: orders-service-deployment
-        image: ricardoahumada/orders-service:v1
+        image: ricardoahumada/orders-service:sb3
         env:
         - name: spring.config.import
           value: "optional:configserver:http://config-server:8888"
