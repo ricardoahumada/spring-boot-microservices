@@ -20,4 +20,9 @@ cd ./orders-service
 mvn spring-boot:build-image -Dspring-boot.build-image.imageName=ricardoahumada/orders-service:sb3.1
 cd ..
 
+echo "Creating users-management-service image..."
+cd ./users-management-service
+mvn spring-boot:build-image -Dspring-boot.build-image.imageName=ricardoahumada/users-management-service:sb3.1
+cd ..
+
 docker images
