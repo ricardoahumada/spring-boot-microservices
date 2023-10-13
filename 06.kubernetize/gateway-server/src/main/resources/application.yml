@@ -13,7 +13,11 @@ spring:
         - id: OrdersService
           uri: "http://orders-service:9100/"
           predicates:
-            - Path=/orders/**        
+            - Path=/orders/**
+        - id: CustomersService
+          uri: "http://customers-service:9200/"
+          predicates:
+            - Path=/customers/**
 
 springdoc:
   enable-native-support: true

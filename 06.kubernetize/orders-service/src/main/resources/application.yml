@@ -28,7 +28,7 @@ server:
 
 spring.mvc.pathmatch.matching-strategy: ANT_PATH_MATCHER
 
-spring.config.import: "optional:configserver:http://localhost:8888" # config server
+spring.config.import: "optional:configserver:http://config-server:8888" # config server
 spring.profiles.active: dev #for activate profile
 
 management.endpoints.web.exposure.include: "*"
@@ -37,8 +37,6 @@ orders-service:
   min: 80
   max: 100
 
-eureka.client.service-url.default-zone: http://localhost:8761/eureka
-
 products-service:
-  base-url: localhost:9090
+  base-url: products-service:9090
   path: /products/{id}
