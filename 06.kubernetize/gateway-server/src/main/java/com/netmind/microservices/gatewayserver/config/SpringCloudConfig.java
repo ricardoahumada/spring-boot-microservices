@@ -8,9 +8,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import reactor.core.publisher.Mono;
 
-@Configuration
+//@Configuration
 public class SpringCloudConfig {
-    @Bean
+//    @Bean
     public GlobalFilter globalFilter() {
         return (exchange, chain) -> {
             System.out.println("First Global filter");
@@ -20,7 +20,7 @@ public class SpringCloudConfig {
         };
     }
 
-    @Bean
+//    @Bean
     public RouteLocator gatewayRoutes(RouteLocatorBuilder builder) {
         return builder.routes()
                 // Open Api
