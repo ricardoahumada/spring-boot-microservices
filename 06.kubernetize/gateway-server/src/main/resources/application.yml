@@ -6,18 +6,22 @@ spring:
   cloud:
     gateway:
       discovery.locator.enabled: true
-#      routes:
-#        - id: ProductsService
-#          uri: "lb://products-service/"
-#          predicates:
-#            - Path=/products/**
-#          filters:
-#            - AddRequestHeader=added-request-header, added-request-header-value
-#            - AddResponseHeader=added-response-header, added-response-header-value
-#        - id: OrdersService
-#          uri: "lb://orders-service/"
-#          predicates:
-#            - Path=/orders/**
+      routes:
+        - id: ProductsService
+          uri: "http://products-service:9090/"
+          predicates:
+            - Path=/products/**
+          filters:
+            - AddRequestHeader=added-request-header, added-request-header-value
+            - AddResponseHeader=added-response-header, added-response-header-value
+        - id: OrdersService
+          uri: "http://orders-service:9100/"
+          predicates:
+            - Path=/orders/**
+        - id: CustomersService
+          uri: "http://customers-service:9100/"
+          predicates:
+            - Path=/customers/**
 
 
 eureka.client:
