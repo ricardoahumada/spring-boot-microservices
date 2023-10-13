@@ -19,7 +19,7 @@ spring:
           predicates:
             - Path=/orders/**
         - id: CustomersService
-          uri: "http://customers-service:9100/"
+          uri: "http://customers-service:9200/"
           predicates:
             - Path=/customers/**
 
