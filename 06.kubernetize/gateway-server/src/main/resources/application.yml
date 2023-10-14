@@ -19,24 +19,24 @@ spring:
           predicates:
             - Path=/customers/**
 
-springdoc:
-  enable-native-support: true
-  api-docs:
-    enabled: true
-  swagger-ui:
-    enabled: true
-    path: /swagger-ui.html
-    config-url: /v3/api-docs/swagger-config
-    urls:
-      - url: /v3/api-docs
-        name: API Gateway Service
-        primaryName: API Gateway Service
-      - url: /products-service/v3/api-docs
-        name: Product Service
-        primaryName: Product Service
-      - url: /orders-service/v3/api-docs
-        name: Order Service
-        primaryName: Order Service
+#springdoc:
+#  enable-native-support: true
+#  api-docs:
+#    enabled: true
+#  swagger-ui:
+#    enabled: true
+#    path: /swagger-ui.html
+#    config-url: /v3/api-docs/swagger-config
+#    urls:
+#      - url: /v3/api-docs
+#        name: API Gateway Service
+#        primaryName: API Gateway Service
+#      - url: /products-service/v3/api-docs
+#        name: Product Service
+#        primaryName: Product Service
+#      - url: /orders-service/v3/api-docs
+#        name: Order Service
+#        primaryName: Order Service
 
 management:
   endpoint:
@@ -46,3 +46,9 @@ management:
     web:
       exposure:
         include: gateway
+
+# disable eureka finding...going to use “Kubernetes” for “Discovery” instead
+eureka.client:
+  service-url.default-zone: http://localhost:8761/eureka
+  register-with-eureka: false
+  fetch-registry: false
