@@ -32,4 +32,10 @@ products.openapi:
 
 spring.mvc.pathmatch.matching-strategy: ANT_PATH_MATCHER
 
-eureka.client.service-url.default-zone: http://localhost:8761/eureka
+# disable eureka finding...going to use “Kubernetes” for “Discovery” instead
+eureka.client:
+  service-url.default-zone: http://localhost:8761/eureka
+  register-with-eureka: false
+  fetch-registry: false
+
+spring.cloud.loadbalancer.enabled: false

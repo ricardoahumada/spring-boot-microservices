@@ -3,7 +3,7 @@
 ## 1. Kubernetes commands
 
 ### build projects
-`./jar-installer.sh`
+`./mvn-images-creator.sh`
 
 
 ### delete images
@@ -11,26 +11,39 @@
 
 `docker images`
 
+### delete minikube images
+`minikube image rm $(minikube image ls | grep 'ricardoahumada')
+
+`minikube image ls`
+
 
 ### build images
-`docker build -t ricardoahumada/config-server:v1 config-server`
+`docker build -t ricardoahumada/config-server:sb3 config-server`
 
-`docker build -t ricardoahumada/products-service:v1 products-service`
+`docker build -t ricardoahumada/products-service:sb3 products-service`
 
-`docker build -t ricardoahumada/orders-service:v1 orders-service`
+`docker build -t ricardoahumada/orders-service:sb3 orders-service`
 
-`docker build -t ricardoahumada/gateway-server:v1 gateway-server`
+`docker build -t ricardoahumada/gateway-server:sb3 gateway-server`
 
 `docker images`
 
+or
+
+`./mvn-images-creator.sh`
+
 ### push images
-`docker push ricardoahumada/config-server:v1`
+`docker push ricardoahumada/config-server:sb3`
 
-`docker push ricardoahumada/products-service:v1`
+`docker push ricardoahumada/products-service:sb3`
 
-`docker push ricardoahumada/orders-service:v1`
+`docker push ricardoahumada/orders-service:sb3`
 
-`docker push ricardoahumada/gateway-server:v1`
+`docker push ricardoahumada/gateway-server:sb3`
+
+or
+
+`./push-images.sh`
 
 
 ### apply manifests
