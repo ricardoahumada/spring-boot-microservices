@@ -19,4 +19,4 @@ spec:
         image: ricardoahumada/users-management-service:v3
         ports:
         - name: http-prods
-          containerPort: 9090
+          containerPort: 9200

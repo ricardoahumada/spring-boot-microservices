@@ -9,7 +9,7 @@ spec:
     app: customers-service
   type: LoadBalancer
   ports:
-  - port: 9090
+  - port: 9200
     targetPort: http-prods
     nodePort: 30168 #30000-32767
     protocol: TCP
