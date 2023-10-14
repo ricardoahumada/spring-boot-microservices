@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: config-server-deployment
-        image: ricardoahumada/config-server:sb3.1
+        image: ricardoahumada/config-server:v3
         ports:
         - name: http-cfg
           containerPort: 8888

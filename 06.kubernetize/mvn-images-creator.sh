@@ -2,12 +2,12 @@
 
 echo "Creating config-server image..."
 cd ./config-server
-mvn clean spring-boot:build-image -Dspring-boot.build-image.imageName=ricardoahumada/config-server:sb3.1
+mvn clean spring-boot:build-image -Dspring-boot.build-image.imageName=ricardoahumada/config-server:v3
 cd ..
 
 echo "Creating gateway-server image..."
 cd ./gateway-server
-mvn clean spring-boot:build-image -Dspring-boot.build-image.imageName=ricardoahumada/gateway-server:sb3.1
+mvn clean spring-boot:build-image -Dspring-boot.build-image.imageName=ricardoahumada/gateway-server:v3
 cd ..
 
 echo "Creating products-service image..."
@@ -22,7 +22,7 @@ cd ..
 
 echo "Creating users-management-service image..."
 cd ./users-management-service
-mvn clean spring-boot:build-image -Dspring-boot.build-image.imageName=ricardoahumada/users-management-service:sb3.1
+mvn clean spring-boot:build-image -Dspring-boot.build-image.imageName=ricardoahumada/users-management-service:v3
 cd ..
 
-docker images | grep "sb3.1"
+docker images | grep "v3"
