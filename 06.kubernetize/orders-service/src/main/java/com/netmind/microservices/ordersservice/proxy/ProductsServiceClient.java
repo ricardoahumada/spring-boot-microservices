@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(name = "products-service", url = "${products-service.base-url}")
+@FeignClient(value = "products-service", url = "${products-service.base-url}")
 //@FeignClient(name = "products-service") //for eureka and load balancer
 public interface ProductsServiceClient {
 

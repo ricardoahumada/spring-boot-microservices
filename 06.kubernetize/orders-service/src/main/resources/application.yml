@@ -40,3 +40,8 @@ orders-service:
 products-service:
   base-url: products-service:9090
   path: /products/{id}
+
+# disable eureka finding...going to use “Kubernetes” for “Discovery” instead
+eureka.client:
+  register-with-eureka: false
+  fetch-registry: false
