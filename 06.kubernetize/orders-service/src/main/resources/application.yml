@@ -38,15 +38,10 @@ orders-service:
   max: 100
 
 products-service:
-<<<<<<< HEAD
   base-url: http://products-service:9090
-  path: /products/{id}
-=======
-  base-url: products-service:9090
   path: /products/{id}
 
 # disable eureka finding...going to use “Kubernetes” for “Discovery” instead
 eureka.client:
   register-with-eureka: false
   fetch-registry: false
->>>>>>> ff1343f74b9b0c9db52c6c5769aa30bc42ceb428
