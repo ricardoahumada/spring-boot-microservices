@@ -25,4 +25,4 @@ cd ./users-management-service
 mvn clean spring-boot:build-image -Dspring-boot.build-image.imageName=ricardoahumada/users-management-service:v3
 cd ..
 
-docker images | grep "v3"
+docker images | grep v3

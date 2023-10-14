@@ -11,6 +11,11 @@
 
 `docker images`
 
+### delete minikube images
+`minikube image rm $(minikube image ls | grep 'ricardoahumada')
+
+`minikube image ls`
+
 
 ### build images
 `docker build -t ricardoahumada/config-server:sb3 config-server`
