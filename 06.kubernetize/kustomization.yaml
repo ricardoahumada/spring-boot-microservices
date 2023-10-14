@@ -5,5 +5,8 @@ resources:
   - products-service/products-service.svc.yaml
   - orders-service/orders-service.rs.yaml
   - orders-service/orders-service.svc.yaml
+  - users-management-service/customers-service.rs.yaml
+  - users-management-service/customers-service.svc.yaml
   - gateway-server/gateway-server.rs.yaml
   - gateway-server/gateway-server.svc.yaml
+  
