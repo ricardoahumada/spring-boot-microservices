@@ -25,4 +25,4 @@ cd ./users-management-service
 mvn spring-boot:build-image -Dspring-boot.build-image.imageName=ricardoahumada/users-management-service:sb3.1
 cd ..
 
-docker images
+docker images | grep "sb3.1"

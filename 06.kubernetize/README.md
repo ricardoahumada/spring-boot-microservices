@@ -3,7 +3,7 @@
 ## 1. Kubernetes commands
 
 ### build projects
-`./jar-installer.sh`
+`./mvn-images-creator.sh`
 
 
 ### delete images
@@ -23,6 +23,10 @@
 
 `docker images`
 
+or
+
+`./mvn-images-creator.sh`
+
 ### push images
 `docker push ricardoahumada/config-server:sb3`
 
@@ -31,6 +35,10 @@
 `docker push ricardoahumada/orders-service:sb3`
 
 `docker push ricardoahumada/gateway-server:sb3`
+
+or
+
+`./push-images.sh`
 
 
 ### apply manifests

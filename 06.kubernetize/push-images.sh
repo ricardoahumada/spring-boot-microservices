@@ -3,9 +3,6 @@
 echo "Pushing config-server image..."
 docker push ricardoahumada/config-server:sb3.1
 
-echo "Pushing naming-server image..."
-docker push ricardoahumada/naming-server:sb3.1
-
 echo "Pushing gateway-server image..."
 docker push ricardoahumada/gateway-server:sb3.1
 

@@ -38,5 +38,5 @@ orders-service:
   max: 100
 
 products-service:
-  base-url: products-service:9090
+  base-url: http://products-service:9090
   path: /products/{id}
