@@ -9,7 +9,7 @@ import org.springframework.http.HttpMethod;
 import reactor.core.publisher.Mono;
 
 // TODO: uncomment for routes
-//@Configuration
+@Configuration
 public class SpringCloudConfig {
     // TODO: uncomment for global filter
      @Bean
@@ -27,12 +27,12 @@ public class SpringCloudConfig {
         return builder.routes()
                 // Open Api
                 // TODO: uncomment for api docs
-                /*.route(r -> r.path("/products-service/v3/api-docs")
+                .route(r -> r.path("/products-service/v3/api-docs")
                         .filters(f->f.rewritePath("/products-service/(?<path>.*)","/${path}"))
                         .uri("lb://products-service"))
                 .route(r -> r.path("/orders-service/v3/api-docs")
                         .filters(f->f.rewritePath("/orders-service/v3/api-docs","/v3/api-docs"))
-                        .uri("lb://orders-service"))*/
+                        .uri("lb://orders-service"))
                 // Endpoints
                 // TODO: uncomment for routes
                 .route(r -> r.path("/orders/**")

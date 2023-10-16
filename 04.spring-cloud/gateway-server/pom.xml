@@ -63,7 +63,7 @@
         </dependency>
 
         <!-- TODO: uncomment for swagger-->
-        <!-- <dependency>
+        <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webflux-api</artifactId>
             <version>2.0.2</version>
@@ -72,7 +72,7 @@
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
             <version>2.0.2</version>
-        </dependency> -->
+        </dependency>
 
     </dependencies>
 
