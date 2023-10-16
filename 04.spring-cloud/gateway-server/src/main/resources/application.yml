@@ -6,22 +6,20 @@ spring:
   cloud:
     gateway:
       discovery.locator.enabled: true
-      # TODO: uncomment for routes in properties
-      routes:
-        - id: ProductsService
-          uri: "lb://products-service/"
-          predicates:
-            - Path=/products/**
-          filters:
-            - AddRequestHeader=added-request-header, added-request-header-value
-            - AddResponseHeader=added-response-header, added-response-header-value
-        - id: OrdersService
-          uri: "lb://orders-service/"
-          predicates:
-            - Path=/orders/**
+#      routes:
+#        - id: ProductsService
+#          uri: "lb://products-service/"
+#          predicates:
+#            - Path=/products/**
+#          filters:
+#            - AddRequestHeader=added-request-header, added-request-header-value
+#            - AddResponseHeader=added-response-header, added-response-header-value
+#        - id: OrdersService
+#          uri: "lb://orders-service/"
+#          predicates:
+#            - Path=/orders/**
 
 
-# TODO: uncomment for api docs
 springdoc:
   enable-native-support: true
   api-docs:
@@ -40,19 +38,20 @@ springdoc:
       - url: /orders-service/v3/api-docs
         name: Order Service
         primaryName: Order Service
+      - url: /accounts-service/v3/api-docs
+        name: Account Service
+        primaryName: Account Service
 
-# TODO: uncomment for eureka
 eureka.client:
   service-url.default-zone: http://localhost:8761/eureka
   health-check.enabled: true
 
-# TODO: uncomment for actuator
-# management:
-#   endpoint:
-#     gateway:
-#       enabled: true
-#   endpoints:
-#     web:
-#       exposure:
-#         include: gateway
+management:
+  endpoint:
+    gateway:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: gateway
 

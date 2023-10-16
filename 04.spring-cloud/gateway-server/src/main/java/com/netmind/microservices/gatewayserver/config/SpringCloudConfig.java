@@ -8,16 +8,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import reactor.core.publisher.Mono;
 
-// TODO: uncomment for routes
 @Configuration
 public class SpringCloudConfig {
-    // TODO: uncomment for global filter
-     @Bean
+    @Bean
     public GlobalFilter globalFilter() {
         return (exchange, chain) -> {
-            System.out.println("Global filter 1");
+            System.out.println("First Global filter");
             return chain.filter(exchange).then(Mono.fromRunnable(() -> {
-                System.out.println("Global filter 2");
+                System.out.println("Second Global filter");
             }));
         };
     }
@@ -26,17 +24,20 @@ public class SpringCloudConfig {
     public RouteLocator gatewayRoutes(RouteLocatorBuilder builder) {
         return builder.routes()
                 // Open Api
-                // TODO: uncomment for api docs
                 .route(r -> r.path("/products-service/v3/api-docs")
                         .filters(f->f.rewritePath("/products-service/(?<path>.*)","/${path}"))
                         .uri("lb://products-service"))
                 .route(r -> r.path("/orders-service/v3/api-docs")
                         .filters(f->f.rewritePath("/orders-service/v3/api-docs","/v3/api-docs"))
                         .uri("lb://orders-service"))
+                .route(r -> r.path("/accounts-service/v3/api-docs")
+                        .filters(f->f.rewritePath("/accounts-service/v3/api-docs","/v3/api-docs"))
+                        .uri("lb://accounts-service"))
                 // Endpoints
-                // TODO: uncomment for routes
                 .route(r -> r.path("/orders/**")
                         .uri("lb://orders-service/"))
+                .route(r -> r.path("/accounts/**")
+                        .uri("lb://accounts-service/"))
                 .route(r -> r.path("/products/**")
                         .filters(f ->
                                 f.addRequestHeader("added-request-header", "added-request-header-value")

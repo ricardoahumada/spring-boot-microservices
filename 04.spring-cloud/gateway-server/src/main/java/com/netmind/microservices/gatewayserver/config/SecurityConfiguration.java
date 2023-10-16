@@ -8,9 +8,8 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
-// TODO: uncomment for security
- @Configuration
-// @EnableWebFluxSecurity
+@Configuration
+@EnableWebFluxSecurity
 public class SecurityConfiguration {
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(final ServerHttpSecurity http) {
@@ -26,8 +25,9 @@ public class SecurityConfiguration {
                         "/*-service/**",
                         "/swagger-ui.html"
                 ).permitAll()
-//                .pathMatchers("/products/**").permitAll() // with oauth must be commented
+                .pathMatchers("/products/**").permitAll() // with oauth must be commented
                 .pathMatchers("/orders/**").permitAll()
+                .pathMatchers("/accounts/**").permitAll()
                 .anyExchange().authenticated()
                 .and()
                 .oauth2ResourceServer()
@@ -35,4 +35,5 @@ public class SecurityConfiguration {
 
         return http.build();
     }
+
 }

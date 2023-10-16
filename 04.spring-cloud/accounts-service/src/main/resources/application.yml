@@ -41,11 +41,16 @@ accounts.openapi:
   dev-url: http://accounts-api.dev
   prod-url: https://accounts-api.com
 
+spring.config.import: "optional:configserver:http://localhost:8888" # config server
+
+
 # property
 accounts-service.maxtoshow: 10
-# TODO: add config server
 
-# TODO: add customers service path
+# customers service path
+customers-service.path: /customers/{id}
+
+management.endpoints.web.exposure.include: "*"
 
 #debug: true
 logging:

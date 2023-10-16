@@ -4,6 +4,7 @@ import com.netmind.accountsservice.exception.AccountNotfoundException;
 import com.netmind.accountsservice.model.Account;
 import com.netmind.accountsservice.model.Customer;
 import com.netmind.accountsservice.persistence.AccountRepository;
+import com.netmind.accountsservice.proxy.CustomersServiceClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +20,14 @@ public class AccountService implements IAccountService {
     @Autowired
     private AccountRepository accountRepository;
 
+    @Autowired
+    private CustomersServiceClient customersServiceClient;
 
     @Override
     public Account create(Account account) {
         Date current_Date = new Date();
         account.setOpeningDate(current_Date);
-        Customer owner = null; // Must be obtained from users-management service
+        Customer owner = customersServiceClient.getCustomer(account.getOwnerId()); // Will be gotten from user service
         account.setOwner(owner);
         return accountRepository.save(account);
     }
@@ -37,7 +40,7 @@ public class AccountService implements IAccountService {
     @Override
     public Account getAccount(Long id) {
         Account account = accountRepository.findById(id).orElseThrow(() -> new AccountNotfoundException(id));
-        Customer owner = null; // Must be obtained from users-management service
+        Customer owner = customersServiceClient.getCustomer(account.getOwnerId()); // Will be gotten from user service
         account.setOwner(owner);
         return account;
     }
@@ -50,7 +53,7 @@ public class AccountService implements IAccountService {
     @Override
     public Account updateAccount(Long id, Account account) {
         Account theAccount = accountRepository.findById(id).orElseThrow(() -> new AccountNotfoundException(id));
-        Customer owner = null; // Must be obtained from users-management service
+        Customer owner = customersServiceClient.getCustomer(account.getOwnerId()); // Will be gotten from user service
         theAccount.setOwner(owner);
         theAccount.setType(account.getType());
         return accountRepository.save(theAccount);
@@ -59,7 +62,7 @@ public class AccountService implements IAccountService {
     @Override
     public Account addBalance(Long id, int amount, Long ownerId) {
         Account account = accountRepository.findById(id).orElseThrow(() -> new AccountNotfoundException(id));
-        Customer owner = null; // Must be obtained from users-management service
+        Customer owner = customersServiceClient.getCustomer(account.getOwnerId()); // Will be gotten from user service
         account.setOwner(owner);
         int newBalance = account.getBalance() + amount;
         account.setBalance(newBalance);
@@ -69,7 +72,7 @@ public class AccountService implements IAccountService {
     @Override
     public Account withdrawBalance(Long id, int amount, Long ownerId) {
         Account account = accountRepository.findById(id).orElseThrow(() -> new AccountNotfoundException(id));
-        Customer owner = null; // Must be obtained from users-management service
+        Customer owner = customersServiceClient.getCustomer(account.getOwnerId()); // Will be gotten from user service
         account.setOwner(owner);
         int newBalance = account.getBalance() - amount;
         account.setBalance(newBalance);

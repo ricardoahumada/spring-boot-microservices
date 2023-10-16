@@ -1,6 +1,7 @@
 package com.netmind.accountsservice.config;
 
 import com.netmind.accountsservice.exception.GlobalException;
+import feign.FeignException;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
@@ -15,8 +16,6 @@ import java.net.URI;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
-
-//import feign.FeignException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler /*extends ResponseEntityExceptionHandler*/ {
@@ -51,11 +50,10 @@ public class GlobalExceptionHandler /*extends ResponseEntityExceptionHandler*/ {
         return new ResponseEntity<>("Not valid due to validation error: " + e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
-    // TODO: uncomment for handling feign exceptions
-    /*@ExceptionHandler(FeignException.NotFound.class)
+    @ExceptionHandler(FeignException.NotFound.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     ResponseEntity<String> handleCustomerInvalid(FeignException e) {
         return new ResponseEntity<>("The customer is not valid: " + e.getMessage(), HttpStatus.BAD_REQUEST);
-    }*/
+    }
 
 }
