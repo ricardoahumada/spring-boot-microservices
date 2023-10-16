@@ -15,7 +15,7 @@ services:
     depends_on:
       - config-server
     environment:
-      - spring.config.import=optional
+      - spring.config.import
     ports:
       - 8761:8761
     networks:
@@ -28,7 +28,7 @@ services:
     environment:
       - eureka.client.service-url.defaultZone
     ports:
-      - 8765:8765
+      - 8080:8765
     networks:
       - spring-cloud-network
   products-service:
@@ -40,7 +40,8 @@ services:
       - eureka.client.service-url.defaultZone
     ports:
       - "9090-9099:9090"
-    scale: 1
+    scale: 2
+    restart: always
     networks:
       - spring-cloud-network    
   orders-service:
@@ -52,7 +53,7 @@ services:
       - config-server
     environment:
       - eureka.client.service-url.defaultZone
-      - spring.config.import=optional
+      - spring.config.import
     ports:
       - 9100:9100
     networks:

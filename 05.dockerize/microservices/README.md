@@ -1,7 +1,9 @@
 # DEPLOYMENT WITH DOCKER COMPOSE
 
+### delete images
+`docker rmi $(docker images | grep 'ricardoahumada') -f`
 
-### apply build images
+### build images
 `docker compose -f docker-compose-config-services.yaml build`
 
 ### apply manifests
@@ -18,15 +20,17 @@
 ### show logs
 `docker compose -f docker-compose-config-services.yaml logs --since 0 | more`
 
-`docker compose naming-server --since 0 | more`
+`docker compose logs naming-server --since 0 | more`
 
-`docker compose config-server --since 0 | more`
+`docker compose logs config-server --since 0 | more`
 
-`docker compose orders-service --since 0 | more`
+`docker compose logs orders-service --since 0 | more`
 
-`docker compose products-service --since 0 | more`
+`docker compose logs products-service --since 0 | more`
 
-`docker compose consumer-service --since 0 | more`
+`docker compose logs consumer-service --since 0 | more`
+
+`docker compose logs gateway-server --since 0 | more`
 
 
 
