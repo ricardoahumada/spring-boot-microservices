@@ -4,7 +4,7 @@ services:
     image: ricardoahumada/config-server:sb3
     build: config-server/
     environment:
-      - eureka.client.service-url.defaultZone=http://naming-server:8761/eureka    
+      - eureka.client.service-url.defaultZone
     ports:
       - 8888:8888
     networks:
@@ -15,7 +15,7 @@ services:
     depends_on:
       - config-server
     environment:
-      - spring.config.import=optional:configserver:http://config-server:8888  
+      - spring.config.import
     ports:
       - 8761:8761
     networks:
@@ -26,7 +26,7 @@ services:
     depends_on:
       - naming-server
     environment:
-      - eureka.client.service-url.defaultZone=http://naming-server:8761/eureka   
+      - eureka.client.service-url.defaultZone
     ports:
       - "9090-9099:9090"
     scale: 3
@@ -40,8 +40,8 @@ services:
       - products-service
       - config-server
     environment:
-      - eureka.client.service-url.defaultZone=http://naming-server:8761/eureka   
-      - spring.config.import=optional:configserver:http://config-server:8888   
+      - eureka.client.service-url.defaultZone
+      - spring.config.import 
     ports:
       - 9100:9100
     networks:
@@ -53,7 +53,7 @@ services:
     depends_on:
       - naming-server
     environment:
-      - eureka.client.service-url.defaultZone=http://naming-server:8761/eureka   
+      - eureka.client.service-url.defaultZone
     ports:
       - 9200:9200
     networks:
