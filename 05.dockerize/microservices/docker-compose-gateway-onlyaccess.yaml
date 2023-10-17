@@ -66,8 +66,8 @@ services:
       - naming-server
     environment:
       - eureka.client.service-url.defaultZone=http://naming-server:8761/eureka   
-    ports:
-      - 9200:9200
+    expose:
+      - 9200
     networks:
       - spring-cloud-network
 
