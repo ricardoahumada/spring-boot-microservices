@@ -55,6 +55,13 @@
 `docker compose -f docker-compose-config-services.yaml stop`
 `docker compose -f docker-compose-config-services.yaml start`
 
+### stop and remove
+`docker compose -f docker-compose-config-services.yaml down`
+
+
+### restart
+`docker compose -f docker-compose-config-services.yaml restart orders-service`
+
 
 ### delete all (must be stopped)
 `docker compose -f docker-compose-config-services.yaml rm`
