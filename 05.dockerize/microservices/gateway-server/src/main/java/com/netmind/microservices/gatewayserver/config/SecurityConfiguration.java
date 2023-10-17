@@ -13,6 +13,8 @@ import static org.springframework.security.web.util.matcher.AntPathRequestMatche
 public class SecurityConfiguration {
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(final ServerHttpSecurity http) {
+        http.csrf(csrf -> csrf.disable());
+
         http.authorizeExchange()
                 .pathMatchers(
                         "/configuration/ui",
