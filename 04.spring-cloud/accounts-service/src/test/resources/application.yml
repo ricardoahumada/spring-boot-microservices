@@ -26,3 +26,7 @@ logging:
     root: INFO
 
 
+eureka.client:
+  register-with-eureka: false
+  fetch-registry: false
+  
