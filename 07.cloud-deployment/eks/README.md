@@ -3,6 +3,7 @@
 - Configure kubectl
 - aws eks --region [region] update-kubeconfig --name [cluster_name]
 - use kubectl
+- Delete cluster
 
 # CLOUD DEPLOYMENT USING EKS - eksctl
 
