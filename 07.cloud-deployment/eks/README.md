@@ -1,4 +1,10 @@
-# CLOUD DEPLOYMENT USING EKS
+# CLOUD DEPLOYMENT USING EKS - aws console
+- Create a cluster
+- Configure kubectl
+- aws eks --region [region] update-kubeconfig --name [cluster_name]
+- use kubectl
+
+# CLOUD DEPLOYMENT USING EKS - eksctl
 
 ## 1. Install tools
 
