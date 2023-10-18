@@ -3,6 +3,7 @@ resources:
   - config-server/config-server.svc.yaml
   - products-service/products-service.rs.yaml
   - products-service/products-service.svc.yaml
+  - orders-service/orders-config.yaml
   - orders-service/orders-service.rs.yaml
   - orders-service/orders-service.svc.yaml
   - users-management-service/customers-service.rs.yaml
