@@ -22,11 +22,11 @@ spec:
               value: "optional:configserver:http://config-server:8888"
             - name: products-service.base-url
               value: "products-service:9090"
-            - name: SPRING_APPLICATION_JSON
+            - name: ADMIN_PASSWORD
               valueFrom:
                 configMapKeyRef:
-                  name: orders-config
-                  key: dev-config.json
+                  name: orders-service
+                  key: ADMIN_PASSWORD
           ports:
             - name: http-orders
               containerPort: 9100
