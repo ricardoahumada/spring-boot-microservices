@@ -46,10 +46,17 @@ or
 `./push-images.sh`
 
 
+### secrets
+kubectl create secret generic spring-security --from-literal=spring.user.name=demo  --from-literal=spring.user.password=password
+
+
+
 ### apply manifests
 `kubectl apply -f config-server.rs.yaml && kubectl apply -f config-server.svc.yaml`
 
 `kubectl apply -f products-service.rs.yaml && kubectl apply -f products-service.svc.yaml`
+
+`kubectl apply -f orders-config.yaml`
 
 `kubectl apply -f orders-service.rs.yaml && kubectl apply -f orders-service.svc.yaml`
 
