@@ -27,6 +27,11 @@ spec:
                 configMapKeyRef:
                   name: orders-config
                   key: dev-config.json
+            - name: SECRETS_DEMO_USER_PASSWD
+              valueFrom:
+                secretKeyRef:
+                  name: spring-security
+                  key: spring.user.password
           ports:
             - name: http-orders
               containerPort: 9100
