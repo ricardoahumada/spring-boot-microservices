@@ -47,7 +47,10 @@ or
 
 
 ### secrets
-kubectl create secret generic spring-security --from-literal=spring.user.name=demo  --from-literal=spring.user.password=password
+`kubectl create secret generic spring-security --from-literal=spring.user.name=demo  --from-literal=spring.user.password=password`
+
+`kubectl get secret spring-security -o yaml`
+
 
 
 
