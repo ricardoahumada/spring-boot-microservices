@@ -11,7 +11,7 @@ sudo apt update
 ```
 curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee \
   /usr/share/keyrings/jenkins-keyring.asc > /dev/null
-  
+
 echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
   https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
   /etc/apt/sources.list.d/jenkins.list > /dev/null
@@ -65,6 +65,9 @@ setfacl -R -m u:jenkins:rwx /home/ubuntu/.minikube/profiles/minikube/
 ```
 
 ## Config
+- get minikube ip
+`kubectl config view -o jsonpath="{.clusters[?(@.name=="minikube")].cluster.server}"`
+- Create a secret file credentials in jenkins
 - Get from .kube/config the "server" and "client-certificate" values
 - Add new credential to jenkins
 	+ kind: secret text
