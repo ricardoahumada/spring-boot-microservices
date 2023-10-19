@@ -65,19 +65,21 @@ setfacl -R -m u:jenkins:rwx /home/ubuntu/.minikube/profiles/minikube/
 ```
 
 ## Config
-- get minikube ip
-`kubectl config view -o jsonpath="{.clusters[?(@.name=="minikube")].cluster.server}"`
-- Create a secret file credentials in jenkins
-- Get from .kube/config the "server" and "client-certificate" values
-- Add new credential to jenkins
-	+ kind: secret text
-	+ value: token string (output of `kubectl describe secrets/jenkins-token-rk2mg`)
-- Jenkins – manage Jenkins – Configure system scroll to bottom
-	+ Add a new cloud, select Kubernetes
-	+ Kubernetes URL: value server from config file
-	+ Kubernetes server certificate key: value certificate-authority from config file
-	+ Credentials: credentials created in previous step.
-	+ Click on “Test Connection” tab and you should get Connection test successful
+- get minikube ip:
+	+ `kubectl config vie`
+- Method 1:
+	+ Create a secret file credentials in jenkins
+- Mehthod 2:
+	+ Get from .kube/config the "server" and "client-certificate" values
+	+ Add new credential to jenkins
+		* kind: secret text
+		* value: token string (output of `kubectl describe secrets/jenkins-token-rk2mg`)
+	+ Jenkins – manage Jenkins – Configure system scroll to bottom
+		* Add a new cloud, select Kubernetes
+		* Kubernetes URL: value server from config file
+		* Kubernetes server certificate key: value certificate-authority from config file
+		* Credentials: credentials created in previous step.
+		* Click on “Test Connection” tab and you should get Connection test successful
 - use withDockerRegistry.
 - Example:
 ```
@@ -87,19 +89,19 @@ setfacl -R -m u:jenkins:rwx /home/ubuntu/.minikube/profiles/minikube/
     Use: "scp ubuntu@[IP]:.kube/config k8-config" to download config file with name k8-config
 **/
 
-/** Minikube case **/                
-c([credentialsId: 'k8-credentials',clusterName: 'minikube']) {
-    sh 'kubectl apply -f k8-app-deploy/1-python-package-flask-test_deployment.yaml'
-    sh 'kubectl apply -f k8-app-deploy/2-python-package-flask-test_service.yaml'
-    sh 'kubectl port-forward service/python-package-flask-test-service 5000:5000 &'
+ /** Minikube case **/                
+withKubeConfig([credentialsId: 'k8-credentials',clusterName: 'minikube']) {
+    sh 'kubectl apply -f [path_to]/deployment.yaml'
+    sh 'kubectl apply -f [path_to]/service.yaml'
+    sh 'kubectl port-forward service/service_name 5000:5000 &'
 }
 
 /** AKS case **/                
 // For getting the server url use: "az aks list -o table" and use "Fqdn" value
 /*withKubeConfig([credentialsId: 'k8-credentials',serverUrl:'https://saving-kitten-k8s-5846b313.hcp.eastasia.azmk8s.io'],clusterName: '[CONTEXT-NAME]') {
-    sh 'kubectl apply -f k8-app-deploy/1-python-package-flask-test_deployment.yaml'
-    sh 'kubectl apply -f k8-app-deploy/2-python-package-flask-test_service.yaml'
-    sh 'kubectl port-forward service/python-package-flask-test-service 80:5000 &'
+    sh 'kubectl apply -f [path_to]/deployment.yaml'
+    sh 'kubectl apply -f [path_to]/service.yaml'
+    sh 'kubectl port-forward service/service_name 80:5000 &'
     sleep 5 // give 5 secs to stablish the port forward
 }*/
 
