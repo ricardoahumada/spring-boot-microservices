@@ -28,7 +28,7 @@ services:
     environment:
       - eureka.client.service-url.defaultZone
     ports:
-      - 8080:8765
+      - 8765:8765
     networks:
       - spring-cloud-network
   products-service:
@@ -43,7 +43,28 @@ services:
     scale: 2
     restart: always
     networks:
-      - spring-cloud-network    
+      - spring-cloud-network
+  customers-service:
+    build: users-management-service/
+    image: ricardoahumada/users-management-service:sb3
+    container_name: customers-service
+    depends_on:
+      - naming-server
+    environment:
+      - eureka.client.service-url.defaultZone
+    ports:
+      - "9200-9299:9200"
+    deploy:
+      replicas: 2
+      # resources:
+      #   limits:
+      #     cpus: '0.5'
+      #     memory: 150M
+      #   reservations:
+      #     cpus: '0.1'
+      #     memory: 100M
+    networks:
+      - spring-cloud-network  
   orders-service:
     image: ricardoahumada/orders-service:sb3
     build: orders-service/
@@ -57,19 +78,7 @@ services:
     ports:
       - 9100:9100
     networks:
-      - spring-cloud-network
-  customers-service:
-    build: users-management-service/
-    image: ricardoahumada/users-management-service:sb3
-    container_name: customers-service
-    depends_on:
-      - naming-server
-    environment:
-      - eureka.client.service-url.defaultZone
-    ports:
-      - 9200:9200
-    networks:
-      - spring-cloud-network
+      - spring-cloud-network  
   accounts-service:
     image: ricardoahumada/accounts-service:sb3
     build: accounts-service/
