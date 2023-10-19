@@ -61,7 +61,7 @@ withDockerRegistry([ credentialsId: "acr-credentials", url: "https://ricardoboot
 ```
 export KUBECONFIG=~/.kube/config
 sudo apt install -y acl
-setfacl -R -m u:jenkins:rwx /home/ubuntu/.minikube/profiles/minikube/
+setfacl -R -m u:jenkins:rwx /home/springboot/.minikube/profiles/minikube/
 ```
 
 ## Config
