@@ -46,7 +46,9 @@ accounts.openapi:
 accounts-service.maxtoshow: 10
 
 # customers service path
-customers-service.path: /customers/{id}
+customers-service:
+  base-url: http://customers-service:9200 
+  path: /customers/{id}
 
 management.endpoints.web.exposure.include: "*"
 
