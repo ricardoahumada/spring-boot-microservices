@@ -1,7 +1,7 @@
 spring:
   application:
     name: ProductsService
-  profiles.active: dev
+  profiles.active: testing
 
 server:
   servlet.contextPath: /api
@@ -25,7 +25,7 @@ products.openapi:
 ---
 spring:
   sql.init.mode: never  # avoid loading
-  config.activate.on-profile: dev
+  config.activate.on-profile: testing
   devtools.restart.enabled: true
   application:
     name: ProductsService
