@@ -30,4 +30,10 @@ cd ./users-management-service
 mvn spring-boot:build-image -Dspring-boot.build-image.imageName=ricardoahumada/users-management-service:sb3
 cd ..
 
-docker images
+echo "Creating accounts-service image..."
+cd ./accounts-service
+mvn spring-boot:build-image -Dspring-boot.build-image.imageName=ricardoahumada/accounts-service:sb3
+cd ..
+
+
+docker images | grrep ricardoahumada

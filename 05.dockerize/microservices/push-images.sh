@@ -17,3 +17,6 @@ docker push ricardoahumada/orders-service:sb3
 
 echo "Pushing users-management-service image..."
 docker push ricardoahumada/users-management-service:sb3
+
+echo "Pushing accounts-service image..."
+docker push ricardoahumada/accounts-service:sb3
