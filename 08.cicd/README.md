@@ -1,11 +1,14 @@
 # Install jenkins linux
+
+## install jdk if needed
 ```
 sudo apt update
 
-sudo apt install openjdk-17-jre
-
-java -version
- 
+# sudo apt install openjdk-17-jre
+# java -version
+```
+## install pacakge
+```
 curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee \
   /usr/share/keyrings/jenkins-keyring.asc > /dev/null
 echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
@@ -15,8 +18,10 @@ echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
 sudo apt-get update
 
 sudo apt-get install jenkins
+```
 
-sudo systemctl start jenkins.service
-
-sudo systemctl status jenkins
+## start service
+```
+sudo service jenkins status
+sudo service jenkins start/stop
 ```
