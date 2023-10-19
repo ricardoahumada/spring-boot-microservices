@@ -68,7 +68,7 @@ setfacl -R -m u:jenkins:rwx /home/springboot/.minikube/profiles/minikube/
 - get minikube ip:
 	+ `kubectl config vie`
 - Method 1:
-	+ Create a secret file credentials in jenkins
+	+ Create a secret file credentials in jenkins with the pato to "/.kube/config"
 - Mehthod 2:
 	+ Get from .kube/config the "server" and "client-certificate" values
 	+ Add new credential to jenkins
