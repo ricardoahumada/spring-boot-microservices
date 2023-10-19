@@ -47,5 +47,5 @@ eureka.client:
   fetch-registry: false
 
 
-security.user.name=${SECRETS_DEMO_USER:demo}
-security.user.password=${SECRETS_DEMO_USER_PASSWD:demo}
+security.user.name: ${SECRETS_DEMO_USER:demo}
+security.user.password: ${SECRETS_DEMO_USER_PASSWD:demo}
