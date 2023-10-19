@@ -29,10 +29,15 @@ sudo service jenkins start/stop
 
 # Jenkins-docker
 
-## Jenkins plugin
+## Jenkins docker plugin: docker pipeline
 - https://plugins.jenkins.io/docker-workflow/
 - https://www.jenkins.io/doc/pipeline/steps/docker-workflow/
  
+
+## Allow jenkins docker conect
+- `sudo chmod 666 /var/run/docker.sock`
+- http://cmr.miccai.cloud/docker-submission-tutorial/
+
 ## Config
 - Add new credential to jenkins
 	+ kind: username-pass
@@ -53,7 +58,7 @@ withDockerRegistry([ credentialsId: "acr-credentials", url: "https://ricardoboot
 
 # Jenkins-kubernetes
 
-## Jenkins plugin
+## Jenkins kubernetes plugin: kubernetes cli
 - https://plugins.jenkins.io/kubernetes-cli/
 - https://geekdudes.wordpress.com/2020/01/03/minikube-configure-jenkins-kubernetes-plugin/
 
