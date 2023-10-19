@@ -85,6 +85,10 @@ or
 
 `kubectl port-forward service/products-service 9090:9090`
 
+`kubectl port-forward service/customers-service 9200:9200`
+
+`kubectl port-forward service/accounts-service 9900:9900`
+
 `kubectl port-forward service/gateway-server 8765:8765`
 
 
