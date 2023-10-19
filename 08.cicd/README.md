@@ -58,9 +58,11 @@ withDockerRegistry([ credentialsId: "acr-credentials", url: "https://ricardoboot
 - https://geekdudes.wordpress.com/2020/01/03/minikube-configure-jenkins-kubernetes-plugin/
 
 ## Allow jenkins access to certification files
+```
 export KUBECONFIG=~/.kube/config
 sudo apt install -y acl
 setfacl -R -m u:jenkins:rwx /home/ubuntu/.minikube/profiles/minikube/
+```
 
 ## Config
 - Get from .kube/config the "server" and "client-certificate" values
