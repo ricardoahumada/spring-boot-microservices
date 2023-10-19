@@ -7,7 +7,7 @@ sudo apt update
 # sudo apt install openjdk-17-jre
 # java -version
 ```
-## install pacakge
+## install package
 ```
 curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee \
   /usr/share/keyrings/jenkins-keyring.asc > /dev/null
@@ -26,17 +26,42 @@ sudo service jenkins status
 sudo service jenkins start/stop
 ```
 
-# Jenkins plugin
-https://plugins.jenkins.io/kubernetes-cli/
-https://geekdudes.wordpress.com/2020/01/03/minikube-configure-jenkins-kubernetes-plugin/
+# Jenkins-docker
+
+## Jenkins plugin
+- https://plugins.jenkins.io/docker-workflow/
+- https://www.jenkins.io/doc/pipeline/steps/docker-workflow/
+ 
+## Config
+- Add new credential to jenkins
+	+ kind: username-pass
+- use withDockerRegistry
+- Example:
+```
+/** Docker hub case **/                
+/*withDockerRegistry([ credentialsId: "docker-hub-credentials", url: "" ]) {
+    sh 'docker push ricardoahumada/python[repo]:[tag]'
+}*/
+
+/** ACR case **/
+// To get acr url use: az acr list -o table
+withDockerRegistry([ credentialsId: "acr-credentials", url: "https://ricardobootcampregistry.azurecr.io" ]) {
+    sh 'docker push ricardobootcampregistry.azurecr.io/python[repo]:[tag]'
+}
+```
+
+# Jenkins-kubernetes
+
+## Jenkins plugin
+- https://plugins.jenkins.io/kubernetes-cli/
+- https://geekdudes.wordpress.com/2020/01/03/minikube-configure-jenkins-kubernetes-plugin/
 
 ## Allow jenkins access to certification files
-
 export KUBECONFIG=~/.kube/config
 sudo apt install -y acl
 setfacl -R -m u:jenkins:rwx /home/ubuntu/.minikube/profiles/minikube/
 
-
+## Config
 - Get from .kube/config the "server" and "client-certificate" values
 - Add new credential to jenkins
 	+ kind: secret text
@@ -47,27 +72,29 @@ setfacl -R -m u:jenkins:rwx /home/ubuntu/.minikube/profiles/minikube/
 	+ Kubernetes server certificate key: value certificate-authority from config file
 	+ Credentials: credentials created in previous step.
 	+ Click on “Test Connection” tab and you should get Connection test successful
- 
+- use withDockerRegistry.
+- Example:
+```
+/**
+    Uses plugin: https://plugins.jenkins.io/kubernetes-cli/
+    Need to create credentials named "k8-credentials"  uploading minikube config file.
+    Use: "scp ubuntu@[IP]:.kube/config k8-config" to download config file with name k8-config
+**/
 
-## Example pipeline
-pipeline {
-    agent any
-
-    stages {
-         stage('Checkout') {
-            steps {
-                git branch: '[branch]',url: 'https://github.com/ricardoahumada/[repo]'
-            }
-        }  
-        stage('Exexuting kubectl') {
-            steps {
-                echo 'Exexuting kubectl'
-                withKubeConfig([credentialsId: 'k8-credentials']) {
-                    sh 'kubectl apply -f deployment.yaml'
-                    sh 'kubectl apply -f service.yaml'
-                }
-            }
-        }
-    }
+/** Minikube case **/                
+c([credentialsId: 'k8-credentials',clusterName: 'minikube']) {
+    sh 'kubectl apply -f k8-app-deploy/1-python-package-flask-test_deployment.yaml'
+    sh 'kubectl apply -f k8-app-deploy/2-python-package-flask-test_service.yaml'
+    sh 'kubectl port-forward service/python-package-flask-test-service 5000:5000 &'
 }
 
+/** AKS case **/                
+// For getting the server url use: "az aks list -o table" and use "Fqdn" value
+/*withKubeConfig([credentialsId: 'k8-credentials',serverUrl:'https://saving-kitten-k8s-5846b313.hcp.eastasia.azmk8s.io'],clusterName: '[CONTEXT-NAME]') {
+    sh 'kubectl apply -f k8-app-deploy/1-python-package-flask-test_deployment.yaml'
+    sh 'kubectl apply -f k8-app-deploy/2-python-package-flask-test_service.yaml'
+    sh 'kubectl port-forward service/python-package-flask-test-service 80:5000 &'
+    sleep 5 // give 5 secs to stablish the port forward
+}*/
+
+```
