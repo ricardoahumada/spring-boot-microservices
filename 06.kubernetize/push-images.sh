@@ -14,3 +14,6 @@ docker push ricardoahumada/orders-service:v3
 
 echo "Pushing users-management-service image..."
 docker push ricardoahumada/users-management-service:v3
+
+echo "Pushing accounts-service image..."
+docker push ricardoahumada/accounts-service:v3
