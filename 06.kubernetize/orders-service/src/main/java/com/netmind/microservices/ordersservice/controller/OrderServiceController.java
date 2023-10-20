@@ -7,6 +7,7 @@ import com.netmind.microservices.ordersservice.persistence.OrdersRepository;
 import com.netmind.microservices.ordersservice.proxy.ProductsServiceClient;
 import com.netmind.microservices.productsservice.model.StatusMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Valid;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +32,11 @@ public class OrderServiceController {
     @Autowired
     private ConfigurationValues limits;
 
+    @Value("${security.user.name}")
+    String username;
+
+    @Value("${security.user.password}")
+    String password;
     @Autowired
     ProductsServiceClient productsServiceClient;
 
@@ -59,6 +66,8 @@ public class OrderServiceController {
 
     @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity createOrder(@RequestBody @Valid Order newOrder) {
+        System.out.println("...Creating new order with secrets:" + username + ":" + password);
+
         Integer quantity = newOrder.getQuantity();
 
         if (quantity >= limits.getMin() && quantity <= limits.getMax()) {
