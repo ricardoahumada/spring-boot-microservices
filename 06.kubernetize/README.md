@@ -16,6 +16,9 @@
 
 `minikube image ls`
 
+### load a local image
+`minikube loag [image-name]`
+
 
 ### build images
 `docker build -t ricardoahumada/config-server:sb3 config-server`
@@ -90,6 +93,12 @@ or
 `kubectl port-forward service/accounts-service 9900:9900`
 
 `kubectl port-forward service/gateway-server 8765:8765`
+
+
+#### Using minikube ingress
+`minikube addons enable ingress`
+
+`minikube service service/config-server --url`
 
 
 ### consume services
