@@ -1,7 +1,8 @@
 # CLOUD DEPLOYMENT USING EKS - aws console
 - Create a cluster
 - Configure kubectl
-- aws eks --region [region] update-kubeconfig --name [cluster_name]
+	+ aws eks --region [region] update-kubeconfig --name [cluster_name]
+		* Example: aws eks --region us-east-2 update-kubeconfig --name my-sb3-cluster
 - use kubectl
 - Delete cluster
 
