@@ -3,7 +3,7 @@ pipeline {
     
     environment {
         VERSION = "${env.BUILD_ID}-${env.GIT_COMMIT}"
-        IMAGE = "ricardoahumada/products-service:V${env.BUILD_ID}"
+        IMAGE = "ricardoahumada/products-service:VT${env.BUILD_ID}"
     }
 
     stages {
