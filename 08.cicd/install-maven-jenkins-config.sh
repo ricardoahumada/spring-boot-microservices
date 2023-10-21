@@ -23,11 +23,11 @@ sudo service jenkins start
 sudo service jenkins status
 
 
-# Allow jenkins docker connect
-sudo chmod 666 /var/run/docker.sock
-
 ## Allow jenkins access to certification files
 export KUBECONFIG=~/.kube/config
 sudo apt install -y acl
 setfacl -R -m u:jenkins:rwx /home/springboot/.minikube/profiles/minikube/
+
+# Allow jenkins docker connect
+sudo chmod 666 /var/run/docker.sock
 

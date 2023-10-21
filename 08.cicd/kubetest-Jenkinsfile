@@ -1,0 +1,14 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Hello') {
+            steps {
+                echo 'Hello World'
+                withKubeConfig([credentialsId: 'k8-credentials',clusterName: 'minikube']) {
+                    sh '/usr/local/bin/kubectl get all'
+                }
+            }
+        }
+    }
+}
