@@ -3,9 +3,17 @@
 ## install jdk if needed
 ```
 sudo apt update
+sudo apt install openjdk-17-jre
+java -version
 
-# sudo apt install openjdk-17-jre
-# java -version
+## install maven if needed
+# https://sharadchhetri.com/install-setup-maven-linux-jenkins/
+wget https://dlcdn.apache.org/maven/maven-3/3.9.5/binaries/apache-maven-3.9.5-bin.tar.gz
+sudo tar xf apache-maven-3.9.5-bin.tar.gz -C /opt
+sudo ln -s /opt/apache-maven-3.9.5 /opt/maven
+sudo ln -s /opt/maven/bin/mvn /usr/bin/mvn
+maven --version
+
 ```
 ## install package
 ```
@@ -34,7 +42,7 @@ sudo service jenkins start/stop
 - https://www.jenkins.io/doc/pipeline/steps/docker-workflow/
  
 
-## Allow jenkins docker conect
+## Allow jenkins docker connect
 - `sudo chmod 666 /var/run/docker.sock`
 - http://cmr.miccai.cloud/docker-submission-tutorial/
 
