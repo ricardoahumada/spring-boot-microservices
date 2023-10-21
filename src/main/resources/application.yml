@@ -58,13 +58,6 @@ server:
 #  servlet.contextPath: /api
   port: 9090
 
-#debug: true
-logging:
-  path: /var/tmp/
-  file: /var/tmp/mylog.log
-  level:
-    root: WARN
-
 
 ---
 spring:
