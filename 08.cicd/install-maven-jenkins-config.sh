@@ -31,8 +31,12 @@ setfacl -R -m u:jenkins:rwx /home/springboot/.minikube/profiles/minikube/
 # start docker
 sudo service docker start
 
-# Allow jenkins docker connect
-sudo chmod 666 /var/run/docker.sock
+sleep 10
 
 # start minikube
 minikube start
+
+sleep 10
+
+# Allow jenkins docker connect
+sudo chmod 666 /var/run/docker.sock
