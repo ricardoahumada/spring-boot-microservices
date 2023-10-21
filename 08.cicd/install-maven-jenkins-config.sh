@@ -40,3 +40,6 @@ sleep 10
 
 # Allow jenkins docker connect
 sudo chmod 666 /var/run/docker.sock
+
+# show jenkins init pass
+sudo more /var/lib/jenkins/secrets/initialAdminPassword
