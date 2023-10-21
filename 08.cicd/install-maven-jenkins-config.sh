@@ -28,6 +28,11 @@ export KUBECONFIG=~/.kube/config
 sudo apt install -y acl
 setfacl -R -m u:jenkins:rwx /home/springboot/.minikube/profiles/minikube/
 
+# start docker
+sudo service docker start
+
 # Allow jenkins docker connect
 sudo chmod 666 /var/run/docker.sock
 
+# start minikube
+minikube start
