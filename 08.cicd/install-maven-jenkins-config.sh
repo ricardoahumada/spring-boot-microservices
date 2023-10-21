@@ -5,7 +5,7 @@ wget https://dlcdn.apache.org/maven/maven-3/3.9.5/binaries/apache-maven-3.9.5-bi
 sudo tar xf apache-maven-3.9.5-bin.tar.gz -C /opt
 sudo ln -s /opt/apache-maven-3.9.5 /opt/maven
 sudo ln -s /opt/maven/bin/mvn /usr/bin/mvn
-maven --version
+mvn --version
 
 # jenkins
 curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee \
