@@ -106,6 +106,9 @@ or
 
 `minikube service [service-name] --url`
 
+#### Using minikube tunnel
+`minikube tunnel`
+
 
 ### consume services
 #### services
