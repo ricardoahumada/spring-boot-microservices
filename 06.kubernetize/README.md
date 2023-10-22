@@ -1,6 +1,11 @@
 # DEPLOYMENT WITH KUBERNETES
 
-## 1. Kubernetes commands
+### minikuke
+`minikube --help`
+`minikube status`
+`minikube ip`
+`minikube image ls`
+
 
 ### build projects
 `./mvn-images-creator.sh`
@@ -56,7 +61,6 @@ or
 
 
 
-
 ### apply manifests
 `kubectl apply -f config-server.rs.yaml && kubectl apply -f config-server.svc.yaml`
 
@@ -98,7 +102,7 @@ or
 #### Using minikube ingress
 `minikube addons enable ingress`
 
-`minikube service service/config-server --url`
+`minikube service accounts-service --url`
 
 
 ### consume services

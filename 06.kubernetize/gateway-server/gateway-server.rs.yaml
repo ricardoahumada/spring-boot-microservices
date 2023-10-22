@@ -17,6 +17,12 @@ spec:
       containers:
       - name: gateway-server-deployment
         image: ricardoahumada/gateway-server:v3
+        env:
+            - name: SPRING_APPLICATION_JSON
+              valueFrom:
+                configMapKeyRef:
+                  name: gateway-config
+                  key: dev-config.json  
         ports:
         - name: http-gtw
           containerPort: 8765
