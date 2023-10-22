@@ -2,9 +2,17 @@ pipeline {
     agent any
     
     environment {
-        // MY_CRED = "MY_CRED_VALUE"
-        MY_CRED = credentials('my-credentials')
+        MY_CRED = "MY_CRED_VALUE"
+        // MY_CRED = credentials('my-credentials')
     }
+
+
+    // install java-17
+    tools {
+        jdk 'java-17'
+    }
+
+
     stages {
         stage('Checkout') {
             steps {
