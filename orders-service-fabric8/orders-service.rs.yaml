@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orders-service-deployment
+  labels:
+    app: orders-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: orders-service
+  template:
+    metadata:
+      labels:
+        app: orders-service
+    spec:
+      containers:
+        - name: orders-service-deployment
+          image: ricardoahumada/orders-service:v3
+          env:
+            - name: spring.config.import
+              value: "optional:configserver:http://config-server:8888"
+            - name: products-service.base-url
+              value: "products-service:9090"
+            - name: ADMIN_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: orders-service
+                  key: ADMIN_PASSWORD
+          ports:
+            - name: http-orders
+              containerPort: 9100

@@ -1,0 +1,8 @@
+apiVersion: v1 by d
+kind: ConfigMap
+metadata:
+  name: orders-service
+data:
+  application.properties: |-
+    orders-service.min=8
+    orders-service.max=10
