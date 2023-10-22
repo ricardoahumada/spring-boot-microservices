@@ -102,7 +102,7 @@ or
 #### Using minikube ingress
 `minikube addons enable ingress`
 
-`minikube service ls`
+`minikube service list`
 
 `minikube service [service-name] --url`
 

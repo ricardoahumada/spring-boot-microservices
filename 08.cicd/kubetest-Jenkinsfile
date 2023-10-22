@@ -7,7 +7,7 @@ pipeline {
                 git branch: 'k8',url: 'https://github.com/ricardoahumada/spring-boot-microservices'
             }
         }
-        stage('GetAll') {
+        stage('GetAllBefore') {
             steps {
                 echo 'Minikube get all'
                 withKubeConfig([credentialsId: 'k8-credentials',clusterName: 'minikube']) {
@@ -21,7 +21,22 @@ pipeline {
                 withKubeConfig([credentialsId: 'k8-credentials',clusterName: 'minikube']) {
                     sh '/usr/local/bin/kubectl apply -k .'
                 }
+                sleep 30
+            }
+        }
+        stage('GetAllAfter') {
+            steps {
+                echo 'Minikube get all'
+                withKubeConfig([credentialsId: 'k8-credentials',clusterName: 'minikube']) {
+                    sh '/usr/local/bin/kubectl get all'
+                }
+            }
+        }
+        stage('K8Test') {
+            steps {
+                echo 'K8 testing...'
             }
         }
     }
 }
+
