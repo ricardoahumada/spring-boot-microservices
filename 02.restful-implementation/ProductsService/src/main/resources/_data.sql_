@@ -4,3 +4,4 @@ INSERT INTO products (name) VALUES
 ('Travel'),
 ('Candy'),
 ('Book');
+

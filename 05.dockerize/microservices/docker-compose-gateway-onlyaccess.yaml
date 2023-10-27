@@ -28,7 +28,7 @@ services:
     environment:
       - eureka.client.service-url.defaultZone
     ports:
-      - 8081:8765
+      - 8080:8765
     networks:
       - spring-cloud-network
   products-service:

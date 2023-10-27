@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk17:alpine-jre
+FROM adoptopenjdk/openjdk11:alpine-jre
 
 # Refer to Maven build -> finalName
 ARG JAR_FILE=target/ProductsService-0.0.1-SNAPSHOT.jar

@@ -8,7 +8,7 @@
         <version>3.1.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.netmind</groupId>
+    <groupId>com.microcompany</groupId>
     <artifactId>ProductsService</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>ProductsService</name>
@@ -59,13 +59,13 @@
         </dependency>
 
         <!-- TODO: UNCOMMENT-->
-        <dependency>
+        <!-- <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
+        </dependency> -->
 
 
-        <dependency>
+        <!--<dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
             <version>0.11.5</version>
@@ -78,10 +78,10 @@
         </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-jackson</artifactId> <!-- or jjwt-gson if Gson is preferred -->
+            <artifactId>jjwt-jackson</artifactId> &lt;!&ndash; or jjwt-gson if Gson is preferred &ndash;&gt;
             <version>0.11.5</version>
             <scope>runtime</scope>
-        </dependency>
+        </dependency>-->
 
     </dependencies>
 
