@@ -1,4 +1,4 @@
-package com.netmind.accountsservice.payload;
+package com.microcompany.accountsservice.payload;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

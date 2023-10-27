@@ -1,4 +1,4 @@
-package com.netmind.demo.models;
+package com.microcompany.demo.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,6 +1,6 @@
-package com.netmind.accountsservice.services;
+package com.microcompany.accountsservice.services;
 
-import com.netmind.accountsservice.model.Account;
+import com.microcompany.accountsservice.model.Account;
 
 import java.util.List;
 

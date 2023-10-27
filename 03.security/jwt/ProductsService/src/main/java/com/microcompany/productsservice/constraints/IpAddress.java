@@ -1,4 +1,4 @@
-package com.netmind.productsservice.constraints;
+package com.microcompany.productsservice.constraints;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.ConstraintValidator;

@@ -1,5 +1,6 @@
-package com.netmind.demo.rest;
+package com.microcompany.demo.rest;
 
+import com.microcompany.demo.models.AuthReqBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -10,8 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.netmind.demo.models.AuthReqBody;
-import com.netmind.demo.models.AuthResBody;
+import com.microcompany.demo.models.AuthResBody;
 
 @RestController
 @RequestMapping("/auth")

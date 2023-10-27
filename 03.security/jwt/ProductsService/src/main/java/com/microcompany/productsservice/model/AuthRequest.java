@@ -1,4 +1,4 @@
-package com.netmind.productsservice.model;
+package com.microcompany.productsservice.model;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;

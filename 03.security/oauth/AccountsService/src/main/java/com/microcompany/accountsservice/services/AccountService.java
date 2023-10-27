@@ -1,9 +1,9 @@
-package com.netmind.accountsservice.services;
+package com.microcompany.accountsservice.services;
 
-import com.netmind.accountsservice.exception.AccountNotfoundException;
-import com.netmind.accountsservice.model.Account;
-import com.netmind.accountsservice.model.Customer;
-import com.netmind.accountsservice.persistence.AccountRepository;
+import com.microcompany.accountsservice.exception.AccountNotfoundException;
+import com.microcompany.accountsservice.persistence.AccountRepository;
+import com.microcompany.accountsservice.model.Account;
+import com.microcompany.accountsservice.model.Customer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

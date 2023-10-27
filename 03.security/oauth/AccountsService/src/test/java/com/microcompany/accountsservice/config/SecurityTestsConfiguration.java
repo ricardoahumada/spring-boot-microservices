@@ -1,4 +1,4 @@
-package com.netmind.accountsservice.config;
+package com.microcompany.accountsservice.config;
 
 
 import org.springframework.boot.test.context.TestConfiguration;

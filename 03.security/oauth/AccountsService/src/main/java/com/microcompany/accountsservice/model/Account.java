@@ -1,4 +1,4 @@
-package com.netmind.accountsservice.model;
+package com.microcompany.accountsservice.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;

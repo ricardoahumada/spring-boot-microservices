@@ -1,4 +1,4 @@
-package com.netmind.demo.security;
+package com.microcompany.demo.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

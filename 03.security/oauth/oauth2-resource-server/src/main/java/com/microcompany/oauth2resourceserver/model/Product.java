@@ -1,4 +1,4 @@
-package com.netmind.oauth2resourceserver.model;
+package com.microcompany.oauth2resourceserver.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

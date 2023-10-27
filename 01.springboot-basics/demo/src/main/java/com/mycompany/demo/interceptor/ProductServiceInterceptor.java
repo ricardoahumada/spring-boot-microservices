@@ -1,4 +1,4 @@
-package com.mysbapp.demo.interceptor;
+package com.mycompany.demo.interceptor;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

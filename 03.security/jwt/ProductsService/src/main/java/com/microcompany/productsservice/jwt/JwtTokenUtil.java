@@ -1,7 +1,7 @@
-package com.netmind.productsservice.jwt;
+package com.microcompany.productsservice.jwt;
 
-import com.netmind.productsservice.model.ERole;
-import com.netmind.productsservice.model.User;
+import com.microcompany.productsservice.model.ERole;
+import com.microcompany.productsservice.model.User;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +24,7 @@ public class JwtTokenUtil {
         return Jwts.builder()
 //                .setSubject(String.format("%s,%s", user.getId(), user.getEmail()))
                 .setClaims(claims)
-                .setIssuer("com.netmind")
+                .setIssuer("com.microcompany")
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRE_DURATION))
                 .signWith(SignatureAlgorithm.HS512, SECRET_KEY)

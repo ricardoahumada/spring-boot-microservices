@@ -1,4 +1,4 @@
-package com.netmind.demo.service;
+package com.microcompany.demo.service;
 
 import java.util.ArrayList;
 

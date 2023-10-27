@@ -1,6 +1,6 @@
-package com.netmind.accountsservice.config;
+package com.microcompany.accountsservice.config;
 
-import com.netmind.accountsservice.exception.GlobalException;
+import com.microcompany.accountsservice.exception.GlobalException;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;

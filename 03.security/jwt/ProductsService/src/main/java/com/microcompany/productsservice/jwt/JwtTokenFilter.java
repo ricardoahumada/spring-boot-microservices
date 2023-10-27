@@ -1,14 +1,14 @@
-package com.netmind.productsservice.jwt;
+package com.microcompany.productsservice.jwt;
 
 import java.io.IOException;
 
+import com.microcompany.productsservice.model.ERole;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import com.netmind.productsservice.model.ERole;
-import com.netmind.productsservice.model.User;
+import com.microcompany.productsservice.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

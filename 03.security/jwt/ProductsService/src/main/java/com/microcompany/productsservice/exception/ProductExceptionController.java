@@ -1,4 +1,4 @@
-package com.netmind.productsservice.exception;
+package com.microcompany.productsservice.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

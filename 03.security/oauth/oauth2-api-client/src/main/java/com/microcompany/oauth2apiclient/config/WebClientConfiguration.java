@@ -1,4 +1,4 @@
-package com.netmind.oauth2apiclient.config;
+package com.microcompany.oauth2apiclient.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

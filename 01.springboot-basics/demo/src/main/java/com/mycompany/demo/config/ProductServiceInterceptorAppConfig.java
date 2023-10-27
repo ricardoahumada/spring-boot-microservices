@@ -1,6 +1,6 @@
-package com.mysbapp.demo.config;
+package com.mycompany.demo.config;
 
-import com.mysbapp.demo.interceptor.ProductServiceInterceptor;
+import com.mycompany.demo.interceptor.ProductServiceInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

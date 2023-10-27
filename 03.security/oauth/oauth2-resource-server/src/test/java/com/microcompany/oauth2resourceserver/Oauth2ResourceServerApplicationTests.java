@@ -1,4 +1,4 @@
-package com.netmind.oauth2resourceserver;
+package com.microcompany.oauth2resourceserver;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

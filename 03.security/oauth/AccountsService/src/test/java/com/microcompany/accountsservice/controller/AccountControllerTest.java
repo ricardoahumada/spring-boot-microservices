@@ -1,9 +1,9 @@
-package com.netmind.accountsservice.controller;
+package com.microcompany.accountsservice.controller;
 
-import com.netmind.accountsservice.config.SecurityTestsConfiguration;
-import com.netmind.accountsservice.model.Account;
-import com.netmind.accountsservice.persistence.AccountRepository;
-import com.netmind.accountsservice.services.AccountService;
+import com.microcompany.accountsservice.config.SecurityTestsConfiguration;
+import com.microcompany.accountsservice.model.Account;
+import com.microcompany.accountsservice.persistence.AccountRepository;
+import com.microcompany.accountsservice.services.AccountService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(AccountController.class)
 //@AutoConfigureMockMvc(addFilters = false)
-//@ComponentScan("package com.netmind.accountsservice.services")
+//@ComponentScan("package com.microcompany.accountsservice.services")
 @Import({AccountService.class, SecurityTestsConfiguration.class})
 class AccountControllerTest {
 

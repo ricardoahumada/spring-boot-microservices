@@ -1,4 +1,4 @@
-package com.netmind.productsservice.config;
+package com.microcompany.productsservice.config;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;

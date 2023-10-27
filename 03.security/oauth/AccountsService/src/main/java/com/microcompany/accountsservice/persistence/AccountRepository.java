@@ -1,6 +1,6 @@
-package com.netmind.accountsservice.persistence;
+package com.microcompany.accountsservice.persistence;
 
-import com.netmind.accountsservice.model.Account;
+import com.microcompany.accountsservice.model.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

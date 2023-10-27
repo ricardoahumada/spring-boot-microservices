@@ -1,4 +1,4 @@
-package com.netmind.oauth2resourceserver.config;
+package com.microcompany.oauth2resourceserver.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

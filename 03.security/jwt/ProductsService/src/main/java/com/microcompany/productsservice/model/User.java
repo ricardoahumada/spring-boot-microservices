@@ -1,4 +1,4 @@
-package com.netmind.productsservice.model;
+package com.microcompany.productsservice.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;

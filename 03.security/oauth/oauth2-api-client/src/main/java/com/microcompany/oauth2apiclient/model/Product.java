@@ -1,4 +1,4 @@
-package com.netmind.oauth2apiclient.model;
+package com.microcompany.oauth2apiclient.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

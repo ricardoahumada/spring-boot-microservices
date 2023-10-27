@@ -1,4 +1,4 @@
-package com.mysbapp.demo.filter;
+package com.mycompany.demo.filter;
 import java.io.IOException;
 
 import jakarta.servlet.Filter;

@@ -1,4 +1,4 @@
-package com.netmind.accountsservice.exception;
+package com.microcompany.accountsservice.exception;
 
 public class AccountNotfoundException extends GlobalException {
     protected static final long serialVersionUID = 2L;

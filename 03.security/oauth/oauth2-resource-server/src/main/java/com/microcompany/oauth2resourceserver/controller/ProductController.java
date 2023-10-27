@@ -1,7 +1,6 @@
-package com.netmind.oauth2resourceserver.controller;
+package com.microcompany.oauth2resourceserver.controller;
 
-import com.netmind.oauth2resourceserver.model.Product;
-import org.springframework.security.access.prepost.PreAuthorize;
+import com.microcompany.oauth2resourceserver.model.Product;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

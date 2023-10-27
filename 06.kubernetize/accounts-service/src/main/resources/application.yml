@@ -30,7 +30,7 @@ springdoc:
   #swagger-ui.enabled: false
   swagger-ui.path: /accounts-documentation
 #  api-docs.path: /accounts-api-docs
-  packages-to-scan: com.netmind.accountsservice.controller
+  packages-to-scan: com.microcompany.accountsservice.controller
   swagger-ui:
     tryItOutEnabled: true
     operationsSorter: method

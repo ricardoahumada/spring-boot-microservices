@@ -1,4 +1,4 @@
-package com.mysbapp.demo.model;
+package com.mycompany.demo.model;
 
 import lombok.*;
 

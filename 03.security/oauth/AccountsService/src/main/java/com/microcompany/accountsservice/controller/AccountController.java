@@ -1,8 +1,8 @@
-package com.netmind.accountsservice.controller;
+package com.microcompany.accountsservice.controller;
 
-import com.netmind.accountsservice.model.Account;
-import com.netmind.accountsservice.payload.ApiResponse;
-import com.netmind.accountsservice.services.AccountService;
+import com.microcompany.accountsservice.model.Account;
+import com.microcompany.accountsservice.payload.ApiResponse;
+import com.microcompany.accountsservice.services.AccountService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

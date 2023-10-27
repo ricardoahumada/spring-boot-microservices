@@ -1,4 +1,4 @@
-package com.netmind.accountsservice.model;
+package com.microcompany.accountsservice.model;
 
 
 import jakarta.persistence.Id;

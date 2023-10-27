@@ -1,6 +1,6 @@
-package com.netmind.demo.security;
+package com.microcompany.demo.security;
 
-import com.netmind.demo.service.MyUserDetailsService;
+import com.microcompany.demo.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

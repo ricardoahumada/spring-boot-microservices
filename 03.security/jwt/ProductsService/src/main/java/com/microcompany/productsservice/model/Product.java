@@ -1,6 +1,6 @@
-package com.netmind.productsservice.model;
+package com.microcompany.productsservice.model;
 
-import com.netmind.productsservice.constraints.SerialNumber;
+import com.microcompany.productsservice.constraints.SerialNumber;
 import lombok.*;
 
 import jakarta.persistence.*;

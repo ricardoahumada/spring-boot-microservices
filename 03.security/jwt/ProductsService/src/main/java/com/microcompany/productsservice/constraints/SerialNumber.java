@@ -1,4 +1,4 @@
-package com.netmind.productsservice.constraints;
+package com.microcompany.productsservice.constraints;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

@@ -1,9 +1,9 @@
-package com.netmind.productsservice.controller;
+package com.microcompany.productsservice.controller;
 
-import com.netmind.productsservice.jwt.JwtTokenUtil;
-import com.netmind.productsservice.model.AuthRequest;
-import com.netmind.productsservice.model.AuthResponse;
-import com.netmind.productsservice.model.User;
+import com.microcompany.productsservice.jwt.JwtTokenUtil;
+import com.microcompany.productsservice.model.AuthRequest;
+import com.microcompany.productsservice.model.AuthResponse;
+import com.microcompany.productsservice.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

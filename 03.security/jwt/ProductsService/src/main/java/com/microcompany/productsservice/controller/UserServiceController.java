@@ -1,7 +1,7 @@
-package com.netmind.productsservice.controller;
+package com.microcompany.productsservice.controller;
 
-import com.netmind.productsservice.model.User;
-import com.netmind.productsservice.persistence.UserRepository;
+import com.microcompany.productsservice.model.User;
+import com.microcompany.productsservice.persistence.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

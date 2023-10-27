@@ -1,6 +1,6 @@
-package com.mysbapp.demo.controller;
+package com.mycompany.demo.controller;
 
-import com.mysbapp.demo.model.Product;
+import com.mycompany.demo.model.Product;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
