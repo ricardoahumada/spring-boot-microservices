@@ -1,7 +1,7 @@
-package com.netmind.productsservice.controller;
+package com.microcompany.productsservice.controller;
 
-import com.netmind.productsservice.model.Product;
-import com.netmind.productsservice.persistence.ProductsRepository;
+import com.microcompany.productsservice.model.Product;
+import com.microcompany.productsservice.persistence.ProductsRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

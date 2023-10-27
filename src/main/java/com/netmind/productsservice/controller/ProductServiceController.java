@@ -1,9 +1,9 @@
-package com.netmind.productsservice.controller;
+package com.microcompany.productsservice.controller;
 
-import com.netmind.productsservice.exception.ProductNotfoundException;
-import com.netmind.productsservice.model.Product;
-import com.netmind.productsservice.model.StatusMessage;
-import com.netmind.productsservice.persistence.ProductsRepository;
+import com.microcompany.productsservice.exception.ProductNotfoundException;
+import com.microcompany.productsservice.model.Product;
+import com.microcompany.productsservice.model.StatusMessage;
+import com.microcompany.productsservice.persistence.ProductsRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

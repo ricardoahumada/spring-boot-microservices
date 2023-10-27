@@ -1,7 +1,7 @@
-package com.netmind.productsservice.service;
+package com.microcompany.productsservice.service;
 
-import com.netmind.productsservice.model.Product;
-import com.netmind.productsservice.persistence.ProductsRepository;
+import com.microcompany.productsservice.model.Product;
+import com.microcompany.productsservice.persistence.ProductsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.netmind.productsservice.exception;
+package com.microcompany.productsservice.exception;
 
 public class ProductNotfoundException extends GlobalException {
     protected static final long serialVersionUID = 2L;

@@ -1,7 +1,7 @@
-package com.netmind.productsservice.config;
+package com.microcompany.productsservice.config;
 
-import com.netmind.productsservice.exception.GlobalException;
-import com.netmind.productsservice.exception.ProductNotfoundException;
+import com.microcompany.productsservice.exception.GlobalException;
+import com.microcompany.productsservice.exception.ProductNotfoundException;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;

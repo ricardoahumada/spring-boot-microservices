@@ -1,6 +1,6 @@
-package com.netmind.productsservice.persistence;
+package com.microcompany.productsservice.persistence;
 
-import com.netmind.productsservice.model.Product;
+import com.microcompany.productsservice.model.Product;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest()
-@ComponentScan(basePackages = {"com.netmind.productsservice.persistence"})
+@ComponentScan(basePackages = {"com.microcompany.productsservice.persistence"})
 @AutoConfigureTestEntityManager
 class JPAProductsRepositoryTest {
 

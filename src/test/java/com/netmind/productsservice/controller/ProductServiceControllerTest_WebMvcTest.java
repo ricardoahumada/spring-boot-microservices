@@ -1,8 +1,8 @@
-package com.netmind.productsservice.controller;
+package com.microcompany.productsservice.controller;
 
-import com.netmind.productsservice.model.Product;
-import com.netmind.productsservice.persistence.ProductsRepository;
-import com.netmind.productsservice.util.JsonUtil;
+import com.microcompany.productsservice.model.Product;
+import com.microcompany.productsservice.persistence.ProductsRepository;
+import com.microcompany.productsservice.util.JsonUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

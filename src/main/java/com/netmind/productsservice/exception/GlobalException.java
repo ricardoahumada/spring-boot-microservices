@@ -1,4 +1,4 @@
-package com.netmind.productsservice.exception;
+package com.microcompany.productsservice.exception;
 
 public class GlobalException extends RuntimeException {
     protected static final long serialVersionUID = 1L;

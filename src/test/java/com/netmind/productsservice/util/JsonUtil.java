@@ -1,4 +1,4 @@
-package com.netmind.productsservice.util;
+package com.microcompany.productsservice.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

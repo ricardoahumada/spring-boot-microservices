@@ -19,7 +19,7 @@ springdoc:
   #swagger-ui.enabled: false
   swagger-ui.path: /products-documentation
   api-docs.path: /products-api-docs
-  packages-to-scan: com.netmind.productsservice.controller
+  packages-to-scan: com.microcompany.productsservice.controller
   swagger-ui:
     tryItOutEnabled: true
     operationsSorter: method

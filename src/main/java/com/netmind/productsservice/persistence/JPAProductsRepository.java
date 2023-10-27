@@ -1,6 +1,6 @@
-package com.netmind.productsservice.persistence;
+package com.microcompany.productsservice.persistence;
 
-import com.netmind.productsservice.model.Product;
+import com.microcompany.productsservice.model.Product;
 import org.springframework.stereotype.Repository;
 
 import jakarta.persistence.EntityManager;

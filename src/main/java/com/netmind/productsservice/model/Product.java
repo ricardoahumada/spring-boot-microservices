@@ -1,6 +1,6 @@
-package com.netmind.productsservice.model;
+package com.microcompany.productsservice.model;
 
-import com.netmind.productsservice.constraints.SerialNumber;
+import com.microcompany.productsservice.constraints.SerialNumber;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
