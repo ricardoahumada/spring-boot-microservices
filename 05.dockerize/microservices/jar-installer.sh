@@ -24,3 +24,8 @@ echo "Installing orders-service..."
 cd ./orders-service
 mvn clean install
 cd ..
+
+echo "Installing users-management-service..."
+cd ./users-management-service
+mvn clean install
+cd ..

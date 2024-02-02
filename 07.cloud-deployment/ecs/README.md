@@ -1,4 +1,21 @@
 # CLOUD DEPLOYMENT USING ECS
+- Create a cluster
+- Create a task
+- Create a service
+	+ Without load balancer
+	+ With load balancer
+	+ Geenerate a SG
+	+ Internet access
+- Show logs
+- Use aws console for curl
+	+ curl http://18.116.165.60:9090/products | jq
+- Delete cluster
+	+ First update service to scale to o
+	+ delete service
+	+ delete task
+
+
+# CLOUD DEPLOYMENT USING ECS - COPILOT
 
 ## 1. Install tools
 
