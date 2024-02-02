@@ -1,0 +1,11 @@
+spring.application.name: currency-conversion-service
+server.port: 8100
+spring.config.import: configserver:http://localhost:8888 # config server
+
+microservices.currency-exchange-service:
+  name: currency-exchange-service
+  base-url: localhost:8000
+  path: /currency-exchange/from/{from}/to/{to}
+  complete-url: http://localhost:8000/currency-exchange/from/{from}/to/{to}
+
+eureka.client.service-url.default-zone: http://localhost:8761/eureka  

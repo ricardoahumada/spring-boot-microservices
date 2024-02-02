@@ -1,0 +1,30 @@
+server.port: 8765
+
+spring:
+  application.name: gateway-server
+  cloud:
+    gateway:
+      discovery.locator.enabled: true
+#      routes:
+#        - id: CurrencyConversionService
+##          uri: "http://localhost:8100/currency-converter-feign/"
+#          uri: "lb://currency-conversion-service/currency-converter-feign/"
+#          predicates:
+#            - Path=/currency-converter/**
+#        - id: CurrencyExchangeService
+#          uri: "lb://currency-exchange-service/currency-exchange/"
+#          predicates:
+#            - Path=/currency-exchange/**
+
+eureka.client:
+  service-url.default-zone: http://localhost:8761/eureka
+  health-check.enabled: true
+
+management:
+  endpoint:
+    gateway:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: gateway
