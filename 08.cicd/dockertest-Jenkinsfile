@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+    
+    environment {
+        VERSION = "${env.BUILD_ID}-${env.GIT_COMMIT}"
+        IMAGE = "ricardoahumada/products-service:VT${env.BUILD_ID}"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'products-service',url: 'https://github.com/ricardoahumada/spring-boot-microservices'
+            }
+        }
+        stage('Build') {
+            steps {
+                echo "Running ${VERSION} on ${env.JENKINS_URL} for branch ${env.BRANCH_NAME}"
+                sh 'mvn --version'
+                sh "mvn clean spring-boot:build-image -Dspring-boot.build-image.imageName=${IMAGE}"
+            }
+        }
+        stage('Push') {
+            steps {
+                echo 'Pushing image ...${IMAGE}'
+                withDockerRegistry([ credentialsId: "docker-hub-credentials", url: "" ]) {
+                    sh 'docker push ${IMAGE}'
+                }
+            }
+        }
+        
+    }
+}
