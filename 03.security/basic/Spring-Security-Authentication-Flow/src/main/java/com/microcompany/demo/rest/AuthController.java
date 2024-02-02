@@ -17,7 +17,8 @@ import com.microcompany.demo.models.AuthResBody;
 @RequestMapping("/auth")
 public class AuthController {
 
-    @Autowired
+    // TODO: UNCOMMENT
+    // @Autowired
     private AuthenticationManager authManager;
 
     @PostMapping("/login")

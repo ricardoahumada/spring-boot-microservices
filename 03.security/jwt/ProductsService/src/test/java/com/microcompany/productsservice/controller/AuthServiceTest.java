@@ -5,6 +5,7 @@ import com.microcompany.productsservice.ProductsServiceApplication;
 import com.microcompany.productsservice.model.*;
 import com.microcompany.productsservice.persistence.ProductsRepository;
 import com.microcompany.productsservice.persistence.UserRepository;
+import com.microcompany.productsservice.util.JsonUtil;
 import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
 import org.slf4j.Logger;
@@ -31,8 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK,
-        classes = ProductsServiceApplication.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureMockMvc
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -51,7 +51,7 @@ class AuthServiceTest {
     @Autowired
     private UserRepository userRepository;
 
-    @BeforeAll
+    /*@BeforeAll
     @Commit // force REAL saving in DB
     public void clean() {
         try {
@@ -60,7 +60,7 @@ class AuthServiceTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     @BeforeEach
     public void setUp() {
@@ -88,8 +88,8 @@ class AuthServiceTest {
         // given
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-        String email = "t@t.com";
-        String password = "tpasswrd";
+        String email = "r@r.com";
+        String password = "pa55wrd";
         String enc_password = passwordEncoder.encode(password);
 
         User aUser = new User(null, email, enc_password, ERole.USER);
@@ -102,7 +102,7 @@ class AuthServiceTest {
 
         //then
         MvcResult result = mvc.perform(post("/auth/login")
-                        .content(asJsonString(authRequest))
+                        .content(JsonUtil.asJsonString(authRequest))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                 )
@@ -144,11 +144,4 @@ class AuthServiceTest {
 
     }
 
-    public static String asJsonString(final Object obj) {
-        try {
-            return new ObjectMapper().writeValueAsString(obj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
 }

@@ -21,61 +21,30 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@ExtendWith(SpringExtension.class)
+// TODO: uncomment and implement methods
+// @ExtendWith(SpringExtension.class)
 public class ProductServiceIntegrationTest {
 
-    @TestConfiguration
-    static class ProductServiceImplTestContextConfiguration {
-        @Bean
-        public ProductsService productsService() {
-            return new ProductsService();
-        }
+    // TODO: implement test configuration for generating ProductsService bean
 
-        @Bean
-        public ProductServiceController productsServiceController() {
-            return new ProductServiceController();
-        }
-    }
-
-    @BeforeEach
-    public void setUp() {
-        List<Product> products = Arrays.asList(
-                new Product(1L, "Fake product", "")
-        );
-
-        Mockito.when(productsRepository.findByNameContaining("Fake"))
-                .thenReturn(products);
-
-        Mockito.when(productsRepository.findAll())
-                .thenReturn(products);
-    }
+    // TODO: implement setup for mock repo bean
 
     @Autowired
     private ProductsService productsService;
 
     @Autowired
     private ProductServiceController controller;
+
     @MockBean
     private ProductsRepository productsRepository;
 
     @Test
     public void whenValidText_thenProductsShouldBeFound() {
-        String text = "Fake";
-        List<Product> found = productsService.getProductsByText(text);
-        assertThat(found).isNotEmpty();
-        assertThat(found.get(0).getName()).contains("Fake");
-
     }
 
     @Test
     void givenProducts_whengetAllProducts_thenIsNotNull() {
-        ResponseEntity<List<Product>> products = controller.getAllProducts();
 
-        assertThat(products.getStatusCode().value())
-                .isEqualTo(HttpStatus.OK.value());
-
-        assertThat(products.getBody())
-                .isNotNull();
     }
 
 }

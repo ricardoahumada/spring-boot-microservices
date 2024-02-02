@@ -21,48 +21,23 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import static org.hamcrest.Matchers.is;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK,
-        classes = ProductsServiceApplication.class)
-@AutoConfigureMockMvc
-//@TestPropertySource( locations = "classpath:application-integrationtest.properties")
-class ProductServiceControllerTest_MockMvc {
-    @Autowired
-    private MockMvc mvc;
 
+// TODO: uncomment and implement methods
+// @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+// @AutoConfigureMockMvc
+// @TestPropertySource( locations = "classpath:application-integrationtest.properties")
+class ProductServiceControllerTest_MockMvc {
     @Autowired
     private ProductsRepository repository;
 
     @Test
     public void givenProducts_whenGetProducts_thenStatus200() throws Exception {
-        Product nuevoProd = new Product(null, "Nuevo Prod", "123-123-1234");
-        repository.save(nuevoProd);
 
-        mvc.perform(get("/products").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$[0].name", is("Nuevo producto")));
-
-    }
-
+    
+}
     @Test
-    void givenProducts_whenVaildCreateProduct_thenIsCreatedAndHaveId() throws Exception {
-        Product newProduct = new Product(null, "Nuevo producto", "123-123-1234");
+    void givenProducts_whenValidCreateProduct_thenIsCreatedAndHaveId() throws Exception {
 
-        mvc.perform(post("/products")
-                        .content(asJsonString(newProduct))
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON)
-                )
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.id").exists());
     }
-
-
-    public static String asJsonString(final Object obj) {
-        try {
-            return new ObjectMapper().writeValueAsString(obj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
+    
 }
