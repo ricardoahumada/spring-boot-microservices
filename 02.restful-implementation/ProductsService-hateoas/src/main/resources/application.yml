@@ -14,6 +14,22 @@ server:
 
 spring.mvc.pathmatch.matching-strategy: ANT_PATH_MATCHER
 
+springdoc:
+  #api-docs.enabled: false
+  #swagger-ui.enabled: false
+  swagger-ui.path: /products-documentation
+  api-docs.path: /products-api-docs
+  packages-to-scan: com.microcompany.productsservice.controller
+  swagger-ui:
+    tryItOutEnabled: true
+    operationsSorter: method
+    tagsSorter: alpha
+    filter: true
+
+products.openapi:
+  dev-url: http://localhost:8080
+  prod-url: https://products-api.com
+
 ---
 spring:
   sql.init.mode: always
@@ -38,15 +54,15 @@ spring:
     console.path: /h2-ui
 
 server:
+#  servlet.contextPath: /api
   port: 9090
 
 #debug: true
 logging:
-  file:
-#    path: /var/tmp/
-    name: /var/tmp/mylog.log
+  path: /var/tmp/
+  file: /var/tmp/mylog.log
   level:
-    root: INFO
+    root: WARN
 
 
 ---
