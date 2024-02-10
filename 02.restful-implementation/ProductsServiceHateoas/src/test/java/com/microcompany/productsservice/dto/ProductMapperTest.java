@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class ProductMapperTest {
 
-    @Test
+    /*@Test
     void productToProductDto() {
         //given
         Product product = new Product(1L, "escoba", "123-345-1234");
@@ -80,7 +80,7 @@ class ProductMapperTest {
         for (Product product : products) {
             assertThat(productDtos.get(idx++).getNombre()).isEqualTo(product.getName());
         }
-    }
+    }*/
 
 
 }

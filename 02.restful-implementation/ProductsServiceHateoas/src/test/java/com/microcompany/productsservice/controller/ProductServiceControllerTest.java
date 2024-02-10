@@ -20,7 +20,7 @@ class ProductServiceControllerTest {
 
     @Test
     void givenProducts_whengetAllProducts_thenIsNotNull() {
-        ResponseEntity<List<ProductResource>> products = controller.getAllProducts();
+        ResponseEntity<List<Product>> products = controller.getAllProducts();
 
         assertThat(products.getStatusCode().value())
                 .isEqualTo(HttpStatus.OK.value());

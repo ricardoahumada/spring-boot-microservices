@@ -1,11 +1,9 @@
 package com.microcompany.productsservice.controller;
 
-import com.microcompany.productsservice.assembler.ProductModelAssembler;
 import com.microcompany.productsservice.exception.ProductNotfoundException;
 import com.microcompany.productsservice.model.Product;
 import com.microcompany.productsservice.model.StatusMessage;
 import com.microcompany.productsservice.persistence.ProductsRepository;
-import com.microcompany.productsservice.resource.ProductResource;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
@@ -36,8 +34,9 @@ public class ProductServiceController {
     @Autowired
     ProductsRepository productsRepo;
 
-    @Autowired
-    private ProductModelAssembler productModelAssembler;
+    // TODO: uncomment
+    /*@Autowired
+    private ProductModelAssembler productModelAssembler;*/
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -58,11 +57,11 @@ public class ProductServiceController {
     }
 
     @GetMapping(value = "", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<List<ProductResource>> getAllProducts() {
-        List<Product> productEntities = productsRepo.findAll();
-        System.out.println("productEntities:" + productEntities);
-//        return new ResponseEntity(productModelAssembler.toCollectionModel(productEntities), HttpStatus.OK);
-        return new ResponseEntity(productModelAssembler.toModel(productEntities), HttpStatus.OK);
+    public ResponseEntity<List<Product>> getAllProducts() {
+        List<Product> products = productsRepo.findAll();
+        System.out.println("products:" + products);
+//        return new ResponseEntity(productModelAssembler.toCollectionModel(products), HttpStatus.OK);
+        return new ResponseEntity(products, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Get a product by id", notes = "Returns a product as per the id")
@@ -76,7 +75,6 @@ public class ProductServiceController {
     ) {
         if (!productsRepo.existsById(id)) throw new ProductNotfoundException();
         return productsRepo.findById(id)
-                .map(productModelAssembler::toModel)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -86,7 +84,7 @@ public class ProductServiceController {
         newProduct.setId(null);
         productsRepo.save(newProduct);
         if (newProduct != null && newProduct.getId() > 0)
-            return new ResponseEntity<>(productModelAssembler.toModel(newProduct), HttpStatus.CREATED);
+            return new ResponseEntity<>(newProduct, HttpStatus.CREATED);
         else
             return new ResponseEntity<>(new StatusMessage(HttpStatus.BAD_REQUEST.value(), "No encontrado"), HttpStatus.BAD_REQUEST);
     }
@@ -95,7 +93,7 @@ public class ProductServiceController {
     public ResponseEntity updateProduct(@PathVariable @Min(1) Long id, @RequestBody @Valid Product aProduct) {
         aProduct.setId(id);
         productsRepo.save(aProduct);
-        if (aProduct != null) return new ResponseEntity(productModelAssembler.toModel(aProduct), HttpStatus.ACCEPTED);
+        if (aProduct != null) return new ResponseEntity(aProduct, HttpStatus.ACCEPTED);
         else
             return new ResponseEntity<>(new StatusMessage(HttpStatus.NOT_MODIFIED.value(), "No modificado"), HttpStatus.NOT_MODIFIED);
     }

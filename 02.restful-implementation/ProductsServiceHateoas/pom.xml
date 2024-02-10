@@ -75,7 +75,8 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-hateoas</artifactId>
         </dependency>
-
+        
+        <!-- TODO: uncomment for mapstruct -->
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
@@ -98,7 +99,8 @@
                     </excludes>
                 </configuration>
             </plugin>
-            <plugin>
+            <!-- TODO: uncomment for mapstruct -->
+            <!--<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.5.1</version>
@@ -115,7 +117,7 @@
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
-            </plugin>
+            </plugin>-->
         </plugins>
     </build>
 
