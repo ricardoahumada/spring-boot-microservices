@@ -2,6 +2,7 @@ package com.microcompany.productsservice.controller;
 
 import com.microcompany.productsservice.model.Product;
 import com.microcompany.productsservice.persistence.ProductsRepository;
+import com.microcompany.productsservice.resource.ProductResource;
 import com.microcompany.productsservice.service.ProductsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -69,7 +70,7 @@ public class ProductServiceIntegrationTest {
 
     @Test
     void givenProducts_whengetAllProducts_thenIsNotNull() {
-        ResponseEntity<List<Product>> products = controller.getAllProducts();
+        ResponseEntity<List<ProductResource>> products = controller.getAllProducts();
 
         assertThat(products.getStatusCode().value())
                 .isEqualTo(HttpStatus.OK.value());
