@@ -75,7 +75,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-hateoas</artifactId>
         </dependency>
-        
+
         <!-- TODO: uncomment for mapstruct -->
         <dependency>
             <groupId>org.mapstruct</groupId>
