@@ -1,7 +1,6 @@
 spring:
   application:
     name: ProductsService
-  profiles.active: dev
 
 server:
   servlet.contextPath: /api
@@ -13,8 +12,6 @@ server:
      include-exception: false
 
 spring.mvc.pathmatch.matching-strategy: ANT_PATH_MATCHER
-
-# TODO: OPENAPI CONFIG
 
 ---
 spring:
@@ -40,7 +37,7 @@ spring:
     console.path: /h2-ui
 
 server:
-#  servlet.contextPath: /api
+  servlet.contextPath: /api
   port: 9090
 
 #debug: true
@@ -59,8 +56,13 @@ spring:
 
 server:
   servlet.contextPath: /api/v1
+  port: 8443
+  ssl:
+      key-store: keystore.p12
+      key-store-password: pa55wrd
+      keyStoreType: PKCS12
+      keyAlias: tomcat
 
-# TODO: SSL CONFIG
-
+security.require-ssl: true
 
 

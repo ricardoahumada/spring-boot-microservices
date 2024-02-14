@@ -1,9 +1,9 @@
 package com.microcompany.microservices.productsservice.constraints;
 
-import jakarta.validation.Constraint;
-import jakarta.validation.ConstraintValidator;
-import jakarta.validation.ConstraintValidatorContext;
-import jakarta.validation.Payload;
+import javax.validation.Constraint;
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
+import javax.validation.Payload;
 import java.lang.annotation.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

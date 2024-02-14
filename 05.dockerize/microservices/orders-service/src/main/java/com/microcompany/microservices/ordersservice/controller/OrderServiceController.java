@@ -14,8 +14,8 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
-import jakarta.validation.ConstraintViolationException;
-import jakarta.validation.Valid;
+import javax.validation.ConstraintViolationException;
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +31,7 @@ public class OrderServiceController {
     private ConfigurationValues limits;
 
     @Autowired
-    ProductsServiceClient productsServiceClient;
+    private ProductsServiceClient productsServiceClient;
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -62,9 +62,10 @@ public class OrderServiceController {
         Integer quantity = newOrder.getQuantity();
 
         if (quantity >= limits.getMin() && quantity <= limits.getMax()) {
-            ProductBean product = productsServiceClient.getProduct(newOrder.getProduct());
-            newOrder.setFinalprice(product.getPrice() * newOrder.getQuantity());
+            ProductBean productBean = productsServiceClient.getProduct(newOrder.getProduct());
+
             newOrder.setId(null);
+            newOrder.setFinalprice(newOrder.getQuantity()*productBean.getPrice());
             orderRepo.save(newOrder);
             if (newOrder != null && newOrder.getId() > 0) return new ResponseEntity<>(newOrder, HttpStatus.CREATED);
             else

@@ -26,16 +26,8 @@ server:
     include-stacktrace: on_param
     include-exception: false
 
-products.openapi:
-  dev-url: http://localhost:8080
-  prod-url: https://products-api.com
-
 spring.mvc.pathmatch.matching-strategy: ANT_PATH_MATCHER
 
-# disable eureka finding...going to use “Kubernetes” for “Discovery” instead
-eureka.client:
-  service-url.default-zone: http://localhost:8761/eureka
-  register-with-eureka: false
-  fetch-registry: false
-
-spring.cloud.loadbalancer.enabled: false
+spring.cloud:
+    discovery.enabled: true
+    service-registry.auto-registration.fail-fast: true

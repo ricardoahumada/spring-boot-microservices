@@ -25,7 +25,7 @@ public class ProductController {
     ) {
         return this.webClient
                 .get()
-                .uri("http://127.0.0.1:8765/products")
+                .uri("http://127.0.0.1:8090/products")
                 .attributes(oauth2AuthorizedClient(authorizedClient))
                 .retrieve()
                 .bodyToMono(new ParameterizedTypeReference<List<Product>>() {

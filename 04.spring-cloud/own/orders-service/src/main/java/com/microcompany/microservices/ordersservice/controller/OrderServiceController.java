@@ -14,8 +14,8 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
-import jakarta.validation.ConstraintViolationException;
-import jakarta.validation.Valid;
+import javax.validation.ConstraintViolationException;
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,13 +27,11 @@ public class OrderServiceController {
     @Autowired
     OrdersRepository orderRepo;
 
-    // TODO: uncomment for injecting config properties
-    // @Autowired
-     private ConfigurationValues limits;
+    @Autowired
+    private ConfigurationValues limits;
 
-    // TODO: uncomment for injecting products-service client
-    // @Autowired
-     ProductsServiceClient productsServiceClient;
+    @Autowired
+    ProductsServiceClient productsServiceClient;
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)

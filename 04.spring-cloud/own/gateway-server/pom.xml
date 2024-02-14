@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.6</version>
+        <version>2.7.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.microcompany.microservices</groupId>
@@ -14,26 +14,24 @@
     <name>gateway-server</name>
     <description>Demo project for Spring Boot</description>
     <properties>
-        <java.version>17</java.version>
-        <spring-cloud.version>2022.0.1</spring-cloud.version>
+        <java.version>11</java.version>
+        <spring-cloud.version>2021.0.4</spring-cloud.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-
-        <!-- TODO: uncomment -->
-        <!-- <dependency>
+        
+         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>
-        </dependency> -->
+        </dependency>
 
-        <!-- TODO: uncomment -->
-        <!-- <dependency>
+         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency> -->
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -52,28 +50,14 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- TODO: uncomment for security -->
-        <!-- <dependency>
+         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
-        </dependency> -->
-
-        <!-- TODO: uncomment for swagger-->
-        <!-- <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-starter-webflux-api</artifactId>
-            <version>2.0.2</version>
         </dependency>
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
-            <version>2.0.2</version>
-        </dependency> -->
-
     </dependencies>
 
     <dependencyManagement>

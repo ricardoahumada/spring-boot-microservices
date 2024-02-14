@@ -26,10 +26,10 @@ server:
     include-stacktrace: on_param
     include-exception: false
 
-products.openapi:
-  dev-url: http://localhost:8080
-  prod-url: https://products-api.com
-
 spring.mvc.pathmatch.matching-strategy: ANT_PATH_MATCHER
 
-eureka.client.service-url.default-zone: http://localhost:8761/eureka
+spring.cloud:
+    discovery.enabled: true
+    service-registry.auto-registration.fail-fast: true
+
+eureka.client.service-url.default-zone: http://naming-server:8761/eureka

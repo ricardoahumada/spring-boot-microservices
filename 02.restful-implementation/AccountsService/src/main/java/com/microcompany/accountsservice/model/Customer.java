@@ -1,7 +1,7 @@
 package com.microcompany.accountsservice.model;
 
 
-import jakarta.persistence.Id;
+import javax.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
