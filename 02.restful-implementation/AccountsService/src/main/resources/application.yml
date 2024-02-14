@@ -69,8 +69,20 @@ logging:
 ---
 spring:
   config.activate.on-profile: prod
-  application:
-    name: AccountsService
+  application.name: AccountsService
+  sql.init.mode: always
+  datasource:
+    url: "jdbc:mysql://127.0.0.1:3306/accounts_db"
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: account_user
+    password: acc123
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      ddl-auto: update
+      generate-ddl: true
+    defer-datasource-initialization: true
 
 server:
   servlet.contextPath: /api/v1

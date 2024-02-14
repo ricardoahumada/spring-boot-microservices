@@ -33,7 +33,7 @@ public class ProductServiceController {
     @GetMapping(value = "", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<List<Product>> getAllProducts() {
         List<Product> products = productsRepo.findAll();
-        return new ResponseEntity<>(products, HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(products);
     }
 
     @ApiOperation(value = "Get a product by id", notes = "Returns a product as per the id")
@@ -75,4 +75,11 @@ public class ProductServiceController {
         productsRepo.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping(value = "/duplicate/{pid}")
+    public ResponseEntity<Product> duplicate(@PathVariable Long pid) {
+        return new ResponseEntity<>(service.duplicate(pid), HttpStatus.CREATED);
+    }
+
+
 }

@@ -12,7 +12,19 @@ public class ProductsService {
     @Autowired
     private ProductsRepository productsRepository;
 
+    @PersistenceContext
+    EntityManager em;
+
     public List<Product> getProductsByText(String text) {
         return productsRepository.findByNameContaining(text);
+    }
+
+    public Product duplicate(Long id) {
+        Product currProd = productsRepository.findById(id).orElseThrow(() -> new RuntimeException());
+        em.detach(currProd);
+        currProd.setId(null);
+        return productsRepository.save(currProd);
+//        Product newProduct = new Product(null, currProd.getName(), currProd.getSerial());
+//        return productsRepository.save(newProduct);
     }
 }
