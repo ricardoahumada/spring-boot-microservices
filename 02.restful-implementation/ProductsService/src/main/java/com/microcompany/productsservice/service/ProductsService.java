@@ -13,6 +13,7 @@ public class ProductsService {
     private ProductsRepository productsRepository;
 
     public List<Product> getProductsByText(String text) {
+        // valida texto, ....
         return productsRepository.findByNameContaining(text);
     }
 }

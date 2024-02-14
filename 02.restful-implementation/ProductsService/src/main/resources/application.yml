@@ -1,6 +1,6 @@
 spring:
-  application:
-    name: ProductsService
+  application.name: ProductsService
+  profiles.active: dev
 
 server:
   servlet.contextPath: /api
@@ -42,10 +42,8 @@ server:
 
 #debug: true
 logging:
-  path: /var/tmp/
-  file: /var/tmp/mylog.log
   level:
-    root: WARN
+    root: INFO
 
 
 ---
