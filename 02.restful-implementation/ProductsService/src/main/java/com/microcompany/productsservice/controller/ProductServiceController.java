@@ -45,8 +45,7 @@ public class ProductServiceController {
 
     @PutMapping(value = "/{pid}")
     public ResponseEntity<Product> update(@PathVariable("pid") Long id, @RequestBody Product product) {
-        product.setId(id);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(repo.save(product));
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(service.actualizar(id, product));
     }
 
     @DeleteMapping(value = "/{pid}")

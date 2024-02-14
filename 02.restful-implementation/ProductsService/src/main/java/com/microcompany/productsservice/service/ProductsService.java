@@ -12,6 +12,16 @@ public class ProductsService {
     @Autowired
     private ProductsRepository productsRepository;
 
+    public Product actualizar(Long id, Product producto) {
+        if (producto != null && producto.getId().equals(id)) {
+            // actualizar campos
+            return productsRepository.save(producto);
+        } else {
+            throw new RuntimeException();
+        }
+
+    }
+
     public List<Product> getProductsByText(String text) {
         // valida texto, ....
         return productsRepository.findByNameContaining(text);
