@@ -25,8 +25,8 @@ public class ProductServiceController {
     ProductsService service;
 
     @GetMapping(value = "")
-    public ResponseEntity<Object> getAll() {
-        List<Product> prods = service.getProductsByText("");
+    public ResponseEntity<Object> getAll(@RequestParam(required = false, defaultValue = "") String texto) {
+        List<Product> prods = service.getProductsByText(texto);
         if (prods != null && !prods.isEmpty()) return ResponseEntity.status(HttpStatus.OK).body(prods);
         else
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new StatusMessage(HttpStatus.NOT_FOUND.value(), "No hay productos"));
