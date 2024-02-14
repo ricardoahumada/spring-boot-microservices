@@ -4,6 +4,7 @@ import com.microcompany.productsservice.exception.ProductNotfoundException;
 import com.microcompany.productsservice.model.Product;
 import com.microcompany.productsservice.model.StatusMessage;
 import com.microcompany.productsservice.persistence.ProductsRepository;
+import com.microcompany.productsservice.service.ProductsService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/products")
@@ -29,11 +31,15 @@ public class ProductServiceController {
     @Autowired
     ProductsRepository productsRepo;
 
+    @Autowired
+    ProductsService service;
+
 
     @GetMapping(value = "", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<List<Product>> getAllProducts() {
         List<Product> products = productsRepo.findAll();
-        return ResponseEntity.status(HttpStatus.OK).body(products);
+        if (products != null && !products.isEmpty()) return ResponseEntity.status(HttpStatus.OK).body(products);
+        else throw new ProductNotfoundException("No hay productos");
     }
 
     @ApiOperation(value = "Get a product by id", notes = "Returns a product as per the id")
