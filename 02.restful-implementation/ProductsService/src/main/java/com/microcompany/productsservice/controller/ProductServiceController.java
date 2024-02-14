@@ -24,31 +24,33 @@ public class ProductServiceController {
     @Autowired
     ProductsService service;
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    public List<Product> getAll() {
-        return service.getProductsByText("");
-//        return repo.findAll();
+    @GetMapping(value = "")
+    public ResponseEntity<List<Product>> getAll() {
+        return ResponseEntity.status(HttpStatus.OK).body(service.getProductsByText(""));
     }
 
-    @RequestMapping(value = "", method = RequestMethod.POST)
-    public Product create(@RequestBody Product newP) {
-        return repo.save(newP);
+    @PostMapping(value = "")
+    public ResponseEntity<Product> create(@RequestBody Product newP) {
+//        return repo.save(newP);
+        return new ResponseEntity<>(repo.save(newP), HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Product geOne(@PathVariable("id") Long pid) {
-        return repo.findById(pid).get();
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Product> geOne(@PathVariable("id") Long pid) {
+        return ResponseEntity.status(HttpStatus.OK).body(repo.findById(pid).get());
     }
 
-    @RequestMapping(value = "/{pid}", method = RequestMethod.PUT)
-    public Product update(@PathVariable("pid") Long id, @RequestBody Product product) {
+    @PutMapping(value = "/{pid}")
+    public ResponseEntity<Product> update(@PathVariable("pid") Long id, @RequestBody Product product) {
         product.setId(id);
-        return repo.save(product);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(repo.save(product));
     }
 
-    @RequestMapping(value = "/{pid}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("pid") Long id) {
+    @DeleteMapping(value = "/{pid}")
+    public ResponseEntity delete(@PathVariable("pid") Long id) {
         repo.deleteById(id);
+        return ResponseEntity.noContent().build();
+//        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
 }
