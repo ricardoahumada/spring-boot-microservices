@@ -55,4 +55,9 @@ public class ProductServiceController {
 //        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
+    @PostMapping(value = "/duplicate/{pid}")
+    public ResponseEntity<Product> duplicate(@PathVariable Long pid) {
+        return new ResponseEntity<>(service.duplicate(pid), HttpStatus.CREATED);
+    }
+
 }
