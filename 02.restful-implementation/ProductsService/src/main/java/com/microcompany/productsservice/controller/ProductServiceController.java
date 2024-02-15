@@ -5,10 +5,11 @@ import com.microcompany.productsservice.model.Product;
 import com.microcompany.productsservice.model.StatusMessage;
 import com.microcompany.productsservice.persistence.ProductsRepository;
 import com.microcompany.productsservice.service.ProductsService;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,11 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/products")
 // @CrossOrigin(origins = {"*"}, allowedHeaders = "*")
+@Tag(name = "Products API", description = "Products management APIs")
 public class ProductServiceController {
     private static final Logger logger = LoggerFactory.getLogger(ProductServiceController.class);
 
@@ -42,14 +43,14 @@ public class ProductServiceController {
         else throw new ProductNotfoundException("No hay productos");
     }
 
-    @ApiOperation(value = "Get a product by id", notes = "Returns a product as per the id")
+    @Operation(summary = "Get a product by id", description = "Returns a product as per the id")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successfully retrieved"),
-            @ApiResponse(code = 404, message = "Not found - The product was not found")
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved"),
+            @ApiResponse(responseCode = "404", description = "Not found - The product was not found")
     })
     @GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity getProduct(
-            @ApiParam(name = "id", value = "Product id", example = "1") @PathVariable @Min(1) Long id
+            @Parameter(name = "id", description = "Product id", example = "1") @PathVariable @Min(1) Long id
     ) {
         if (!productsRepo.existsById(id)) throw new ProductNotfoundException();
         Product product = productsRepo.findById(id).get();
@@ -58,8 +59,17 @@ public class ProductServiceController {
             return new ResponseEntity<>(new StatusMessage(HttpStatus.NOT_FOUND.value(), "No encontrado"), HttpStatus.NOT_FOUND);
     }
 
+
+    @Operation(summary = "Add a new product", description = "Returns a persisted product")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "202", description = "Successfully created"),
+            @ApiResponse(responseCode = "4XX", description = "Bad request")
+    })
     @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity createProduct(@RequestBody @Valid Product newProduct) {
+    public ResponseEntity createProduct(
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "Product data")
+            @RequestBody @Valid Product newProduct
+    ) {
         newProduct.setId(null);
         productsRepo.save(newProduct);
         if (newProduct != null && newProduct.getId() > 0) return new ResponseEntity<>(newProduct, HttpStatus.CREATED);
