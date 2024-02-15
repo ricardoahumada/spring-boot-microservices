@@ -10,14 +10,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/products")
+@Validated
 public class ProductServiceController {
     private static final Logger logger = LoggerFactory.getLogger(ProductServiceController.class);
 
@@ -29,7 +33,7 @@ public class ProductServiceController {
 
 
     @GetMapping(value = "")
-    public ResponseEntity<Object> getAll(@RequestParam(required = false, defaultValue = "") String texto) {
+    public ResponseEntity<Object> getAll(@RequestParam(required = false, defaultValue = "") @Size(min = 0, max = 10) String texto) {
         List<Product> prods = service.getProductsByText(texto);
         if (prods != null && !prods.isEmpty()) return ResponseEntity.status(HttpStatus.OK).body(prods);
         else
@@ -43,26 +47,26 @@ public class ProductServiceController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Product> geOne(@PathVariable("id") Long pid) {
+    public ResponseEntity<Product> geOne(@PathVariable("id") @Min(1) Long pid) {
         return ResponseEntity.status(HttpStatus.OK).body(
                 repo.findById(pid).orElseThrow(() -> new ProductNotfoundException("No existe el producto"))
         );
     }
 
     @PutMapping(value = "/{pid}")
-    public ResponseEntity<Product> update(@PathVariable("pid") Long id, @RequestBody Product product) {
+    public ResponseEntity<Product> update(@PathVariable("pid") @Min(1) Long id, @RequestBody Product product) {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(service.actualizar(id, product));
     }
 
     @DeleteMapping(value = "/{pid}")
-    public ResponseEntity delete(@PathVariable("pid") Long id) {
+    public ResponseEntity delete(@PathVariable("pid") @Min(1) Long id) {
         repo.deleteById(id);
         return ResponseEntity.noContent().build();
 //        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @PostMapping(value = "/duplicate/{pid}")
-    public ResponseEntity<Product> duplicate(@PathVariable Long pid) {
+    public ResponseEntity<Product> duplicate(@PathVariable @Min(1) Long pid) {
         return new ResponseEntity<>(service.duplicate(pid), HttpStatus.CREATED);
     }
 
