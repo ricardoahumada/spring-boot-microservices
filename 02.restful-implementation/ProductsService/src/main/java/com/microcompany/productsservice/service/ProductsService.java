@@ -1,5 +1,6 @@
 package com.microcompany.productsservice.service;
 
+import com.microcompany.productsservice.exception.ProductNotfoundException;
 import com.microcompany.productsservice.model.Product;
 import com.microcompany.productsservice.persistence.ProductsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class ProductsService {
     }
 
     public Product duplicate(Long id) {
-        Product currProd = productsRepository.findById(id).orElseThrow(() -> new RuntimeException());
+        Product currProd = productsRepository.findById(id).orElseThrow(() -> new ProductNotfoundException("El recurso no existe"));
         em.detach(currProd);
         currProd.setId(null);
         return productsRepository.save(currProd);
