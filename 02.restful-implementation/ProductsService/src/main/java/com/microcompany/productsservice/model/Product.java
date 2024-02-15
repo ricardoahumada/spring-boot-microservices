@@ -6,6 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.microcompany.productsservice.constraints.ProductName;
 import com.microcompany.productsservice.constraints.SerialNumber;
 import lombok.*;
 
@@ -25,7 +26,8 @@ public class Product {
     @Column
 //    @NonNull
     @NotBlank
-    @Size(min = 3, max = 20)
+//    @Size(min = 3, max = 20)
+    @ProductName
     private String name;
 
     @Column
