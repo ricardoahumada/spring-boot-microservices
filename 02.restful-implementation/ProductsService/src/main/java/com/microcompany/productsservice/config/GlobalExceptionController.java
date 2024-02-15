@@ -7,13 +7,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@RestControllerAdvice
+//@RestControllerAdvice
 public class GlobalExceptionController {
 
-    @ExceptionHandler(GeneralException.class)
+    /*@ExceptionHandler(GeneralException.class)
     ResponseEntity<Object> noSuchElementExceptionHandler(GeneralException exception) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
-    }
+    }*/
 
     /*@ExceptionHandler(ProductNotfoundException.class)
     ResponseEntity<Object> noSuchElementExceptionHandler(ProductNotfoundException exception) {
