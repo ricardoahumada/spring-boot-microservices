@@ -1,5 +1,6 @@
 package com.microcompany.productsservice.controller;
 
+import com.microcompany.productsservice.exception.ProductNotfoundException;
 import com.microcompany.productsservice.model.Product;
 import com.microcompany.productsservice.model.StatusMessage;
 import com.microcompany.productsservice.persistence.ProductsRepository;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/products")
@@ -23,6 +25,7 @@ public class ProductServiceController {
 
     @Autowired
     ProductsService service;
+
 
     @GetMapping(value = "")
     public ResponseEntity<Object> getAll(@RequestParam(required = false, defaultValue = "") String texto) {
@@ -40,7 +43,9 @@ public class ProductServiceController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Product> geOne(@PathVariable("id") Long pid) {
-        return ResponseEntity.status(HttpStatus.OK).body(repo.findById(pid).get());
+        return ResponseEntity.status(HttpStatus.OK).body(
+                repo.findById(pid).orElseThrow(() -> new ProductNotfoundException("No existe el producto"))
+        );
     }
 
     @PutMapping(value = "/{pid}")
