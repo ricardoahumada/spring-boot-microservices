@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -40,13 +41,13 @@ public class ProductServiceController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new StatusMessage(HttpStatus.NOT_FOUND.value(), "No hay productos"));
     }
 
-    @PostMapping(value = "")
+    @PostMapping(value = "", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<Product> create(@RequestBody @Valid Product newP) {
 //        return repo.save(newP);
         return new ResponseEntity<>(repo.save(newP), HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<Product> geOne(@PathVariable("id") @Min(1) Long pid) {
         return ResponseEntity.status(HttpStatus.OK).body(
                 repo.findById(pid).orElseThrow(() -> new ProductNotfoundException("No existe el producto"))
