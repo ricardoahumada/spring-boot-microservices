@@ -23,6 +23,7 @@ import java.util.NoSuchElementException;
 @RestController
 @RequestMapping("/products")
 @Validated
+//@CrossOrigin(origins = {"*"}, allowedHeaders = "*")
 public class ProductServiceController {
     private static final Logger logger = LoggerFactory.getLogger(ProductServiceController.class);
 
