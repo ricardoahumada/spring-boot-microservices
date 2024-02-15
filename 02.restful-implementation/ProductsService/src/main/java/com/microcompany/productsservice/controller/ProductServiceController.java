@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -36,7 +37,7 @@ public class ProductServiceController {
     }
 
     @PostMapping(value = "")
-    public ResponseEntity<Product> create(@RequestBody Product newP) {
+    public ResponseEntity<Product> create(@RequestBody @Valid Product newP) {
 //        return repo.save(newP);
         return new ResponseEntity<>(repo.save(newP), HttpStatus.CREATED);
     }
