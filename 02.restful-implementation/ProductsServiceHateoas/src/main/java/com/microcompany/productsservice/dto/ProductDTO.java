@@ -24,15 +24,13 @@ public class ProductDTO {
     @ApiModelProperty(notes = "Product ID", example = "1", required = false)
     private Long id;
 
-    @Column
     @NotBlank(message = "Debe tener valor")
     @NotNull
     @Size(min = 3, max = 50)
     @ApiModelProperty(notes = "Product name", example = "Product 1", required = true)
     private String nombre;
 
-    @Column
-//    @NotNull @NotBlank(message = "Debe tener valor con formato ddd-ddd-dddd")
+    //    @NotNull @NotBlank(message = "Debe tener valor con formato ddd-ddd-dddd")
     @SerialNumber(message = "{serial.format}")
     @ApiModelProperty(notes = "Product serial number", example = "111-222-3333", required = true)
     private String numSerie;
