@@ -5,6 +5,11 @@ import com.microcompany.productsservice.model.Product;
 import com.microcompany.productsservice.model.StatusMessage;
 import com.microcompany.productsservice.persistence.ProductsRepository;
 import com.microcompany.productsservice.service.ProductsService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +29,7 @@ import java.util.NoSuchElementException;
 @RequestMapping("/products")
 @Validated
 //@CrossOrigin(origins = {"*"}, allowedHeaders = "*")
+@Tag(name = "API de productos", description = "Endpoints para ccnsumir productos")
 public class ProductServiceController {
     private static final Logger logger = LoggerFactory.getLogger(ProductServiceController.class);
 
@@ -34,8 +40,16 @@ public class ProductServiceController {
     ProductsService service;
 
 
+    @Operation(summary = "Para pedir todos los productos", description = "Devuelve todos los productos, pudidendo filtrar, en distintos formatos")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Cuando hay productos a devolver."),
+        @ApiResponse(responseCode = "404", description = "Cuando no hay productos a devolver.")
+    })
     @GetMapping(value = "")
-    public ResponseEntity<Object> getAll(@RequestParam(required = false, defaultValue = "") @Size(min = 0, max = 10) String texto) {
+    public ResponseEntity<Object> getAll(
+            @Parameter(name = "texto", description = "Indica un texto por el que filtrar", example = "aa, el, hola")
+            @RequestParam(required = false, defaultValue = "") @Size(min = 0, max = 10) String texto
+    ) {
         List<Product> prods = service.getProductsByText(texto);
         if (prods != null && !prods.isEmpty()) return ResponseEntity.status(HttpStatus.OK).body(prods);
         else
