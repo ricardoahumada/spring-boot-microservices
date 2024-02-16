@@ -1,6 +1,6 @@
 spring:
   application.name: ProductsService
-  profiles.active: dev
+  profiles.active: prod
 
 server:
   servlet.contextPath: /api
@@ -60,7 +60,7 @@ spring:
     show-sql: true
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
       generate-ddl: true
     defer-datasource-initialization: true
   h2:
@@ -71,8 +71,8 @@ server:
   servlet.contextPath: /api/v1
   port: 8443
   ssl:
-      key-store: keystore.p12
-      key-store-password: pa55wrd
+      key-store: keystore2.p12
+      key-store-password: ricardo7
       keyStoreType: PKCS12
       keyAlias: tomcat
 

@@ -2,6 +2,7 @@ package com.microcompany.productsservice.config;
 
 import com.microcompany.productsservice.exception.GeneralException;
 import com.microcompany.productsservice.exception.ProductNotfoundException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -16,6 +17,9 @@ import java.util.Map;
 
 @RestControllerAdvice
 public class GlobalExceptionController {
+
+    /*@Value("${serial}")
+    Map<String,String> mensajes;*/
 
     @ExceptionHandler(GeneralException.class)
     ResponseEntity<Object> noSuchElementExceptionHandler(GeneralException exception) {
