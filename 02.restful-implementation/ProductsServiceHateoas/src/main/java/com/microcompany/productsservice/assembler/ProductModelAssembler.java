@@ -24,18 +24,45 @@ public class ProductModelAssembler extends RepresentationModelAssemblerSupport<P
     public ProductResource toModel(Product entity) {
         ProductResource productModel = instantiateModel(entity);
 
+        productModel = productModel.builder().
+                id(entity.getId()).
+                nombre(entity.getName()).
+                numSerie(entity.getSerial()).
+                build();
+
+        productModel.add(linkTo(
+                methodOn(ProductServiceController.class)
+                        .getProduct(entity.getId()))
+                .withSelfRel());
+
+        productModel.add(linkTo(
+                methodOn(ProductServiceController.class)
+                        .getAllProducts())
+                .withRel("products"));
+
         return productModel;
     }
 
     public Collection<ProductResource> toModel(Collection<Product> products) {
         if (products.isEmpty()) return Collections.emptyList();
 
-        return null;
+        return products.stream()
+                .map(product -> ProductResource.builder()
+                        .id(product.getId())
+                        .nombre(product.getName())
+                        .build()
+                        .add(linkTo(
+                                methodOn(ProductServiceController.class)
+                                        .getProduct(product.getId()))
+                                .withSelfRel()))
+                .collect(Collectors.toList());
     }
 
     @Override
     public CollectionModel<ProductResource> toCollectionModel(Iterable<? extends Product> entities) {
         CollectionModel<ProductResource> productModels = super.toCollectionModel(entities);
+
+        productModels.add(linkTo(methodOn(ProductServiceController.class).getAllProducts()).withSelfRel());
 
         return productModels;
     }

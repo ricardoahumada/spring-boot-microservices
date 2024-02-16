@@ -1,9 +1,11 @@
 package com.microcompany.productsservice.controller;
 
+import com.microcompany.productsservice.assembler.ProductModelAssembler;
 import com.microcompany.productsservice.exception.ProductNotfoundException;
 import com.microcompany.productsservice.model.Product;
 import com.microcompany.productsservice.model.StatusMessage;
 import com.microcompany.productsservice.persistence.ProductsRepository;
+import com.microcompany.productsservice.resource.ProductResource;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
@@ -35,8 +37,8 @@ public class ProductServiceController {
     ProductsRepository productsRepo;
 
     // TODO: uncomment
-    /*@Autowired
-    private ProductModelAssembler productModelAssembler;*/
+    @Autowired
+    private ProductModelAssembler productModelAssembler;
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -57,11 +59,11 @@ public class ProductServiceController {
     }
 
     @GetMapping(value = "", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<List<Product>> getAllProducts() {
+    public ResponseEntity<List<ProductResource>> getAllProducts() {
         List<Product> products = productsRepo.findAll();
         System.out.println("products:" + products);
-//        return new ResponseEntity(productModelAssembler.toCollectionModel(products), HttpStatus.OK);
-        return new ResponseEntity(products, HttpStatus.OK);
+        return new ResponseEntity(productModelAssembler.toModel(products), HttpStatus.OK);
+//        return new ResponseEntity(products, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Get a product by id", notes = "Returns a product as per the id")
@@ -74,9 +76,10 @@ public class ProductServiceController {
             @ApiParam(name = "id", value = "Product id", example = "1") @PathVariable @Min(1) Long id
     ) {
         if (!productsRepo.existsById(id)) throw new ProductNotfoundException();
-        return productsRepo.findById(id)
+        return ResponseEntity.status(HttpStatus.OK).body(productModelAssembler.toModel(productsRepo.findById(id).get()));
+        /*return productsRepo.findById(id)
                 .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+                .orElse(ResponseEntity.notFound().build());*/
     }
 
     @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -84,7 +87,7 @@ public class ProductServiceController {
         newProduct.setId(null);
         productsRepo.save(newProduct);
         if (newProduct != null && newProduct.getId() > 0)
-            return new ResponseEntity<>(newProduct, HttpStatus.CREATED);
+            return new ResponseEntity<>(productModelAssembler.toModel(newProduct), HttpStatus.CREATED);
         else
             return new ResponseEntity<>(new StatusMessage(HttpStatus.BAD_REQUEST.value(), "No encontrado"), HttpStatus.BAD_REQUEST);
     }

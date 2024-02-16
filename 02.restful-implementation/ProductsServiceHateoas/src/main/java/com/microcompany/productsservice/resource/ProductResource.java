@@ -31,11 +31,11 @@ public class ProductResource extends RepresentationModel<ProductResource> {
     @NotNull
     @Size(min = 3, max = 50)
     @ApiModelProperty(name = "Product name", example = "Product 1", required = true)
-    private String name;
+    private String nombre;
 
     @NotNull
     @NotBlank(message = "Debe tener valor con formato ddd-ddd-dddd")
     @SerialNumber(message = "{serial.format}")
     @ApiModelProperty(name = "Product serial number", example = "111-222-3333", required = true)
-    private String serial;
+    private String numSerie;
 }
