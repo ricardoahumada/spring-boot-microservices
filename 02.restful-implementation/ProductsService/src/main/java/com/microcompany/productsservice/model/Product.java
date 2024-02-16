@@ -29,11 +29,11 @@ public class Product {
 //    @NonNull
     @NotBlank
 //    @Size(min = 3, max = 20)
-    @ProductName
+    @ProductName(message = "{product.name}")
     private String name;
 
     @Column
 //    @Pattern(regexp = "[0-9]{3}-[0-9]{3}-[0-9]{4}")
-    @SerialNumber
+    @SerialNumber(message = "{serial.format}")
     private String serial;
 }
