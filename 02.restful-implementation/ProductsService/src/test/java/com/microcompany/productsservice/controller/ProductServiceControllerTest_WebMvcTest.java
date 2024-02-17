@@ -1,8 +1,9 @@
 package com.microcompany.productsservice.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.microcompany.productsservice.model.Product;
 import com.microcompany.productsservice.persistence.ProductsRepository;
+import com.microcompany.productsservice.service.ProductsService;
+import com.microcompany.productsservice.util.JsonUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,30 +16,33 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-
 import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(ProductServiceController.class)
+//@ActiveProfiles("tes_sin_db")
 public class ProductServiceControllerTest_WebMvcTest {
 
     @BeforeEach
     public void setUp() {
+
         List<Product> products = Arrays.asList(
                 new Product(1L, "Fake product", "")
         );
+
+        Mockito.when(service.getProductsByText("Fake"))
+                .thenReturn(products);
 
         Mockito.when(repository.findByNameContaining("Fake"))
                 .thenReturn(products);
@@ -54,8 +58,12 @@ public class ProductServiceControllerTest_WebMvcTest {
                 });
     }
 
+
     @Autowired
     private MockMvc mvc;
+
+    @MockBean
+    private ProductsService service;
 
     @MockBean
     private ProductsRepository repository;
@@ -81,7 +89,7 @@ public class ProductServiceControllerTest_WebMvcTest {
         Product newProduct = new Product(null, "Nuevo producto", "123-123-1234");
 
         mvc.perform(post("/products")
-                        .content(asJsonString(newProduct))
+                        .content(JsonUtil.asJsonString(newProduct))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                 )
@@ -90,11 +98,4 @@ public class ProductServiceControllerTest_WebMvcTest {
                 .andExpect(jsonPath("$.id", is(100)));
     }
 
-    public static String asJsonString(final Object obj) {
-        try {
-            return new ObjectMapper().writeValueAsString(obj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
