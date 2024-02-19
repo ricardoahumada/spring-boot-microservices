@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -25,6 +26,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest()
 @ComponentScan(basePackages = {"com.microcompany.productsservice.persistence"})
 @AutoConfigureTestEntityManager
+@ActiveProfiles({"test"})
 class JPAProductsRepositoryTest {
 
     private static final Logger logger = LoggerFactory.getLogger(JPAProductsRepositoryTest.class);
@@ -34,6 +36,7 @@ class JPAProductsRepositoryTest {
 
     @Autowired
     private IProductsRepository jpaRepo;
+//    private ProductsRepository jpaRepo;
 
     @Test
     void findAll() {
