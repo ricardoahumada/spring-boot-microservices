@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -23,21 +26,32 @@ import static org.hamcrest.Matchers.is;
 
 
 // TODO: uncomment and implement methods
-// @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
-// @AutoConfigureMockMvc
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+@AutoConfigureMockMvc
 // @TestPropertySource( locations = "classpath:application-integrationtest.properties")
+@ActiveProfiles("test")
+@Sql("classpath:datos_prueba.sql")
 class ProductServiceControllerTest_MockMvc {
     @Autowired
     private ProductsRepository repository;
 
+    @Autowired
+    MockMvc mvc;
+
     @Test
     public void givenProducts_whenGetProducts_thenStatus200() throws Exception {
+        // given
+        String texto = "a";
 
-    
-}
+        // when - then
+        mvc.perform(get("/products"))
+                .andExpect(status().isOk());
+
+    }
+
     @Test
     void givenProducts_whenValidCreateProduct_thenIsCreatedAndHaveId() throws Exception {
 
     }
-    
+
 }
