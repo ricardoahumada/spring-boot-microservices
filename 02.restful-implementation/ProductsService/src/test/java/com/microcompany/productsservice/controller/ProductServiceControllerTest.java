@@ -6,13 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.jdbc.Sql;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
 // TODO: uncomment and implement methods
-//@SpringBootTest
+@SpringBootTest
+@ActiveProfiles({"test"})
+@Sql("classpath:datos_prueba.sql")
 class ProductServiceControllerTest {
 
     @Autowired
@@ -20,7 +24,15 @@ class ProductServiceControllerTest {
 
     @Test
     void givenProducts_whengetAllProducts_thenIsNotNull() {
+//        given
+        String texto = "a";
 
+//        when
+        ResponseEntity<Object> response = controller.getAll(texto);
+
+//        then
+        assertThat(response.getBody()).isNotNull();
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
     @Test
