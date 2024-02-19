@@ -4,8 +4,10 @@ import com.microcompany.productsservice.model.Product;
 import com.microcompany.productsservice.persistence.IProductsRepository;
 import com.microcompany.productsservice.persistence.JPAProductsRepository;
 import com.microcompany.productsservice.persistence.ProductsRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -34,13 +36,25 @@ class ProductsServiceW_MockTest {
         }
     }
 
+    @BeforeEach
+    public void setUp() {
+        List<Product> products = List.of(
+                new Product(null, "a1", "123-123-1234"),
+                new Product(null, "a2", "123-123-1234"),
+                new Product(null, "a3", "123-123-1234"),
+                new Product(null, "a4", "123-123-1234")
+        );
+
+        Mockito.when(repo.findByNameContaining("a")).thenReturn(products);
+    }
+
     @MockBean
     private EntityManagerFactory emf;
 
     @MockBean
     private EntityManager em;
 
-    @Autowired
+    @MockBean
     IProductsRepository repo;
 
     @Autowired
