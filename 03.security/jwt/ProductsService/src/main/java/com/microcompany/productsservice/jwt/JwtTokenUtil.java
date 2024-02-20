@@ -14,8 +14,7 @@ import java.util.Date;
 public class JwtTokenUtil {
     private static final long EXPIRE_DURATION = 24 * 60 * 60 * 1000; // 24 hour
 
-    // TODO: Uncomment
-    // @Value("${app.jwt.secret}")
+    @Value("${app.jwt.secret}")
     private String SECRET_KEY;
 
     public String generateAccessToken(User user) {
