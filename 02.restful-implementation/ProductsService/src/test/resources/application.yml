@@ -6,7 +6,7 @@ products.openapi:
   prod-url: http://www.prod.microcompany.es
 ---
 spring:
-  sql.init.mode: never
+  sql.init.mode: always
   config.activate.on-profile: test
   devtools.restart.enabled: true
   application:
