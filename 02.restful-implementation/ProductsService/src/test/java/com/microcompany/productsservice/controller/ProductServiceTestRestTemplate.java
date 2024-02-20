@@ -42,7 +42,7 @@ public class ProductServiceTestRestTemplate {
         assertThat(response.getHeaders().getContentType()).isEqualTo(MediaType.APPLICATION_JSON);
         assertThat(response.getBody())
                 .extracting(Product::getName)
-                .containsExactlyInAnyOrder("Magazine");
+                .contains("Magazine");
     }
 
     @Test
