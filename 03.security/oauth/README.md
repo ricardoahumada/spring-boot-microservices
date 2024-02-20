@@ -8,16 +8,21 @@
 - Open a browser and enter a request this:
 
 ```
-http://127.0.0.1:9000/oauth2/authorize?response_type=code&client_id=[client_id]&redirect_uri=[redirect_url]/authorized&scope=openid [scope]
+http://127.0.0.1:9000/oauth2/authorize?response_type=code&client_id=[client_id]&redirect_uri=[redirect_url]/authorized&scope=[scope]
 ```
 - Get the previous data from the configuration of auth server.
 
 - Example url: 
 ```
-http://127.0.0.1:9000/oauth2/authorize?response_type=code&client_id=client1&redirect_uri=http://127.0.0.1:8080/authorized&scope=openid SCOPE_products.read
+http://127.0.0.1:9000/oauth2/authorize?response_type=code&client_id=client1&redirect_uri=http://127.0.0.1:8080/authorized&scope=SCOPE_products.read
+    - With different client update client param
 ```
+- Alternatively can use https://oauthdebugger.com/
+    + Complete the fields and send
+
 - Example user-password:
     + admin/password
+    + user/password
 
 - You get a response like this: 
 ```
