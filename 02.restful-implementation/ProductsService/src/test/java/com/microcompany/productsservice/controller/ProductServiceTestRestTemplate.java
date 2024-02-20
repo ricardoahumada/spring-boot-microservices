@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 
@@ -49,6 +47,18 @@ public class ProductServiceTestRestTemplate {
 
     @Test
     public void givenAProduct_whenPostWithHeader_thenSuccess() throws URISyntaxException {
+        Product product = new Product(null, "New book", "123-123-1234");
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("ACCEPT", MediaType.APPLICATION_JSON_VALUE);
+        HttpEntity<Product> request = new HttpEntity<>(product, headers);
+
+        ResponseEntity<String> response = restTemplate.postForEntity("http://localhost:" + port + "/api/products", request, String.class);
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+        assertThat(response.getHeaders().getContentType()).isEqualTo(MediaType.APPLICATION_JSON);
+        assertThat(response.getBody()).contains("New book");
+
     }
 
 }
