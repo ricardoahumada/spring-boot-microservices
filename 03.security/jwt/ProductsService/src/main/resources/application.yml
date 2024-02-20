@@ -1,6 +1,5 @@
 spring:
-  application:
-    name: ProductsService
+  application.name: ProductsService
   profiles.active: dev
 server:
   port: 8080
@@ -11,18 +10,11 @@ server:
     include-exception: false
 
 spring.mvc.pathmatch.matching-strategy: ANT_PATH_MATCHER
-
-# TODO: UNCOMMENT
-# app.jwt.secret: SECRETKEYVALUESECRETKEYVALUESECRETKEYVALUESECRETKEYVALUESECRETKEYVALUESECRETKEYVALUESECRETKEYVALUESECRETKEYVALUESECRETKEYVALUESECRETKEYVALUESECRETKEYVALUESECRETKEYVALUE
-
-products.openapi:
-  dev-url: http://localhost:8080
-  prod-url: https://products-api.com
-
+app.jwt.secret: SECRET-KEY-VALUE
 ---
 spring:
   sql.init.mode: always
-  config.activate.on-profile: dev
+  profiles: dev
   application:
     name: ProductsService
   datasource:
@@ -54,7 +46,7 @@ logging:
 
 ---
 spring:
-  config.activate.on-profile: prod
+  profiles: prod
   application:
     name: ProductsService
 server:
