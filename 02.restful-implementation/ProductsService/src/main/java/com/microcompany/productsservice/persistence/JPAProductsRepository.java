@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class JPAProductsRepository implements IProductsRepository{
+public class JPAProductsRepository implements IProductsRepository {
 
     @PersistenceContext
     EntityManager em;
@@ -29,7 +29,9 @@ public class JPAProductsRepository implements IProductsRepository{
 
     @Override
     public List<Product> findByNameContaining(String name) {
-        return null;
+        Query query = em.createQuery("SELECT p FROM Product p WHERE p.name LIKE CONCAT('%',?1,'%')");
+        query.setParameter(1, name);
+        return (List<Product>) query.getResultList();
     }
 
     @Override

@@ -16,8 +16,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 // TODO: uncomment and implement methods
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-//@ActiveProfiles("test")
-//@Sql("classpath:datos_prueba.sql")
+@ActiveProfiles("test")
+@Sql("classpath:datos_prueba.sql")
 public class ProductServiceTestRestTemplate {
     // @Value(value = "${local.server.port}")
     @LocalServerPort
@@ -31,7 +31,7 @@ public class ProductServiceTestRestTemplate {
         System.out.println(response.getBody());
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).contains("Magazine");
-        assertThat(response.getHeaders().getContentType()).isEqualTo(MediaType.APPLICATION_JSON_VALUE);
+        assertThat(response.getHeaders().getContentType()).isEqualTo(MediaType.APPLICATION_JSON);
     }
 
     @Test
@@ -39,7 +39,7 @@ public class ProductServiceTestRestTemplate {
         ResponseEntity<Product[]> response = restTemplate.getForEntity("http://localhost:" + port + "/api/products", Product[].class);
         System.out.println(response.getBody());
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(response.getHeaders().getContentType()).isEqualTo(MediaType.APPLICATION_JSON_VALUE);
+        assertThat(response.getHeaders().getContentType()).isEqualTo(MediaType.APPLICATION_JSON);
         assertThat(response.getBody())
                 .extracting(Product::getName)
                 .containsExactlyInAnyOrder("Magazine");
