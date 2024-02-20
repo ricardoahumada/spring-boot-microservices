@@ -5,8 +5,8 @@
 - Make a POST request to http://localhost:8080/auth/login with the following JSON request body:
 ```
 {
-"username": "ausername",
-"password": "password"
+"username": "juan",
+"password": "juanpass"
 }
 ```
 
