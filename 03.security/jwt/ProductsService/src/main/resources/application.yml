@@ -1,6 +1,6 @@
 spring:
-  application:
-    name: ProductsService
+  application.name: ProductsService
+  profiles.active: dev
 server:
   port: 8080
   error:

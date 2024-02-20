@@ -68,7 +68,7 @@ public class ApplicationSecurity {
         return authConfig.getAuthenticationManager();
     }
 
-    @Bean
+    /*@Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
@@ -103,6 +103,50 @@ public class ApplicationSecurity {
                             );
                         }
                 );
+
+        http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
+
+        return http.build();
+    }*/
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.csrf(csrf -> csrf.disable())
+                .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
+        // http.authenticationProvider(authProvider()); // can be commented
+
+        http
+                .authorizeHttpRequests((requests) -> requests
+                        .antMatchers("/auth/login",
+                                "/docs/**",
+                                "/users",
+                                "/h2-ui/**",
+                                "/configuration/ui",
+                                "/swagger-resources/**",
+                                "/configuration/security",
+                                "/swagger-ui.html",
+                                "/webjars/**"
+                        ).permitAll() // HABILITAR ESPACIOS LIBRES
+//                        .antMatchers("/**").permitAll() // BARRA LIBRE
+//                        .antMatchers("/products/**").hasAuthority(ERole.USER.name())
+                        .antMatchers(HttpMethod.GET, "/products/**").hasAnyAuthority(ERole.USER.name(), ERole.ADMIN.name())//Para acceder a productos debe ser USER
+                        .antMatchers("/products/**").hasAnyAuthority(ERole.ADMIN.name()) //admin puede hacer de todo
+                        .anyRequest().authenticated()
+                );
+
+        http.headers(headers ->
+                headers.frameOptions(frameOptionsConfig -> frameOptionsConfig.sameOrigin())
+        );
+
+        http.exceptionHandling((exception) -> exception.authenticationEntryPoint(
+                (request, response, ex) -> {
+                    response.sendError(
+                            HttpServletResponse.SC_UNAUTHORIZED,
+                            ex.getMessage()
+                    );
+                }
+        ));
 
         http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
