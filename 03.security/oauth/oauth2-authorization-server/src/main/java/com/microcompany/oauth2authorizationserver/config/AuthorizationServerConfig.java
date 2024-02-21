@@ -69,7 +69,13 @@ public class AuthorizationServerConfig {
                 .roles("ADMIN")
                 .build();
 
-        return new InMemoryUserDetailsManager(userDetails, adminDetails);
+        UserDetails clienteCuentasDetails = User.withDefaultPasswordEncoder()
+                .username("cliente_cuentas")
+                .password("passcc")
+                .roles("CLIENTE")
+                .build();
+
+        return new InMemoryUserDetailsManager(userDetails, adminDetails, clienteCuentasDetails);
     }
 
     @Bean
@@ -103,7 +109,21 @@ public class AuthorizationServerConfig {
                 .tokenSettings(tokenSettings())
                 .build();
 
-        return new InMemoryRegisteredClientRepository(oidcClient1, oidcClient2);
+        RegisteredClient oidcClientAndroid = RegisteredClient.withId(UUID.randomUUID().toString())
+                .clientId("android")
+                .clientSecret("{noop}androidSecret")
+                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+                .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+                .redirectUri("https://oauthdebugger.com/debug")
+                .redirectUri("http://127.0.0.1:8080/authorized")
+                .redirectUri("http://127.0.0.1:8080/login/oauth2/code/products-client-oidc")
+                .scope(OidcScopes.OPENID)
+                .scope("SCOPE_accounts.client")
+                .tokenSettings(tokenSettings())
+                .build();
+
+        return new InMemoryRegisteredClientRepository(oidcClient1, oidcClient2, oidcClientAndroid);
     }
 
 

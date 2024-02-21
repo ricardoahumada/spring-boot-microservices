@@ -59,7 +59,7 @@ public class ApplicationSecurity {
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
-
+    
     @Bean
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration authConfig
@@ -67,7 +67,6 @@ public class ApplicationSecurity {
         logger.info("Entra authenticationManager!!!!");
         return authConfig.getAuthenticationManager();
     }
-
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
