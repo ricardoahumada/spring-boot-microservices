@@ -21,6 +21,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Configuration
 public class ApplicationSecurity {
@@ -35,7 +38,7 @@ public class ApplicationSecurity {
     public UserDetailsService userDetailsService() {
         return new UserDetailsService() {
 
-            @Override
+            /*@Override
             public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
                 return userRepo.findByEmail(email)
                         .orElseThrow(
@@ -43,6 +46,22 @@ public class ApplicationSecurity {
                                         "User " + email + " not found"
                                 )
                         );
+            }*/
+
+            @Override
+            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+                BCryptPasswordEncoder enc = new BCryptPasswordEncoder();
+
+                List<com.microcompany.productsservice.model.User> users = List.of(
+                        new com.microcompany.productsservice.model.User(1, "gestor@email.com", enc.encode("gpass"), ERole.GESTOR),
+                        new com.microcompany.productsservice.model.User(2, "cliente@email.com", enc.encode("cpass"), ERole.CLIENTE)
+                );
+
+                return users.stream()
+                        .filter(u -> u.getEmail().equals(username))
+                        .findFirst()
+                        .orElseThrow(() -> new UsernameNotFoundException("User with username - " + username + " not found"));
+
             }
         };
     }
@@ -59,7 +78,7 @@ public class ApplicationSecurity {
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
-    
+
     @Bean
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration authConfig
@@ -77,21 +96,21 @@ public class ApplicationSecurity {
 
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .antMatchers("/auth/login",
-                                "/docs/**",
-                                "/users",
-                                "/h2-ui/**",
-                                "/configuration/ui",
-                                "/swagger-resources/**",
-                                "/configuration/security",
-                                "/swagger-ui.html",
-                                "/webjars/**"
-                        ).permitAll() // HABILITAR ESPACIOS LIBRES
+                                .antMatchers("/auth/login",
+                                        "/docs/**",
+                                        "/users",
+                                        "/h2-ui/**",
+                                        "/configuration/ui",
+                                        "/swagger-resources/**",
+                                        "/configuration/security",
+                                        "/swagger-ui.html",
+                                        "/webjars/**"
+                                ).permitAll() // HABILITAR ESPACIOS LIBRES
 //                        .antMatchers("/**").permitAll() // BARRA LIBRE
 //                        .antMatchers("/products/**").hasAuthority(ERole.USER.name())
-                        .antMatchers(HttpMethod.GET, "/products/**").hasAnyAuthority(ERole.USER.name(), ERole.ADMIN.name())//Para acceder a productos debe ser USER
-                        .antMatchers("/products/**").hasAnyAuthority(ERole.ADMIN.name()) //admin puede hacer de todo
-                        .anyRequest().authenticated()
+                                .antMatchers(HttpMethod.GET, "/products/**").hasAnyAuthority(ERole.USER.name(), ERole.ADMIN.name())//Para acceder a productos debe ser USER
+                                .antMatchers("/products/**").hasAnyAuthority(ERole.ADMIN.name()) //admin puede hacer de todo
+                                .anyRequest().authenticated()
                 );
 
         http.headers(headers ->
