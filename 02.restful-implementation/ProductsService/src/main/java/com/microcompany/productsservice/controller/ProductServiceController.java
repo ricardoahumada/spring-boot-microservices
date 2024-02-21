@@ -53,6 +53,7 @@ public class ProductServiceController {
         List<Product> prods = service.getProductsByText(texto);
         if (prods != null && !prods.isEmpty()) return ResponseEntity.status(HttpStatus.OK).body(prods);
         else
+//            throw new ProductNotfoundException("No hay productos");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new StatusMessage(HttpStatus.NOT_FOUND.value(), "No hay productos"));
     }
 

@@ -53,6 +53,17 @@ class ProductServiceControllerTest_MockMvc {
     }
 
     @Test
+    public void givenProducts_whenGetProductsNotexiting_then() throws Exception {
+        // given
+        String texto = "xxxxxx";
+
+        // when - then
+        mvc.perform(get("/products?texto=" + texto).accept(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isNotFound());
+
+    }
+
+    @Test
     void givenProducts_whenValidCreateProduct_thenIsCreatedAndHaveId() throws Exception {
         // given
         Product newPoduct = new Product(null, "Escoba", "123-123-1234");
