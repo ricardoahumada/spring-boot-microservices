@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @DataJpaTest()
 @ComponentScan(basePackages = {"com.microcompany.productsservice.persistence"})
 @AutoConfigureTestEntityManager
+// @AutoConfigureTestDatabase(replace= AutoConfigureTestDatabase.Replace.NONE) // If not H2    
 class JPAProductsRepositoryTest {
 
     private static final Logger logger = LoggerFactory.getLogger(JPAProductsRepositoryTest.class);
