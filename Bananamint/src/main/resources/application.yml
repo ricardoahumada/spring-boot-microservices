@@ -22,6 +22,8 @@ spring:
     console.enabled: true
     console.path: /h2-ui
 
+loggin.root: WARN
+
 server.port: 9900
 
 ---

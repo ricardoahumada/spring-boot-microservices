@@ -35,4 +35,7 @@ public class Customer {
         return false;
     }
 
+    public Customer(Long id) {
+        this.id = id;
+    }
 }
