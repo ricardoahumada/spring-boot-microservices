@@ -52,6 +52,7 @@ public class ProductServiceController {
     //    @RequestMapping(value = "/{pid}", method = RequestMethod.GET)
     @GetMapping("/{pid}")
     public Product getAProduct(@PathVariable("pid") Long id) {
+//        return repo.findById(id).get();
         return repo.findById(id).orElseThrow(() -> new ProductNotfoundException("Producto no existe: " + id));
 
         /*Product prod = repo.findById(id).get();
