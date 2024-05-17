@@ -33,7 +33,7 @@ public class ProductServiceController {
     }*/
 
     //    @RequestMapping(value = "", method = RequestMethod.GET)
-    @GetMapping(value = "", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(value = "", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity getAllProducts() {
         List<Product> prods = service.getProductsByText("");
         if (prods != null && prods.size() > 0) return ResponseEntity.status(HttpStatus.OK).body(prods);
@@ -42,7 +42,7 @@ public class ProductServiceController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)
-    @PostMapping("")
+    @PostMapping(value = "", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<Product> add(@RequestBody Product newP) {
         repo.save(newP);
         return ResponseEntity.status(HttpStatus.CREATED).body(newP);
