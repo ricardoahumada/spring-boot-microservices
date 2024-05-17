@@ -1,5 +1,6 @@
 package com.microcompany.productsservice.config;
 
+import com.microcompany.productsservice.exception.GlobalException;
 import com.microcompany.productsservice.exception.ProductNotfoundException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
@@ -16,14 +17,14 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionController {
 
-   /* @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(value = GlobalException.class)
     public ResponseEntity<Object> handleGlobalException(GlobalException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
-    }*/
+    }
     @ExceptionHandler(value = ProductNotfoundException.class)
     public ResponseEntity<Object> exception(ProductNotfoundException exception) {
-        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("Especifica --"+exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
