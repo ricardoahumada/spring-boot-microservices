@@ -1,5 +1,6 @@
 package com.microcompany.productsservice.controller;
 
+import com.microcompany.productsservice.exception.ProductNotfoundException;
 import com.microcompany.productsservice.model.Product;
 import com.microcompany.productsservice.model.StatusMessage;
 import com.microcompany.productsservice.persistence.IProductsRepository;
@@ -50,11 +51,13 @@ public class ProductServiceController {
 
     //    @RequestMapping(value = "/{pid}", method = RequestMethod.GET)
     @GetMapping("/{pid}")
-    public ResponseEntity getAProduct(@PathVariable("pid") Long id) {
-        Product prod = repo.findById(id).orElse(null);
+    public Product getAProduct(@PathVariable("pid") Long id) {
+        return repo.findById(id).orElseThrow(() -> new ProductNotfoundException("Producto no existe: " + id));
+
+        /*Product prod = repo.findById(id).get();
         if (prod != null) return ResponseEntity.status(HttpStatus.OK).body(prod);
         else
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new StatusMessage(HttpStatus.OK.value(), "No exite producto:" + id));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new StatusMessage(HttpStatus.OK.value(), "No exite producto:" + id));*/
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -67,7 +70,7 @@ public class ProductServiceController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity deleteProduct(@PathVariable  Long id) {
+    public ResponseEntity deleteProduct(@PathVariable Long id) {
         repo.deleteById(id);
         return ResponseEntity.noContent().build();
     }
