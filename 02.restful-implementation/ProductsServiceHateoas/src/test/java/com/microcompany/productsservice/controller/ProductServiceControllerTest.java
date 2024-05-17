@@ -15,7 +15,7 @@ import java.util.List;
 @SpringBootTest
 class ProductServiceControllerTest {
 
-   /* @Autowired
+    @Autowired
     private ProductServiceController controller;
 
     @Test
@@ -40,5 +40,5 @@ class ProductServiceControllerTest {
         assertThat(response.getStatusCode().value()).isEqualTo(HttpStatus.CREATED.value());
         assertThat(response.getBody().getId()).isGreaterThan(0);
 
-    }*/
+    }
 }

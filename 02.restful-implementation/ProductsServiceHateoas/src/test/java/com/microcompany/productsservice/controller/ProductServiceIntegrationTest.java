@@ -25,7 +25,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(SpringExtension.class)
 public class ProductServiceIntegrationTest {
 
-   /* @TestConfiguration
+    @TestConfiguration
     static class ProductServiceImplTestContextConfiguration {
         @Bean
         public ProductsService productsService() {
@@ -77,6 +77,6 @@ public class ProductServiceIntegrationTest {
 
         assertThat(products.getBody())
                 .isNotNull();
-    }*/
+    }
 
 }
