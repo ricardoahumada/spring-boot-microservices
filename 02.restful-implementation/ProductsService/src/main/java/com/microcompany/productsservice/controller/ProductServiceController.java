@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +32,8 @@ public class ProductServiceController {
         return "Productos";
     }*/
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    //    @RequestMapping(value = "", method = RequestMethod.GET)
+    @GetMapping(value = "", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity getAllProducts() {
         List<Product> prods = service.getProductsByText("");
         if (prods != null && prods.size() > 0) return ResponseEntity.status(HttpStatus.OK).body(prods);
@@ -40,17 +42,34 @@ public class ProductServiceController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)
+    @PostMapping("")
     public ResponseEntity<Product> add(@RequestBody Product newP) {
         repo.save(newP);
         return ResponseEntity.status(HttpStatus.CREATED).body(newP);
     }
 
-    @RequestMapping(value = "/{pid}", method = RequestMethod.GET)
+    //    @RequestMapping(value = "/{pid}", method = RequestMethod.GET)
+    @GetMapping("/{pid}")
     public ResponseEntity getAProduct(@PathVariable("pid") Long id) {
         Product prod = repo.findById(id).orElse(null);
         if (prod != null) return ResponseEntity.status(HttpStatus.OK).body(prod);
         else
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new StatusMessage(HttpStatus.OK.value(), "No exite producto:" + id));
+    }
+
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity updateProduct(@PathVariable Long id, @RequestBody Product aProduct) {
+        aProduct.setId(id);
+        repo.save(aProduct);
+        if (aProduct != null) return new ResponseEntity(aProduct, HttpStatus.ACCEPTED);
+        else
+            return new ResponseEntity<>(new StatusMessage(HttpStatus.NOT_MODIFIED.value(), "No modificado"), HttpStatus.NOT_MODIFIED);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity deleteProduct(@PathVariable  Long id) {
+        repo.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
