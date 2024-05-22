@@ -23,6 +23,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/products")
 @Validated
+//@CrossOrigin(origins = "*")
 public class ProductServiceController {
     private static final Logger logger = LoggerFactory.getLogger(ProductServiceController.class);
 
