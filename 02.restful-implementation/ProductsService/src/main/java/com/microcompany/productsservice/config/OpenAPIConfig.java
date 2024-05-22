@@ -38,10 +38,10 @@ public class OpenAPIConfig {
         License mitLicense = new License().name("MIT License").url("https://choosealicense.com/licenses/mit/");
 
         Info info = new Info()
-                .title("Accounts Management API")
+                .title("Products Management API")
                 .version("1.0")
                 .contact(contact)
-                .description("This API exposes endpoints to manage accounts.").termsOfService("https://www.microcompany.es/terms")
+                .description("This API exposes endpoints to manage products.").termsOfService("https://www.microcompany.es/terms")
                 .license(mitLicense);
 
         return new OpenAPI().info(info).servers(List.of(devServer, prodServer));
