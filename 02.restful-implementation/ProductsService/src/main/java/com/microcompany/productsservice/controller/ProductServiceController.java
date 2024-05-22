@@ -6,6 +6,11 @@ import com.microcompany.productsservice.model.StatusMessage;
 import com.microcompany.productsservice.persistence.IProductsRepository;
 import com.microcompany.productsservice.persistence.ProductsRepository;
 import com.microcompany.productsservice.service.ProductsService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +29,7 @@ import java.util.List;
 @RequestMapping("/products")
 @Validated
 //@CrossOrigin(origins = "*")
+@Tag(name = "API Productos", description = "Api que expone producots y servicos asociados")
 public class ProductServiceController {
     private static final Logger logger = LoggerFactory.getLogger(ProductServiceController.class);
 
@@ -46,6 +52,12 @@ public class ProductServiceController {
     }*/
 
     //    @RequestMapping(value = "", method = RequestMethod.GET)
+
+    @Operation(summary = "Obtener todos los productos", description = "Devuelve todos los productos en els sistema")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Cuando existen producits"),
+            @ApiResponse(responseCode = "404", description = "Cuando no existen productos")
+    })
     @GetMapping(value = "", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity getAllProducts() {
         List<Product> prods = service.getProductsByText("");
@@ -54,16 +66,27 @@ public class ProductServiceController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new StatusMessage(HttpStatus.OK.value(), "No hay productos"));
     }
 
+    @Operation(summary = "Añadir productos", description = "Permite añadir un producto al sistema")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "202", description = "Cuando OK"),
+            @ApiResponse(responseCode = "412", description = "Cuando nOK")
+    })
     @RequestMapping(value = "", method = RequestMethod.POST)
     @PostMapping(value = "", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<Product> add(@Valid @RequestBody Product newP) {
+    public ResponseEntity<Product> add(
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Cuerpo del producto", required = false)
+            @Valid @RequestBody Product newP
+    ) {
         repo.save(newP);
         return ResponseEntity.status(HttpStatus.CREATED).body(newP);
     }
 
     //    @RequestMapping(value = "/{pid}", method = RequestMethod.GET)
     @GetMapping("/{pid}")
-    public Product getAProduct(@PathVariable("pid") @Min(1) Long id) {
+    public Product getAProduct(
+            @Parameter(required = true, name = "ID", description = "El identificador del producto")
+            @PathVariable("pid") @Min(1) Long id
+    ) {
 //        return repo.findById(id).get();
         return repo.findById(id).orElseThrow(() -> new ProductNotfoundException("Producto no existe: " + id));
 
