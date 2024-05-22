@@ -36,6 +36,7 @@ public class Product {
 
     @Column
 //    @NotNull @NotBlank(message = "Debe tener valor con formato ddd-ddd-dddd")
+    // @Pattern(regexp = "[\d]*3-[\d]*3-[\d]*4")  
     @SerialNumber(message = "{serial.format}")
     @Schema(name = "Product serial number", example = "111-222-3333", required = true)
     private String serial;
