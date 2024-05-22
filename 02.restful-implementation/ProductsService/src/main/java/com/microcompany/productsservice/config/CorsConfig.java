@@ -11,7 +11,7 @@ public class CorsConfig {
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/products").allowedOrigins("http://localhost");
+                registry.addMapping("/products").allowedOrigins("*");
             }
         };
     }
