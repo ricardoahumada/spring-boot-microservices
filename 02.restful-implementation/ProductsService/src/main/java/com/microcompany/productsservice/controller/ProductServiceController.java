@@ -12,13 +12,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import java.util.List;
 
 @RestController
 @RequestMapping("/products")
+@Validated
 public class ProductServiceController {
     private static final Logger logger = LoggerFactory.getLogger(ProductServiceController.class);
 
@@ -27,6 +31,12 @@ public class ProductServiceController {
 
     @Autowired
     private ProductsRepository repo;
+
+    @ExceptionHandler(ConstraintViolationException.class)
+//    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    ResponseEntity<String> handleConstraintViolationException(ConstraintViolationException e) {
+        return new ResponseEntity<>("not valid due to validation error: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 
    /* @RequestMapping("")
     public String info() {
@@ -52,7 +62,7 @@ public class ProductServiceController {
 
     //    @RequestMapping(value = "/{pid}", method = RequestMethod.GET)
     @GetMapping("/{pid}")
-    public Product getAProduct(@PathVariable("pid") Long id) {
+    public Product getAProduct(@PathVariable("pid") @Min(1) Long id) {
 //        return repo.findById(id).get();
         return repo.findById(id).orElseThrow(() -> new ProductNotfoundException("Producto no existe: " + id));
 
