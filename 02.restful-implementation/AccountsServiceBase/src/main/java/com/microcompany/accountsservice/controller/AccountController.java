@@ -6,8 +6,10 @@ import com.microcompany.accountsservice.services.AccountService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -57,9 +59,24 @@ public class AccountController {
     }
 
     // Add Money
-
+    @PutMapping("/addmoney/{id}")
+    public ResponseEntity<Account> addMoney(
+            @PathVariable Long id,
+            @RequestParam int amount,
+            @RequestParam Long ownerId
+    ) {
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(accountService.addBalance(id, amount, ownerId));
+    }
 
     // withdraw Money
+    @PutMapping("/withdraw/{id}")
+    public ResponseEntity<Account> withdraw(
+            @PathVariable Long id,
+            @RequestParam int amount,
+            @RequestParam Long ownerId
+    ) {
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(accountService.withdrawBalance(id, amount, ownerId));
+    }
 
 
     // Delete Account
@@ -73,6 +90,14 @@ public class AccountController {
     }
 
     // Delete Account using ownerId
+    @DeleteMapping("user/{ownerId}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public ApiResponse deleteAccountByUserId(
+            @PathVariable Long ownerId
+    ) {
+        this.accountService.deleteAccountsUsingOwnerId(ownerId);
+        return new ApiResponse(" Accounts with given userId is deleted Successfully", true);
 
+    }
 
 }
