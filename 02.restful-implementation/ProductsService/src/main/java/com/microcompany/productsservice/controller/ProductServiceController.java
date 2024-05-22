@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -44,7 +45,7 @@ public class ProductServiceController {
 
     @RequestMapping(value = "", method = RequestMethod.POST)
     @PostMapping(value = "", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<Product> add(@RequestBody Product newP) {
+    public ResponseEntity<Product> add(@Valid @RequestBody Product newP) {
         repo.save(newP);
         return ResponseEntity.status(HttpStatus.CREATED).body(newP);
     }
