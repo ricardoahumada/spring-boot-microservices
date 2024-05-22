@@ -6,6 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.microcompany.productsservice.constraints.SerialNumber;
 import lombok.*;
 
 @Entity
@@ -22,12 +23,13 @@ public class Product {
     private Long id;
 
     @Column
-    @Size(min=3, max = 20)
+    @Size(min=3, max = 20, message = "debe ser un nombre con 3-20 chars")
     @NonNull
     @NotBlank(message = "El nombre no puede ser vacio")
     private String name;
 
     @Column
-    @Pattern(regexp = "[1-9]*3-[1-9]*3-[1-9]*4")
+//    @Pattern(regexp = "[1-9]*3-[1-9]*3-[1-9]*4")
+    @SerialNumber
     private String serial;
 }
