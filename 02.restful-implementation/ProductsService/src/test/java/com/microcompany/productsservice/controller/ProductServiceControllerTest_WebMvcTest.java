@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.microcompany.productsservice.model.Product;
 import com.microcompany.productsservice.persistence.ProductsRepository;
 import com.microcompany.productsservice.service.ProductsService;
+import com.microcompany.productsservice.util.JsonUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -91,7 +92,16 @@ public class ProductServiceControllerTest_WebMvcTest {
 
     @Test
     void givenProducts_whenVaildCreateProduct_thenIsCreatedAndHaveId() throws Exception {
+        Product newProduct = new Product(null, "Nuevo producto", "123-123-1234");
 
+        mvc.perform(post("/products")
+                        .content(JsonUtil.asJsonString(newProduct))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                )
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id", is(100)));
     }
 
 }
