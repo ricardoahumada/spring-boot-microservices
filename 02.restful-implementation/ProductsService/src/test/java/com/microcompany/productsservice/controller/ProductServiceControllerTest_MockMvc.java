@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -23,10 +24,14 @@ import static org.hamcrest.Matchers.is;
 
 
 // TODO: uncomment and implement methods
-// @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
-// @AutoConfigureMockMvc
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+@AutoConfigureMockMvc
 // @TestPropertySource( locations = "classpath:application-integrationtest.properties")
 class ProductServiceControllerTest_MockMvc {
+
+    @Autowired
+    private MockMvc mvc;
+
     @Autowired
     private ProductsRepository repository;
 
@@ -35,6 +40,10 @@ class ProductServiceControllerTest_MockMvc {
         Product nuevoProd = new Product(null, "Nuevo producto", "123-123-1234");
         repository.save(nuevoProd);
 
+        mvc.perform(get("/products").accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$[0].name", is("Nuevo producto")));
 
     }
 
