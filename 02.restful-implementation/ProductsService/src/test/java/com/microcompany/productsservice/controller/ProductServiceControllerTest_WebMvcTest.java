@@ -37,7 +37,7 @@ import static org.mockito.BDDMockito.given;
 public class ProductServiceControllerTest_WebMvcTest {
 
 
-   /* @BeforeEach
+    @BeforeEach
     public void setUp() {
 
         List<Product> products = Arrays.asList(
@@ -45,6 +45,9 @@ public class ProductServiceControllerTest_WebMvcTest {
         );
 
         Mockito.when(service.getProductsByText("Fake"))
+                .thenReturn(products);
+
+        Mockito.when(service.getProductsByText(""))
                 .thenReturn(products);
 
         Mockito.when(repository.findByNameContaining("Fake"))
@@ -59,7 +62,7 @@ public class ProductServiceControllerTest_WebMvcTest {
                     ap.setId(100L);
                     return ap;
                 });
-    }*/
+    }
 
     @Autowired
     private MockMvc mvc;
@@ -79,7 +82,7 @@ public class ProductServiceControllerTest_WebMvcTest {
         given(repository.findAll()).willReturn(allProducts);*/
 
         mvc.perform(get("/products")
-        // mvc.perform(get("/products?text=Fake")
+//         mvc.perform(get("/products?text=Fake")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
