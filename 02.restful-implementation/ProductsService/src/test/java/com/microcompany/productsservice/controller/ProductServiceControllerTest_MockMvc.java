@@ -32,12 +32,15 @@ class ProductServiceControllerTest_MockMvc {
 
     @Test
     public void givenProducts_whenGetProducts_thenStatus200() throws Exception {
+        Product nuevoProd = new Product(null, "Nuevo producto", "123-123-1234");
+        repository.save(nuevoProd);
 
 
     }
 
     @Test
     void givenProducts_whenValidCreateProduct_thenIsCreatedAndHaveId() throws Exception {
+        Product newProduct = new Product(null, "Nuevo producto", "123-123-1234");
 
     }
 

@@ -59,8 +59,8 @@ public class ProductServiceController {
             @ApiResponse(responseCode = "404", description = "Cuando no existen productos")
     })
     @GetMapping(value = "", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity getAllProducts() {
-        List<Product> prods = service.getProductsByText("");
+    public ResponseEntity getAllProducts( @RequestParam(required = false, defaultValue = "") String text) {
+        List<Product> prods = service.getProductsByText(text);
         if (prods != null && prods.size() > 0) return ResponseEntity.status(HttpStatus.OK).body(prods);
         else
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new StatusMessage(HttpStatus.OK.value(), "No hay productos"));

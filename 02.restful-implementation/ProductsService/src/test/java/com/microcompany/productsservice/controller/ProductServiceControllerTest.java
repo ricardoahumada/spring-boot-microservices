@@ -27,7 +27,7 @@ class ProductServiceControllerTest {
     @Test
     @Order(2)
     void givenProducts_whengetAllProducts_thenIsNotNull() {
-        ResponseEntity<List<Product>> response = controller.getAllProducts();
+        ResponseEntity<List<Product>> response = controller.getAllProducts("");
         System.out.println("response:" + response.getBody());
 
         assertThat(response.getStatusCode().value())
@@ -42,7 +42,7 @@ class ProductServiceControllerTest {
     void givenProducts_whenVaildCreateProduct_thenIsCreatedAndHaveId() {
         Product newProduct = new Product(null, "Nuevo producto", "123-123-1234");
 
-        ResponseEntity<Product> response = controller.createProduct(newProduct);
+        ResponseEntity<Product> response = controller.add(newProduct);
         System.out.println("***** response:" + response);
 
         assertThat(response.getStatusCode().value()).isEqualTo(HttpStatus.CREATED.value());
