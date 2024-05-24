@@ -1,4 +1,4 @@
-package net.codejava.lib;
+package com.banana.lib;
 
 public class CommonUtil {
 	public static String getAppName() {

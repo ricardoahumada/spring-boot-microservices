@@ -1,12 +1,14 @@
-package net.codejava.admin;
+package com.banana.admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import net.codejava.lib.CommonUtil;
+import com.banana.lib.CommonUtil;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/admin")
 public class MainController {
 
 	@GetMapping("")

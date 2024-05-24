@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: AdminApp
+
+server:
+  port: 8080

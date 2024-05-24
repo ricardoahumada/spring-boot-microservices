@@ -1,4 +1,4 @@
-package net.codejava.lib;
+package com.banana.lib;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
