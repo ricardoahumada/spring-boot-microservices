@@ -33,11 +33,12 @@ class ProductServiceControllerTest_MockMvc {
     @Test
     public void givenProducts_whenGetProducts_thenStatus200() throws Exception {
 
-    
-}
+
+    }
+
     @Test
     void givenProducts_whenValidCreateProduct_thenIsCreatedAndHaveId() throws Exception {
 
     }
-    
+
 }
